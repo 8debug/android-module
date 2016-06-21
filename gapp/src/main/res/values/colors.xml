@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="g_colorPrimary">#3F51B5</color>
+    <color name="g_colorPrimaryDark">#303F9F</color>
+    <color name="g_colorAccent">#FF4081</color>
+    <color name="g_white">#FFFFFF</color>
+    <color name="g_gray_normal">#c0c0c0</color>
+    <color name="g_gray_pressed">#666667</color>
+    <color name="g_bg_red">#D9595B</color>
+    <color name="g_bg_blue">#3F51B5</color>
+    <color name="g_bg_gray">#ECECEC</color>
+    <color name="g_font_default">#FF424242</color>
+</resources>

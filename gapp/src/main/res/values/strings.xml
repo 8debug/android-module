@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GApp</string>
+
+    <string name="g_login_name">用户名</string>
+    <string name="g_login_pwd">密码</string>
+    <string name="g_btn_submit">提交</string>
+</resources>

@@ -1,0 +1,56 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/g_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/g_colorPrimaryDark</item>
+        <item name="colorAccent">@color/g_colorAccent</item>
+    </style>
+
+    <!--用户名-->
+    <style name="g_et_name">
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">20</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <!--密码-->
+    <style name="g_et_pwd">
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">20</item>
+        <item name="android:inputType">textPassword</item>
+    </style>
+
+    <!--TextView 红边框-->
+    <style name="g_tv_border_red">
+        <item name="android:background">@drawable/g_border_radius_red</item>
+        <item name="android:textColor">@color/g_bg_red</item>
+        <item name="android:paddingEnd">3dp</item>
+        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+
+    <!--TextView 蓝边框-->
+    <style name="g_tv_border_blue">
+        <item name="android:background">@drawable/g_border_radius_blue</item>
+        <item name="android:textColor">@color/g_bg_blue</item>
+        <item name="android:paddingEnd">3dp</item>
+        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+
+    <!--TextView 灰边框-->
+    <style name="g_tv_border_gray">
+        <item name="android:background">@drawable/g_border_radius_gray</item>
+        <item name="android:textColor">@color/g_gray_normal</item>
+        <item name="android:paddingEnd">3dp</item>
+        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+
+
+</resources>
