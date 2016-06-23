@@ -27,7 +27,19 @@ public class L {
         }
     }
 
+    public static void error(String tag, String msg, Throwable e){
+        if( IS_DEBUG ){
+            Log.e(tag, msg, e);
+        }
+    }
+
     public static void e(Exception e){
+        if( IS_DEBUG ){
+            error(TAG_ERROR, MSG, e);
+        }
+    }
+
+    public static void e(Throwable e){
         if( IS_DEBUG ){
             error(TAG_ERROR, MSG, e);
         }
