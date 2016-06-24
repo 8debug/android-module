@@ -27,11 +27,11 @@ public interface GHttpSerivce {
     Call<JSONObject> ajaxGet(@Query("sign") String sign, @QueryMap Map<String, String> options);
 
     @FormUrlEncoded
-    @POST(gesoft.gandroid.http.GHttp.URL)
+    @POST(GHttp.URL)
     Call<JSONObject> ajaxPost(@Field("sign") String sign, @FieldMap Map<String, String> options);
 
     @Multipart
-    @POST(gesoft.gandroid.http.GHttp.URL)
+    @POST(GHttp.URL)
     Call<JSONObject> ajaxUpload(@Part("sign") String sign, @PartMap Map<String, RequestBody> params);
 
 }
