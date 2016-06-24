@@ -26,7 +26,7 @@ public class T {
 	}
 	
 	public static void show(Object msg){
-		T.show(GApplication.getInstance(), String.valueOf(msg));
+		T.show(GApplication.instance, String.valueOf(msg));
 	}
 	
 	/**

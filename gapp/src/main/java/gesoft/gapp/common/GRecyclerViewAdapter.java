@@ -17,8 +17,13 @@ import java.util.List;
 
 public class GRecyclerViewAdapter extends RecyclerView.Adapter<GRecyclerViewAdapter.ViewHolder> {
 
-    private final List<JSONObject> mList;
+    private final List<JSONObject> mList ;
     private final int mLayout;
+
+    public GRecyclerViewAdapter(int layoutId) {
+        mLayout = layoutId;
+        mList = new ArrayList<>();
+    }
 
     public GRecyclerViewAdapter(List<JSONObject> listJson, int layoutId) {
         mList = listJson==null?new ArrayList<JSONObject>():listJson;

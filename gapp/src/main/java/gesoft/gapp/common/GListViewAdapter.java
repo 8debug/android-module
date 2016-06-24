@@ -15,23 +15,29 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GAdapter extends BaseAdapter {
+public abstract class GListViewAdapter extends BaseAdapter {
 
-	protected LayoutInflater mInflater;  
-    protected Context mContext;  
-    protected List<JSONObject> mList;
-    protected final int mItemLayoutId;  
+    protected Context mContext;
+    protected List<JSONObject> mList = new ArrayList<>();
+    protected final int mItemLayoutId;
+
+    public GListViewAdapter(int itemLayoutId){
+        this.mItemLayoutId = itemLayoutId;
+    }
+
+    public GListViewAdapter(Context context, int itemLayoutId){
+        this.mContext = context;
+        this.mItemLayoutId = itemLayoutId;
+    }
   
-    public GAdapter(Context context, List<JSONObject> list, int itemLayoutId)
-    {
-        mInflater = LayoutInflater.from(context);
+    public GListViewAdapter(Context context, List<JSONObject> list, int itemLayoutId){
         this.mContext = context;
         this.mList = list != null? list : new ArrayList<JSONObject>();
         this.mItemLayoutId = itemLayoutId;
 
     }
 
-    public GAdapter addAll(List<JSONObject> list ){
+    public GListViewAdapter addAll(List<JSONObject> list ){
         mList.addAll(list);
         return this;
     }
@@ -87,7 +93,7 @@ public abstract class GAdapter extends BaseAdapter {
         convert(viewHolder, getItem(position));*/
         GViewHolder viewHolder;
         if( convertView==null ){
-            viewHolder = new GViewHolder(mContext, parent, mItemLayoutId, position);
+            viewHolder = new GViewHolder(parent.getContext(), parent, mItemLayoutId, position);
         }else{
             viewHolder = (GViewHolder) convertView.getTag();
             viewHolder.setPosition(position);
@@ -107,7 +113,7 @@ public abstract class GAdapter extends BaseAdapter {
 
         private GViewHolder(Context context, ViewGroup parent, int layoutId, int position){
             this.mPosition = position;
-            mViews = new SparseArray<View>();
+            mViews = new SparseArray<>();
             mConvertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
             mConvertView.setTag(this);
         }
