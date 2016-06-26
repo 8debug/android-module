@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 import gesoft.gapp.common.L;
-import gesoft.gapp.common.T;
 import gesoft.gapp.http.retrofit.converter.JsonConverterFactory;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -19,7 +18,7 @@ import retrofit2.Retrofit;
 
 public class GHttp {
 
-    public final static String BASE_URL = "http://10.70.23.47:8080/jdgis/zc/";
+    public static String BASE_URL;
 
     public final static String URL = "mobile.do";
     //请求数据
@@ -31,28 +30,50 @@ public class GHttp {
 
     public final static int METHOD_POST = 1;
 
+    //ajax请求计数
+    int ajaxcount;
+
     GHttpSerivce mHttpService;
 
-    public GHttp(){
+    IAjaxFinish mAjaxFinish;
+
+    public void setAjaxFinish(IAjaxFinish ajaxFinish){
+        mAjaxFinish = ajaxFinish;
+    }
+
+    //初始化计数器
+    void initAjaxCount(){
+        ajaxcount = 0;
+    }
+
+    public GHttp(String baseUrl){
+        initAjaxCount();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl( GHttp.BASE_URL )
-                .addConverterFactory(JsonConverterFactory.create())
-                .build();
+                                        .baseUrl( baseUrl )
+                                        .addConverterFactory(JsonConverterFactory.create())
+                                        .build();
         mHttpService = retrofit.create(GHttpSerivce.class);
     }
 
-    /*private Retrofit getRetrofitJson(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl( GHttp.BASE_URL )
-                .addConverterFactory(JsonConverterFactory.create())
-                .build();
-        return retrofit;
-    }*/
-
-    public interface IAjax{
+    public interface IAjaxResponse{
+        //完成一次请求
         void onResponse(JSONObject response);
     }
 
+    public interface IAjaxFinish{
+        //完成一次请求
+        void onFinish();
+    }
+
+    /**
+     * 默认post请求
+     * @param url
+     * @param mapAjax
+     * @param iAjax
+     */
+    public void ajaxJSON(String url, Map<String, String> mapAjax, final IAjaxResponse iAjax){
+        ajaxJSON(METHOD_POST, url, mapAjax, iAjax);
+    }
 
     /**
      * 请求数据返回json格式
@@ -60,23 +81,14 @@ public class GHttp {
      * @param url
      * @param mapAjax
      */
-    public void ajaxJSON(int method, String url, Map<String, String> mapAjax, final IAjax iAjax){
+    public void ajaxJSON(int method, String url, Map<String, String> mapAjax, final IAjaxResponse iAjax){
+
+        mapAjax = mapAjax==null?new HashMap<String, String>():mapAjax;
 
         Call<JSONObject> request = method == METHOD_GET ? mHttpService.ajaxGet(url, mapAjax) : mHttpService.ajaxPost(url, mapAjax);
-        request.enqueue(new Callback<JSONObject>() {
-            @Override
-            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
-                JSONObject json = response.body();
-                if ( isSuccess(json) && iAjax!=null ){
-                    iAjax.onResponse(json);
-                }
-            }
 
-            @Override
-            public void onFailure(Call<JSONObject> call, Throwable e) {
-                call.cancel();
-            }
-        });
+        ajaxcount++;
+        request.enqueue(getCallback(iAjax));
     }
 
     /**
@@ -84,34 +96,46 @@ public class GHttp {
      * @param url
      * @param mapAjax
      */
-    public void ajaxUpload(String url, Map<String, Object> mapAjax, final IAjax iAjax){
+    public void ajaxUpload(String url, Map<String, Object> mapAjax, final IAjaxResponse iAjax){
 
         Map<String, RequestBody> params = parseMap( mapAjax );
 
         Call<JSONObject> request = mHttpService.ajaxUpload(url, params);
-        request.enqueue(new Callback<JSONObject>() {
+        request.enqueue(getCallback(iAjax));
+    }
+
+    /**
+     *
+     * @param iAjax 请求结束的回调函数
+     * @return
+     */
+    Callback getCallback(final IAjaxResponse iAjax){
+        return new Callback<JSONObject>() {
             @Override
             public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
-                JSONObject json = response.body();
-                if ( isSuccess(json) && iAjax!=null ){
-                    iAjax.onResponse(json);
+                ajaxcount--;
+                JSONObject jsonResponse = response.body();
+                if ( iAjax!=null ){
+                    iAjax.onResponse(jsonResponse);
                 }
+
+                if( ajaxcount<=0 && mAjaxFinish!=null  ){
+                    mAjaxFinish.onFinish();
+                }
+
             }
 
             @Override
             public void onFailure(Call<JSONObject> call, Throwable e) {
+                L.e(e);
                 call.cancel();
-            }
-        });
-    }
+                ajaxcount--;
 
-    boolean isSuccess( JSONObject jsonResponse ){
-        if( jsonResponse.optInt("sign")==1 ){
-            return true;
-        }else{
-            T.show(jsonResponse.optString("msg"));
-            return false;
-        }
+                if( ajaxcount<=0 && mAjaxFinish!=null  ){
+                    mAjaxFinish.onFinish();
+                }
+            }
+        };
     }
 
     /**
