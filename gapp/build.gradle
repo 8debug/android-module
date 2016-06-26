@@ -18,14 +18,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    provided fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
-    compile 'com.android.support:support-v4:23.3.0'
+    //compile 'com.android.support:appcompat-v7:23.4.0'
+    //compile 'com.android.support:support-v4:23.4.0'
+
+    //design包含appcompat-v7和support-v4
+    compile 'com.android.support:design:23.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.facebook.fresco:fresco:0.8.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -39,7 +45,7 @@ uploadArchives {
                 authentication(userName: 'admin', password: 'admin123')
             }*/
 
-            repository(url: 'http://10.70.23.21:8081/nexus/content/repositories/gapp/') {
+            repository(url: 'http://10.70.23.32:9999/nexus/content/repositories/gapp/') {
                 authentication(userName: 'admin', password: 'admin123')
             }
 
