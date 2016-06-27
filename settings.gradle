@@ -1,1 +1,1 @@
-include ':app', 'gapp', ':gpush'
+include ':app', ':gphotoview', 'gapp', ':gpush'
