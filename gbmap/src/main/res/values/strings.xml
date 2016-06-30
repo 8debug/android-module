@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GBMap</string>
+    <string name="bd_location_success_gps">gps定位成功</string>
+    <string name="bd_location_success_network">网络定位成功</string>
+    <string name="bd_location_success_offline">离线定位成功</string>
+
+    <string name="bd_location_error_server">服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因</string>
+    <string name="bd_location_error_netWork">网络不同导致定位失败，请检查网络是否通畅</string>
+    <string name="bd_location_error_criteria">无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机</string>
+</resources>
