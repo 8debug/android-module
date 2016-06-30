@@ -115,6 +115,7 @@ public class GBLocation {
                 bean.setDistrict(location.getDistrict());
                 bean.setStreet(location.getStreet());
                 bean.setTime(location.getTime());
+                bean.setListPoi(location.getPoiList());
 
                 Boolean isSuccess = true;
                 String msg = "";
@@ -175,6 +176,15 @@ public class GBLocation {
         private String address;
         private String discribe;
         private String msg;
+        private List<Poi> listPoi;
+
+        public List<Poi> getListPoi() {
+            return listPoi;
+        }
+
+        public void setListPoi(List<Poi> listPoi) {
+            this.listPoi = listPoi;
+        }
 
         public String getTime() {
             return time;
@@ -264,15 +274,7 @@ public class GBLocation {
             this.discribe = discribe;
         }
 
-        public String[] getPois() {
-            return pois;
-        }
 
-        public void setPois(String[] pois) {
-            this.pois = pois;
-        }
-
-        private String[] pois;
     }
 
 }
