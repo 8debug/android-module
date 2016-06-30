@@ -26,9 +26,6 @@ public abstract class GBLocationActivity extends Activity {
     protected void onStart() {
         super.onStart();
         try {
-            GBLocation.setApplication(getApplicationContext());
-            mGBLocation = new GBLocation();
-            mGBLocation.initLocation();
             onStartG();
         } catch (Exception e) {
             L.e(e);
@@ -40,11 +37,18 @@ public abstract class GBLocationActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getPersimmions();
-        mActivity = this;
-        mContext = mActivity;
-        onCreateG(savedInstanceState);
+        try {
+            super.onCreate(savedInstanceState);
+            getPersimmions();
+            mActivity = this;
+            mContext = mActivity;
+            GBLocation.setApplication(getApplicationContext());
+            mGBLocation = new GBLocation();
+            mGBLocation.initLocation();
+            onCreateG(savedInstanceState);
+        } catch (Exception e) {
+            L.e(e);
+        }
     }
 
     @Override
