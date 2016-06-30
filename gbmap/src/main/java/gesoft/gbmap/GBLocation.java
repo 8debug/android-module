@@ -7,6 +7,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.Poi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gesoft.gbmap.base.GBMapApplication;
@@ -115,7 +116,17 @@ public class GBLocation {
                 bean.setDistrict(location.getDistrict());
                 bean.setStreet(location.getStreet());
                 bean.setTime(location.getTime());
-                bean.setListPoi(location.getPoiList());
+
+                List<Poi> listPoi = location.getPoiList();
+                List<GPoi> listGpoi = new ArrayList<>();
+                for (Poi poi : listPoi) {
+                    GPoi gpoi = new GPoi();
+                    gpoi.setId(poi.getId());
+                    gpoi.setName(poi.getName());
+                    gpoi.setRank(poi.getRank());
+                    listGpoi.add(gpoi);
+                }
+                bean.setListPoi(listGpoi);
 
                 Boolean isSuccess = true;
                 String msg = "";
@@ -176,13 +187,13 @@ public class GBLocation {
         private String address;
         private String discribe;
         private String msg;
-        private List<Poi> listPoi;
+        private List<GPoi> listPoi;
 
-        public List<Poi> getListPoi() {
+        public List<GPoi> getListPoi() {
             return listPoi;
         }
 
-        public void setListPoi(List<Poi> listPoi) {
+        public void setListPoi(List<GPoi> listPoi) {
             this.listPoi = listPoi;
         }
 
@@ -274,7 +285,36 @@ public class GBLocation {
             this.discribe = discribe;
         }
 
+    }
 
+    public class GPoi{
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Double getRank() {
+            return rank;
+        }
+
+        public void setRank(Double rank) {
+            this.rank = rank;
+        }
+
+        private String id;
+        private String name;
+        private Double rank;
     }
 
 }
