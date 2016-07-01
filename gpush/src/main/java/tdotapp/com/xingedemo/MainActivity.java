@@ -1,17 +1,10 @@
 package tdotapp.com.xingedemo;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.tencent.android.tpush.XGPushBaseReceiver;
-import com.tencent.android.tpush.XGPushClickedResult;
-import com.tencent.android.tpush.XGPushRegisterResult;
-import com.tencent.android.tpush.XGPushShowedResult;
-import com.tencent.android.tpush.XGPushTextMessage;
-
-import gesoft.push.GPushXG;
+import gesoft.gandroid.gpush.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GPushXG.registerReceiver(this, new XGPushBaseReceiver() {
+        /*GPushXG.registerReceiver(this, new XGPushBaseReceiver() {
             @Override
             public void onRegisterResult(Context context, int i, XGPushRegisterResult xgPushRegisterResult) {
 
@@ -56,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void onNotifactionShowedResult(Context context, XGPushShowedResult xgPushShowedResult) {
 
             }
-        });
+        });*/
 
     }
 

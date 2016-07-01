@@ -1,5 +1,6 @@
 package gesoft.push;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -7,10 +8,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGNotifaction;
 import com.tencent.android.tpush.XGPushBaseReceiver;
 import com.tencent.android.tpush.XGPushConfig;
 import com.tencent.android.tpush.XGPushManager;
+import com.tencent.android.tpush.XGPushNotifactionCallback;
 import com.tencent.android.tpush.service.XGPushService;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/6/12.
@@ -26,18 +31,65 @@ public class GPushXG {
     }
 
     /**
-     * 注册消息接收
+     * 判断是否在主线程中
+     * @param applicationContext
+     * @return
+     */
+    private static boolean isMainProcess(Context applicationContext) {
+        ActivityManager am = ((ActivityManager) applicationContext.getSystemService(Context.ACTIVITY_SERVICE));
+        List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
+        String mainProcessName = applicationContext.getPackageName();
+        int myPid = android.os.Process.myPid();
+        for (ActivityManager.RunningAppProcessInfo info : processInfos) {
+            if (info.pid == myPid && mainProcessName.equals(info.processName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * step 1
+     * 在主进程设置信鸽相关的内容
+     * @param applicationcontext
+     */
+    public static void setApplication(Context applicationcontext){
+        // 在主进程设置信鸽相关的内容
+        if ( isMainProcess(applicationcontext) ) {
+            // 为保证弹出通知前一定调用本方法，需要在application的onCreate注册
+            // 收到通知时，会调用本回调函数。
+            // 相当于这个回调会拦截在信鸽的弹出通知之前被截取
+            // 一般上针对需要获取通知内容、标题，设置通知点击的跳转逻辑等等
+            XGPushManager.setNotifactionCallback(new XGPushNotifactionCallback() {
+                @Override
+                public void handleNotify(XGNotifaction xGNotifaction) {
+                    Log.i("test", "处理信鸽通知：" + xGNotifaction);
+                    // 获取标签、内容、自定义内容
+                    String title = xGNotifaction.getTitle();
+                    String content = xGNotifaction.getContent();
+                    String customContent = xGNotifaction.getCustomContent();
+                    // 其它的处理
+                    // 如果还要弹出通知，可直接调用以下代码或自己创建Notifaction，否则，本通知将不会弹出在通知栏中。
+                    xGNotifaction.doNotify();
+                }
+            });
+        }
+    }
+
+    /**
+     * 注册消息接收（动态）
      * @param ctx
      * @param receiver
      */
-    public static void registerReceiver(Context ctx, XGPushBaseReceiver receiver){
+    /*public static void registerReceiver(Context ctx, XGPushBaseReceiver receiver){
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(GPushConstant.XG_ACTION_PUSH_MESSAGE);
         intentFilter.addAction(GPushConstant.XG_ACTION_FEEDBACK);
         ctx.registerReceiver(receiver,intentFilter);
-    }
+    }*/
 
     /**
+     * step 2
      * 注册信鸽推送
      * @param applicationContext
      */
