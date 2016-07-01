@@ -5,8 +5,10 @@ import android.content.Context;
 
 import com.facebook.stetho.Stetho;
 
+import gesoft.push.GPushXG;
+
 /**
- * Created by Administrator on 2016/6/23.
+ * Created by yhr on 2016/6/23.
  */
 public class BaseApplication extends Application {
 
@@ -16,6 +18,8 @@ public class BaseApplication extends Application {
         super.onCreate();
         Stetho.initializeWithDefaults(this);
         mContext = getApplicationContext();
+        //信鸽推送
+        GPushXG.setApplication(mContext);
     }
 
     public static Context getContext(){
