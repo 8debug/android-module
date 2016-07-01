@@ -22,7 +22,7 @@ import gesoft.push.common.NotificationService;
 import gesoft.push.po.XGNotification;
 
 public class MessageReceiver extends XGPushBaseReceiver {
-	private Intent intent = new Intent(GPushConstant.XG_GPUSH_RECEIVER);
+	private Intent intent = new Intent(GPushConstant.XG_NOTIFACTION_SHOW_RECEIVER);
 	public static final String LogTag = "TPushReceiver";
 
 	private void show(Context context, String text) {

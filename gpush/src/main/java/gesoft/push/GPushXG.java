@@ -17,10 +17,25 @@ import com.tencent.android.tpush.service.XGPushService;
 
 import java.util.List;
 
+import gesoft.push.po.GMessage;
+
 /**
- * Created by Administrator on 2016/6/12.
+ * Created by yhr on 2016/6/12.
  */
 public class GPushXG {
+
+    //利用此项目获取点击通知后携带的参数
+    private static GMessage message;
+
+    public static GMessage getMessage() {
+        GMessage msg = message;
+        message = null;
+        return msg;
+    }
+
+    public static void setMessage(GMessage message) {
+        GPushXG.message = message;
+    }
 
     public interface Reg{
         void onSuccess(Object token);
