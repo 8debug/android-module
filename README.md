@@ -4,7 +4,7 @@
 
 ### gpush 信鸽推送
 1、初始化推送`GPushXG.setApplication(mContext);`   
-2、注册设备   
+2、注册设备
 ```
 GPushXG.registerPush(getApplicationContext(), new GPushXG.Reg() {
                         @Override
@@ -15,8 +15,7 @@ GPushXG.registerPush(getApplicationContext(), new GPushXG.Reg() {
 ```
 3、在`MessageReceiver`中写自己的逻辑代码
 
-### gphotoview 图片浏览   
-调用
+### gphotoview 图片浏览
 ```
 GPhotoView.startImagePagerActivity(Context context, List<String> imgUrls, int position, int width, int height)
 ```
