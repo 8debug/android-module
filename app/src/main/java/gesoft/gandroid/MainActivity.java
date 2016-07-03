@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         // 0.注册数据更新监听器
         updateListViewReceiver = new MsgReceiver();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(GPushConstant.XG_GPUSH_RECEIVER);
+        intentFilter.addAction(GPushConstant.XG_NOTIFACTION_SHOW_RECEIVER);
         registerReceiver(updateListViewReceiver, intentFilter);
     }
 
