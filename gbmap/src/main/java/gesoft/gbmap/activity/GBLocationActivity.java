@@ -32,8 +32,8 @@ public abstract class GBLocationActivity extends Activity {
         }
     }
 
-    protected void onStartG() throws Exception{}
-    protected void onStopG() throws Exception{}
+    protected abstract void onStartG();
+    protected abstract void onStopG();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
