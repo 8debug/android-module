@@ -17,15 +17,15 @@ import java.util.List;
 
 public abstract class GListViewAdapter extends BaseAdapter {
 
-    protected Context mContext;
-    protected List<JSONObject> mList = new ArrayList<>();
-    protected final int mItemLayoutId;
+    //private Context mContext;
+    private List<JSONObject> mList = new ArrayList<>();
+    private final int mItemLayoutId;
 
     public GListViewAdapter(int itemLayoutId){
         this.mItemLayoutId = itemLayoutId;
     }
 
-    public GListViewAdapter(Context context, int itemLayoutId){
+    /*public GListViewAdapter(Context context, int itemLayoutId){
         this.mContext = context;
         this.mItemLayoutId = itemLayoutId;
     }
@@ -35,7 +35,7 @@ public abstract class GListViewAdapter extends BaseAdapter {
         this.mList = list != null? list : new ArrayList<JSONObject>();
         this.mItemLayoutId = itemLayoutId;
 
-    }
+    }*/
 
     public GListViewAdapter addAll(List<JSONObject> list ){
         mList.addAll(list);

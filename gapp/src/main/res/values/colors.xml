@@ -10,4 +10,6 @@
     <color name="g_bg_blue">#3F51B5</color>
     <color name="g_bg_gray">#ECECEC</color>
     <color name="g_font_default">#FF424242</color>
+    <color name="g_bg_orange">#ffff8800</color>
+    <color name="g_bg_green">#ff669900</color>
 </resources>
