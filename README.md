@@ -40,4 +40,8 @@ mGBLocation.setIGBLocation(new GBLocation.IGBLocation() {
                 }
             });
 ```
-3、开始定位`mGBLocation.start();`,结束定位`mGBLocation.stop();`
+3、开始定位/结束定位
+```
+mGBLocation.start();
+mGBLocation.stop();
+```
