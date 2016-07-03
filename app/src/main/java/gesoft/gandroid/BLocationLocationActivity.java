@@ -12,6 +12,16 @@ import gesoft.gbmap.activity.GBLocationActivity;
 public class BLocationLocationActivity extends GBLocationActivity {
 
     @Override
+    protected void onStartG(){
+
+    }
+
+    @Override
+    protected void onStopG(){
+
+    }
+
+    @Override
     protected void onCreateG(Bundle savedInstanceState) {
         setContentView(R.layout.activity_blocation);
     }
