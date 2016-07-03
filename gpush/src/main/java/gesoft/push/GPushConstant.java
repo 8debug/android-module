@@ -13,4 +13,8 @@ public class GPushConstant {
     public static final String XG_NOTIFACTION_SHOW_RECEIVER = "NotifactionShowReceive";
 
     public static final String XG_NOTIFACTION_CLICK_RECEIVER = "NotifactionClickReceive";
+
+    //点击通知时此作为Bundle参数传入
+    public static final String XG_INTENT_BUNDLE = GPushConstant.class.getClass().getName();
+    public static final String XG_BUNDLE_GMESSAGE = "gmessage";
 }

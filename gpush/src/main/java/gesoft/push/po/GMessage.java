@@ -1,10 +1,12 @@
 package gesoft.push.po;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/7/1.
  */
 
-public class GMessage {
+public class GMessage implements Serializable {
 
     private String title;
     private String content;
