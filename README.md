@@ -24,7 +24,6 @@
     public void onStart() {
         ...
     }
-
     @Override
     public void onFinish(boolean isSuccess, GBLocation.GLBean bean) {
         mGBLocation.stop();
