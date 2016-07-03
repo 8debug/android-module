@@ -18,7 +18,9 @@
 ### gbmap 百度地图
 #### 定位功能
 1、`activity`继承`GBLocationActivity`
+
 2、设置开始定位和定位结束的回调函数
+
 `mGBLocation.setIGBLocation(new GBLocation.IGBLocation() {
     @Override
     public void onStart() {
