@@ -31,4 +31,5 @@
         ...
     }
 });`
+
 3、开始定位`mGBLocation.start();`,结束定位`mGBLocation.stop();`
