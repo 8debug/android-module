@@ -25,7 +25,6 @@ import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import uk.co.senab.photoview.PhotoView;
@@ -44,14 +43,17 @@ public class ImagePagerActivity extends Activity {
     private int startPos;
     private ArrayList<String> imgUrls;
 
-    /**
-     *
-     * @param context
-     * @param imgUrls 图片地址数组形式
-     * @param position  点击的缩略图位置
-     * @param imageSize 作为loading时的图片size
-     */
-    public static void startImagePagerActivity(Context context, List<String> imgUrls, int position, ImageSize imageSize){
+    /*public static void startImagePagerActivity(Context context, List<String> imgUrls, int position, ImageSize imageSize){
+        Intent intent = new Intent(context, ImagePagerActivity.class);
+        intent.putStringArrayListExtra(INTENT_IMGURLS, new ArrayList<>(imgUrls));
+        intent.putExtra(INTENT_POSITION, position);
+        intent.putExtra(INTENT_IMAGESIZE, imageSize);
+        context.startActivity(intent);
+    }*/
+
+    static void startImagePagerActivity(Context context, List<String> imgUrls, int position, int width, int height){
+//      ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize(view.getMeasuredWidth(), view.getMeasuredHeight());
+        ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize( width, height );
         Intent intent = new Intent(context, ImagePagerActivity.class);
         intent.putStringArrayListExtra(INTENT_IMGURLS, new ArrayList<>(imgUrls));
         intent.putExtra(INTENT_POSITION, position);
@@ -59,22 +61,16 @@ public class ImagePagerActivity extends Activity {
         context.startActivity(intent);
     }
 
-    public static void startImagePagerActivity(Context context, List<String> imgUrls, int position, int width, int height){
-//      ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize(view.getMeasuredWidth(), view.getMeasuredHeight());
-        ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize( width, height );
-        startImagePagerActivity(context, imgUrls, position, imageSize);
-    }
 
-
-    public static void startImagePagerActivity(Context context, String[] urls, int position, ImageSize imageSize){
+    /*public static void startImagePagerActivity(Context context, String[] urls, int position, ImageSize imageSize){
         ArrayList array = new ArrayList<>(Arrays.asList(urls));
         startImagePagerActivity(context, array, position, imageSize);
-    }
+    }*/
 
-    public static void startImagePagerActivity(Context context, String[] urls, int position, int width, int height){
+    /*public static void startImagePagerActivity(Context context, String[] urls, int position, int width, int height){
         ArrayList array = new ArrayList<>(Arrays.asList(urls));
         startImagePagerActivity(context, array, position, width, height);
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
