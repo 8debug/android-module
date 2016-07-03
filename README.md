@@ -3,7 +3,10 @@
 ### gapp 通用module或aar，常用方法+颜色+布局
 
 ### gpush 信鸽推送
-1、初始化推送`GPushXG.setApplication(mContext);`   
+1、初始化推送
+```
+GPushXG.setApplication(mContext);
+```
 2、注册设备
 ```
 GPushXG.registerPush(getApplicationContext(), new GPushXG.Reg() {
