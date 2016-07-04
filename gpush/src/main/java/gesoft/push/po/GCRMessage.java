@@ -3,16 +3,35 @@ package gesoft.push.po;
 import java.io.Serializable;
 
 /**
- * Created by Administrator on 2016/7/1.
+ * Created by yhr on 2016/7/1.
+ * 封装XGPushClickedResult
  */
 
-public class GMessage implements Serializable {
+public class GCRMessage implements Serializable {
 
     private String title;
     private String content;
     private long actionType;
     private String customContent;
     private long msgId;
+    private int notificationActionType;
+    private String activityName;
+
+    public int getNotificationActionType() {
+        return notificationActionType;
+    }
+
+    public void setNotificationActionType(int notificationActionType) {
+        this.notificationActionType = notificationActionType;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
 
     public long getActionType() {
         return actionType;
