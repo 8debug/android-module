@@ -52,9 +52,14 @@ public abstract class GBLocationActivity extends Activity {
     }
 
     @Override
+    protected void onDestroy() {
+        mGBLocation.destoryLocation();
+        super.onDestroy();
+    }
+
+    @Override
     protected void onStop() {
         try {
-            mGBLocation.destoryLocation();
             onStopG();
         } catch (Exception e) {
             L.e(e);

@@ -13,8 +13,6 @@ import java.util.List;
 import gesoft.gbmap.base.GBMapApplication;
 import gesoft.gbmap.service.LocationService;
 
-import static gesoft.gbmap.base.GBMapApplication.locationService;
-
 /**
  * Created by yhr on 2016/6/30.
  * 定位封装类
@@ -31,8 +29,8 @@ public class GBLocation {
     }
 
     public interface IGBLocation{
-        void onStart();
-        void onFinish(boolean isSuccess, GLBean bean);
+        void onLocationStart();
+        void onLocationFinish(boolean isSuccess, GLBean bean);
     }
 
     private static String str(Object obj){
@@ -83,7 +81,7 @@ public class GBLocation {
      * 启动定位
      */
     public void start(){
-        if( mIGBLocation!=null )mIGBLocation.onStart();
+        if( mIGBLocation!=null )mIGBLocation.onLocationStart();
         stop();
         locationService.start();
     }
@@ -163,7 +161,7 @@ public class GBLocation {
                 if( mIGBLocation!=null ){
                     bean.setMsg(msg);
                     isSuccess = ( isSuccess && isNumber(mStrLng) && isNumber(mStrLat) );
-                    mIGBLocation.onFinish(isSuccess, bean);
+                    mIGBLocation.onLocationFinish(isSuccess, bean);
                 }
 
 
