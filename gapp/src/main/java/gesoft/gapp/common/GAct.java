@@ -73,6 +73,24 @@ public class GAct {
     }
 
     /**
+     * 获取系统相机的Intent
+     * @param ctx
+     * @param file
+     * @return
+     */
+    public static Intent getIntentCamera(Context ctx, File file){
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(cameraIntent.resolveActivity(ctx.getPackageManager()) != null){
+            // 设置系统相机拍照后的输出路径
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+            return cameraIntent;
+        }else{
+            Toast.makeText(ctx.getApplicationContext(), "没找到摄像头", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+    }
+
+    /**
      * 打电话，需要拨号权限
      * @param context
      * @param phoneNumber 电话号码
