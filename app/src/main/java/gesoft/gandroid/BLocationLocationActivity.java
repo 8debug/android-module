@@ -30,12 +30,12 @@ public class BLocationLocationActivity extends GBLocationActivity {
         final Button btn = (Button)view;
         mGBLocation.setIGBLocation(new GBLocation.IGBLocation() {
             @Override
-            public void onStart() {
+            public void onLocationStart() {
                 btn.setText(getResources().getString(R.string.btn_bd_start));
             }
 
             @Override
-            public void onFinish(boolean isSuccess, GBLocation.GLBean bean) {
+            public void onLocationFinish(boolean isSuccess, GBLocation.GLBean bean) {
                 mGBLocation.stop();
                 btn.setText(getResources().getString(R.string.btn_bd_stop));
                 if( isSuccess ){

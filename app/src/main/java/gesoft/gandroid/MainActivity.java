@@ -17,6 +17,7 @@ import java.util.List;
 import gesoft.gandroid.download.service.DownloadService;
 import gesoft.gapp.common.L;
 import gesoft.gphotoview.GPhotoView;
+import gesoft.gupd.GFIR;
 import gesoft.push.GPushConstant;
 import gesoft.push.GPushXG;
 
@@ -59,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void bdlocation(View view){
         startActivity(new Intent(this, BLocationLocationActivity.class));
+    }
+
+    public void checkupd(View view){
+        GFIR.checkUpd();
     }
 
     //推送

@@ -35,4 +35,10 @@
         android:text="@string/btn_bd_location"
         android:onClick="bdlocation"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_checkupd"
+        android:onClick="checkupd"/>
+
 </LinearLayout>
