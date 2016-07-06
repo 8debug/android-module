@@ -20,6 +20,11 @@ public class GRecyclerViewAdapter extends RecyclerView.Adapter<GRecyclerViewAdap
     private final List<JSONObject> mList ;
     private final int mLayout;
 
+    public GRecyclerViewAdapter(int layoutId, List<JSONObject> list) {
+        mLayout = layoutId;
+        mList = list;
+    }
+
     public GRecyclerViewAdapter(int layoutId) {
         mLayout = layoutId;
         mList = new ArrayList<>();
