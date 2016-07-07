@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
 android {
     compileSdkVersion 24
@@ -29,4 +30,27 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.0.0'*/
     testCompile 'junit:junit:4.12'
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            /*snapshotRepository(url: 'http://10.70.23.21:8081/nexus/content/repositories/gapp-snapshot/') {
+                authentication(userName: 'admin', password: 'admin123')
+            }*/
+
+            repository(url: 'http://10.70.23.47:9999/nexus/content/repositories/gbmap/') {
+                authentication(userName: 'admin', password: 'admin123')
+            }
+
+            pom.project {
+                version '0.0.1'
+                artifactId 'gbmap'
+                groupId 'gesoft.android'
+                packaging 'aar'
+                description 'gesoft common'
+            }
+        }
+    }
 }
