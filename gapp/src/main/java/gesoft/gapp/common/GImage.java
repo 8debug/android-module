@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 /**
  * Created by yhr on 2016/2/15.
@@ -39,6 +40,8 @@ public class GImage {
                     options.inSampleSize = (int)Math.pow(2.0D, i);
                     options.inJustDecodeBounds = false;
                     bitmap = BitmapFactory.decodeStream(in, null, options);
+                    /*L.d("options.outWidth==="+options.outWidth);
+                    L.d("options.outHeight==="+options.outHeight);*/
                     break;
                 }
                 i++;
@@ -305,16 +308,19 @@ public class GImage {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Bitmap bitmap = revitionImageSize(path);
-                //String filename = new Date().getTime() + ".jpeg";
-                final File file = new File(path);
-                storeImage(bitmap, file.getPath());
-                new Handler(ctx.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        fresco.setImageURI(Uri.fromFile(file));
-                    }
-                });
+                try {
+                    Bitmap bitmap = revitionImageSize(path);
+                    final File file = File.createTempFile(new Date().getTime()+"", ".jpg", new File(path).getParentFile());
+                    storeImage(bitmap, file.getPath());
+                    new Handler(ctx.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            fresco.setImageURI(Uri.fromFile(file));
+                        }
+                    });
+                } catch (IOException e) {
+                    L.e(e);
+                }
             }
         }).start();
     }
