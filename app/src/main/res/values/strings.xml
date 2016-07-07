@@ -3,8 +3,10 @@
     <string name="btn_download">service下载</string>
     <string name="btn_retrofit">Retrofit</string>
     <string name="btn_photoview">图片浏览</string>
+    <string name="btn_loadimg">超大图加载</string>
     <string name="btn_bd_location">百度定位</string>
     <string name="btn_checkupd">检测更新</string>
+    <string name="activity_label_fresco">fresco使用</string>
 
     <string name="btn_bd_bdlocation">定位</string>
     <string name="btn_bd_start">开始定位...</string>

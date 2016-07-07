@@ -26,6 +26,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/activity_label_fresco"
+        android:onClick="fresco"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/btn_photoview"
         android:onClick="photoview"/>
 

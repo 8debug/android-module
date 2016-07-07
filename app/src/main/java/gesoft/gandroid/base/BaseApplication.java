@@ -3,10 +3,16 @@ package gesoft.gandroid.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.common.logging.FLog;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.listener.RequestListener;
+import com.facebook.imagepipeline.listener.RequestLoggingListener;
 import com.facebook.stetho.Stetho;
 
-import gesoft.gapp.common.L;
-import gesoft.gupd.GFIR;
+import java.util.HashSet;
+import java.util.Set;
+
 import gesoft.push.GPushXG;
 
 /**
@@ -20,9 +26,24 @@ public class BaseApplication extends Application {
         super.onCreate();
         Stetho.initializeWithDefaults(this);
         mContext = getApplicationContext();
+
+        //配置fresco打印崩溃信息
+        Set<RequestListener> requestListeners = new HashSet<>();
+        requestListeners.add(new RequestLoggingListener());
+
+        //Image pipeline 负责完成加载图像，变成Android设备可呈现的形式所要做的每个事情。
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setRequestListeners(requestListeners)
+            //开启向下采样，向下采样在大部分情况下比 resize 更快
+                .setDownsampleEnabled(true).build();
+
+        Fresco.initialize(this, config);
+        //配置fresco打印崩溃信息
+        FLog.setMinimumLoggingLevel(FLog.ERROR);
+
         //信鸽推送
         GPushXG.setApplication(mContext);
-        GFIR.init(this);
+        /*GFIR.init(this);
         GFIR.checkUpd(new GFIR.ICheckUpdCallback() {
             @Override
             public void onSuccess(String versionJson) {
@@ -43,7 +64,7 @@ public class BaseApplication extends Application {
             public void onFinish() {
                 L.d("更新完成");
             }
-        });
+        });*/
     }
 
     public static Context getContext(){

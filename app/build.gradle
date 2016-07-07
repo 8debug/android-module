@@ -17,32 +17,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    /*productFlavors {
-        dev {
-            minSdkVersion  21
-        }
-        prod {
-            minSdkVersion  14
-        }
-    }*/
-    //非必要部分，大内存机器可加入
-    dexOptions {
-        javaMaxHeapSize "4g"
-    }
-
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //compile 'com.android.support:design:23.4.0'
     //compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.facebook.stetho:stetho:1.3.1'
     compile project(':gapp')
     compile project(':gphotoview')
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
-    testCompile 'junit:junit:4.12'
     compile project(':gbmap')
     compile project(':gpush')
-    compile project(':gupd')
+    //compile project(':gupd')
+    compile 'com.facebook.stetho:stetho:1.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
+    testCompile 'junit:junit:4.12'
 }

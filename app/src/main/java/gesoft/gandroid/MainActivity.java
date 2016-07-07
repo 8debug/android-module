@@ -17,7 +17,6 @@ import java.util.List;
 import gesoft.gandroid.download.service.DownloadService;
 import gesoft.gapp.common.L;
 import gesoft.gphotoview.GPhotoView;
-import gesoft.gupd.GFIR;
 import gesoft.push.GPushConstant;
 import gesoft.push.GPushXG;
 
@@ -46,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity( new Intent(this, RetrofitActivity.class));
     }
 
+    public void fresco(View view){
+        startActivity(new Intent(this, FrescoActivity.class));
+    }
+
     public void photoview(View view){
 
         List<String> listUrl = new ArrayList<>();
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkupd(View view){
-        GFIR.checkUpd();
+        //GFIR.checkUpd();
     }
 
     //推送
