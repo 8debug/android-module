@@ -40,7 +40,7 @@ uploadArchives {
                 authentication(userName: 'admin', password: 'admin123')
             }*/
 
-            repository(url: 'http://10.70.23.47:9999/nexus/content/repositories/gbmap/') {
+            repository(url: 'http://10.70.23.47:9999/nexus/content/repositories/gapp/') {
                 authentication(userName: 'admin', password: 'admin123')
             }
 
@@ -49,7 +49,7 @@ uploadArchives {
                 artifactId 'gbmap'
                 groupId 'gesoft.android'
                 packaging 'aar'
-                description 'gesoft common'
+                description 'baidu location'
             }
         }
     }
