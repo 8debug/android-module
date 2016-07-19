@@ -8,11 +8,11 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.listener.RequestLoggingListener;
-import com.facebook.stetho.Stetho;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import gesoft.ghotfix.GHotFix;
 import gesoft.push.GPushXG;
 
 /**
@@ -24,7 +24,7 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Stetho.initializeWithDefaults(this);
+        //Stetho.initializeWithDefaults(this);
         mContext = getApplicationContext();
 
         //配置fresco打印崩溃信息
@@ -43,6 +43,10 @@ public class BaseApplication extends Application {
 
         //信鸽推送
         GPushXG.setApplication(mContext);
+
+        //热修复
+        GHotFix.setApplication(mContext);
+
         /*GFIR.init(this);
         GFIR.checkUpd(new GFIR.ICheckUpdCallback() {
             @Override
@@ -52,6 +56,7 @@ public class BaseApplication extends Application {
 
             @Override
             public void onFail(Exception exception) {
+                L.e(exception);
                 L.d("更新失败");
             }
 

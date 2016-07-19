@@ -16,6 +16,7 @@ import java.util.List;
 
 import gesoft.gandroid.download.service.DownloadService;
 import gesoft.gapp.common.L;
+import gesoft.gapp.common.T;
 import gesoft.gphotoview.GPhotoView;
 import gesoft.push.GPushConstant;
 import gesoft.push.GPushXG;
@@ -38,7 +39,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void download(View view){
-        startService( new Intent(this, DownloadService.class));
+        Intent intent = new Intent(this, DownloadService.class);
+        intent.putExtra(DownloadService.PARAM_URL, "http://218.61.254.30:8082/glcsgis_APPDownload/apk/UnicomZc.apk");
+        startService(intent );
+    }
+
+    public void asyncTask(View view){
+        startActivity(new Intent(this, AsyncTaskActivity.class));
     }
 
     public void retrofit(View view){
@@ -66,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkupd(View view){
+        T.show(this, "正在开发中");
+    }
+
+    public void hotfix(View view){
+        startActivity(new Intent(this, HotFixActivity.class));
         //GFIR.checkUpd();
     }
 

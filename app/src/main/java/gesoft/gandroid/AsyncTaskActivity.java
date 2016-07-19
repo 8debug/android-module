@@ -37,7 +37,7 @@ public class AsyncTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_async_task);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
         //Progress Bar na
         pBar = (ProgressBar) findViewById(R.id.progressBar);

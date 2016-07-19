@@ -20,6 +20,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/btn_asyncTask"
+        android:onClick="asyncTask"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/btn_retrofit"
         android:onClick="retrofit"/>
 
@@ -46,5 +52,11 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_checkupd"
         android:onClick="checkupd"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_hotfix"
+        android:onClick="hotfix"/>
 
 </LinearLayout>
