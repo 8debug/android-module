@@ -13,11 +13,12 @@ import java.util.ArrayList;
 import gesoft.gbmap.GBLocation;
 import gesoft.gbmap.L;
 
-public abstract class GBLocationActivity extends Activity {
+public abstract class GBLocationActivity extends Activity implements GBLocation.IGBLocation {
 
     protected Context mContext;
     protected Activity mActivity;
-    protected GBLocation mGBLocation;
+
+    private GBLocation mGBLocation;
 
     private String permissionInfo;
     private final int SDK_PERMISSION_REQUEST = 127;
@@ -46,9 +47,35 @@ public abstract class GBLocationActivity extends Activity {
             mGBLocation = new GBLocation();
             mGBLocation.initLocation();
             onCreateG(savedInstanceState);
+            setGBLocation(this);
         } catch (Exception e) {
             L.e(e);
         }
+    }
+
+    /**
+     * 实现IGBLocation接口
+     * @param igbLocation
+     */
+    void setGBLocation(GBLocation.IGBLocation igbLocation){
+        if( igbLocation!=null )mGBLocation.setIGBLocation(igbLocation);
+        else{
+            throw new IllegalArgumentException(" GBLocation.IGBLocation is not null ");
+        }
+    }
+
+    /**
+     * 开始定位
+     */
+    protected void startLocation(){
+        mGBLocation.start();
+    }
+
+    /**
+     * 结束定位
+     */
+    protected void stopLocation(){
+        mGBLocation.stop();
     }
 
     @Override

@@ -29,7 +29,16 @@ public class GBLocation {
     }
 
     public interface IGBLocation{
+        /**
+         * 定位开始前
+         */
         void onLocationStart();
+
+        /**
+         * 定位结束后
+         * @param isSuccess 判断是否定位成功
+         * @param bean  定位成功返回定位信息，否则返回null
+         */
         void onLocationFinish(boolean isSuccess, GLBean bean);
     }
 
