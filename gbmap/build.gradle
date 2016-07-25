@@ -1,18 +1,19 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
+// JitPack
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.297179121'
+
 android {
     compileSdkVersion 24
     buildToolsVersion "23.0.3"
 
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -20,6 +21,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        gapp {
+            buildConfigField 'String', 'ENV', '"PRODUCTION"'
+        }
+    }
+    publishNonDefault true
 }
 
 dependencies {
@@ -40,12 +48,12 @@ uploadArchives {
                 authentication(userName: 'admin', password: 'admin123')
             }*/
 
-            repository(url: 'http://10.70.23.47:9999/nexus/content/repositories/gapp/') {
+            repository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
                 authentication(userName: 'admin', password: 'admin123')
             }
 
             pom.project {
-                version '0.0.6'
+                version '0.0.1'
                 artifactId 'gbmap'
                 groupId 'gesoft.android'
                 packaging 'aar'
