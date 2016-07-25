@@ -1,1 +1,1 @@
-include ':app', ':gphotoview', ':gbmap', 'gapp', ':gpush'
+include ':app', ':gphotoview', ':gbmap', ':ghotfix', /*':gupd',*/ 'gapp', ':gpush'

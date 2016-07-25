@@ -35,4 +35,5 @@ dependencies {
     compile 'gesoft.android:gbmap:0.0.6'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
     testCompile 'junit:junit:4.12'
+
 }

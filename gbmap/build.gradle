@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
+//apply plugin: 'maven'
 
 // JitPack
 apply plugin: 'com.github.dcendents.android-maven'
@@ -41,13 +41,10 @@ dependencies {
 }
 
 
+/*
 uploadArchives {
     repositories {
         mavenDeployer {
-            /*snapshotRepository(url: 'http://10.70.23.21:8081/nexus/content/repositories/gapp-snapshot/') {
-                authentication(userName: 'admin', password: 'admin123')
-            }*/
-
             repository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
                 authentication(userName: 'admin', password: 'admin123')
             }
@@ -61,4 +58,4 @@ uploadArchives {
             }
         }
     }
-}
+}*/
