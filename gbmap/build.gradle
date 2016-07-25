@@ -23,7 +23,7 @@ android {
     }
 
     productFlavors {
-        gapp {
+        gbmap {
             buildConfigField 'String', 'ENV', '"PRODUCTION"'
         }
     }
