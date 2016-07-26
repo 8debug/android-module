@@ -24,13 +24,6 @@ android {
     lintOptions {
         abortOnError false
     }
-
-    productFlavors {
-        gapp {
-            buildConfigField 'String', 'ENV', '"PRODUCTION"'
-        }
-    }
-    publishNonDefault true
 }
 
 dependencies {

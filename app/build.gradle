@@ -33,6 +33,8 @@ dependencies {
     compile project(':ghotfix')
     compile 'gesoft.android:gapp:0.0.7'
     compile 'gesoft.android:gbmap:0.0.6'
+//    compile 'com.github.297179121.android-module:gapp:0.0.2'
+//    compile 'com.github.297179121.android-module:gbmap:0.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
     testCompile 'junit:junit:4.12'
 
