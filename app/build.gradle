@@ -23,18 +23,14 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //compile 'com.android.support:design:23.4.0'
     //compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    //compile project(':gapp')
+    compile project(':gapp')
     compile project(':gphotoview')
-    //compile project(':gbmap')
+    compile project(':gbmap')
     compile project(':gpush')
     //compile project(':gupd')
     //compile 'com.facebook.stetho:stetho:1.3.1'
     //compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
-    compile project(':ghotfix')
-    compile 'gesoft.android:gapp:0.0.7'
-    compile 'gesoft.android:gbmap:0.0.6'
-//    compile 'com.github.297179121.android-module:gapp:0.0.2'
-//    compile 'com.github.297179121.android-module:gbmap:0.0.2'
+    //compile project(':ghotfix')
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
     testCompile 'junit:junit:4.12'
 

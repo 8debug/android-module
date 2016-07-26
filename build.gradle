@@ -16,10 +16,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven { url 'http://10.70.23.47:9999/nexus/content/repositories/gapp/' }
-        //maven { url 'http://10.70.23.47:9999/nexus/content/repositories/gbmap/' }
         maven { url "https://jitpack.io" }
-        maven { url "http://maven.bughd.com/public" }
+        //maven { url "http://maven.bughd.com/public" }
     }
 }
 

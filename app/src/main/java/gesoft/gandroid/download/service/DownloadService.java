@@ -16,7 +16,6 @@ import java.io.File;
 import java.util.Date;
 
 import gesoft.gapp.common.L;
-import gesoft.ghotfix.GHotFix;
 
 public class DownloadService extends Service {
     private DownloadManager dm;
@@ -61,7 +60,7 @@ public class DownloadService extends Service {
                             int columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
                             if( DownloadManager.STATUS_SUCCESSFUL == cursor.getInt(columnIndex) ){
                                 String strPath = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
-                                GHotFix.addPatch( Uri.parse(strPath).getPath() );
+                                //GHotFix.addPatch( Uri.parse(strPath).getPath() );
                                 //T.show(context, strUri);
                             }
                         }

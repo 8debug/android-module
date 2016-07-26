@@ -12,7 +12,6 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener;
 import java.util.HashSet;
 import java.util.Set;
 
-import gesoft.ghotfix.GHotFix;
 import gesoft.push.GPushXG;
 
 /**
@@ -45,7 +44,7 @@ public class BaseApplication extends Application {
         GPushXG.setApplication(mContext);
 
         //热修复
-        GHotFix.setApplication(mContext);
+        //GHotFix.setApplication(mContext);
 
         /*GFIR.init(this);
         GFIR.checkUpd(new GFIR.ICheckUpdCallback() {
