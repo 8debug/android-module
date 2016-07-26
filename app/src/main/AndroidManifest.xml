@@ -33,7 +33,7 @@
 
         <activity android:name=".AsyncTaskActivity" />
         <activity android:name=".RetrofitActivity" />
-        <activity android:name=".BLocationLocationActivity" />
+        <activity android:name=".BLocationActivity" />
         <activity
             android:name=".FrescoActivity"
             android:label="@string/activity_label_fresco" />

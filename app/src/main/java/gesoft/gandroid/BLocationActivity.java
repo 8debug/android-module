@@ -1,6 +1,10 @@
 package gesoft.gandroid;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.transition.Transition;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,7 +15,7 @@ import gesoft.gapp.common.T;
 import gesoft.gbmap.GBLocation;
 import gesoft.gbmap.activity.GBLocationActivity;
 
-public class BLocationLocationActivity extends GBLocationActivity {
+public class BLocationActivity extends GBLocationActivity {
 
     @Bind(R.id.btn_location)
     Button btn;
@@ -33,6 +37,12 @@ public class BLocationLocationActivity extends GBLocationActivity {
 
     public void location(final View view) {
         startLocation();
+    }
+
+    public void openFragment( View view ){
+        FragmentManager mgr = getFragmentManager();
+        FragmentTransaction tr = mgr.beginTransaction();
+        tr.add(R.id.fragment, new BLocationFragment(), BLocationFragment.TAG).commit();
     }
 
     @Override

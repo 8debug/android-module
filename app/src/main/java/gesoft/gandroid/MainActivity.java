@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void bdlocation(View view){
-        startActivity(new Intent(this, BLocationLocationActivity.class));
+        startActivity(new Intent(this, BLocationActivity.class));
     }
 
     public void checkupd(View view){
