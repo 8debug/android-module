@@ -23,7 +23,7 @@ import retrofit2.http.QueryMap;
  */
 public interface GHttpSerivce {
 
-    @GET("mobile.do")
+    @GET(GHttp.URL)
     Call<JSONObject> ajaxGet(@Query("sign") String sign, @QueryMap Map<String, String> options);
 
     @FormUrlEncoded
