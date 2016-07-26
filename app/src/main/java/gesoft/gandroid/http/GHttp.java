@@ -19,17 +19,13 @@ import retrofit2.Retrofit;
 
 public class GHttp {
 
-    public final static String BASE_URL = "http://10.70.23.47:8080/jdgis/zc/";
+    public final static String BASE_URL = "http://10.70.23.32:8080/jdgis/zc/";
 
-    public final static String URL = "mobile.do";
+    public static String URL = BASE_URL + "mobile.do";
     //请求数据
-    public final static String URL_3 = "3";
+    public static String URL_3 = URL + "?sign=3";
     //上传文件
-    public final static String URL_4 = "4";
-
-    public final static int METHOD_GET = 0;
-
-    public final static int METHOD_POST = 1;
+    public static String URL_4 = URL + "?sign=4";
 
     GHttpSerivce mHttpService;
 
@@ -53,21 +49,29 @@ public class GHttp {
         void onResponse(JSONObject response);
     }
 
+    private ISetSuccess mSetSuccess;
 
-    /**
-     * 请求数据返回json格式
-     * @param method
-     * @param url
-     * @param mapAjax
-     */
-    public void ajaxJSON(int method, String url, Map<String, String> mapAjax, final IAjax iAjax){
+    public interface ISetSuccess<T>{
+        boolean isSuccess(T t);
+    }
 
-        Call<JSONObject> request = method == METHOD_GET ? mHttpService.ajaxGet(url, mapAjax) : mHttpService.ajaxPost(url, mapAjax);
+    public GHttp setIsSuccess( ISetSuccess setSuccess ){
+        mSetSuccess = setSuccess;
+        return this;
+    }
+
+    private void request( Call<JSONObject> request , final IAjax iAjax){
         request.enqueue(new Callback<JSONObject>() {
             @Override
             public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
                 JSONObject json = response.body();
-                if ( isSuccess(json) && iAjax!=null ){
+                if( mSetSuccess==null ){
+                    try {
+                        throw new Exception(" 未实现ISetSuccess接口 ");
+                    } catch (Exception e) {
+                        L.e(e);
+                    }
+                }else if( mSetSuccess.isSuccess(json) && iAjax!=null ){
                     iAjax.onResponse(json);
                 }
             }
@@ -75,8 +79,22 @@ public class GHttp {
             @Override
             public void onFailure(Call<JSONObject> call, Throwable e) {
                 call.cancel();
+                L.e(e);
             }
         });
+    }
+
+    /**
+     * 请求数据返回json格式
+     * @param url
+     * @param mapAjax
+     */
+    public void ajaxPost(String url, Map<String, String> mapAjax, final IAjax iAjax){
+
+        Call<JSONObject> call = mHttpService.ajaxPost(url, mapAjax);
+
+        request(call, iAjax);
+
     }
 
     /**
@@ -88,31 +106,19 @@ public class GHttp {
 
         Map<String, RequestBody> params = parseMap( mapAjax );
 
-        Call<JSONObject> request = mHttpService.ajaxUpload(url, params);
-        request.enqueue(new Callback<JSONObject>() {
-            @Override
-            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
-                JSONObject json = response.body();
-                if ( isSuccess(json) && iAjax!=null ){
-                    iAjax.onResponse(json);
-                }
-            }
+        Call<JSONObject> call = mHttpService.ajaxUpload(url, params);
 
-            @Override
-            public void onFailure(Call<JSONObject> call, Throwable e) {
-                call.cancel();
-            }
-        });
+        request(call, iAjax);
     }
 
-    boolean isSuccess( JSONObject jsonResponse ){
+    /*boolean isSuccess( JSONObject jsonResponse ){
         if( jsonResponse.optInt("sign")==1 ){
             return true;
         }else{
             T.show(jsonResponse.optString("msg"));
             return false;
         }
-    }
+    }*/
 
     /**
      * 将Map<String, Object>转换为Map<String, RequestBody>

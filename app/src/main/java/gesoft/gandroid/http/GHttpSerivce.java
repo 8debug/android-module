@@ -16,6 +16,7 @@ import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 /**
  * Created by yhr on 2016/6/22.
@@ -23,7 +24,7 @@ import retrofit2.http.QueryMap;
  */
 public interface GHttpSerivce {
 
-    @GET(GHttp.URL)
+    /*@GET("mobile.do")
     Call<JSONObject> ajaxGet(@Query("sign") String sign, @QueryMap Map<String, String> options);
 
     @FormUrlEncoded
@@ -32,6 +33,19 @@ public interface GHttpSerivce {
 
     @Multipart
     @POST(GHttp.URL)
-    Call<JSONObject> ajaxUpload(@Part("sign") String sign, @PartMap Map<String, RequestBody> params);
+    Call<JSONObject> ajaxUpload(@Part("sign") String sign, @PartMap Map<String, RequestBody> params);*/
+
+    @GET
+    Call<JSONObject> ajaxGet(@Url String url, @QueryMap Map<String, String> options);
+
+    @FormUrlEncoded
+    @POST
+    Call<JSONObject> ajaxPost(@Url String url, @FieldMap Map<String, String> options);
+
+    @Multipart
+    @POST
+    Call<JSONObject> ajaxUpload(@Url String url, @PartMap Map<String, RequestBody> params);
+
+
 
 }

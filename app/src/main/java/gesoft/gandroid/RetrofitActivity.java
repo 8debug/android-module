@@ -32,12 +32,20 @@ public class RetrofitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_retrofit);
         lv = (ListView) findViewById(R.id.lv);
         context = this;
+
+        gHttp.setIsSuccess(new GHttp.ISetSuccess<JSONObject>() {
+            @Override
+            public boolean isSuccess(JSONObject response) {
+                L.d(response);
+                return response.optInt("sign")==1;
+            }
+        });
     }
 
     public void ajaxJSON(View v){
         Map<String, String> mapAjax = new HashMap<>();
         mapAjax.put("pageStart", "1");
-        gHttp.ajaxJSON(GHttp.METHOD_POST, GHttp.URL_3, mapAjax, new GHttp.IAjax() {
+        gHttp.ajaxPost(GHttp.URL_3, mapAjax, new GHttp.IAjax() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray array = response.optJSONArray("data");
