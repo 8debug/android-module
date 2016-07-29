@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
 // JitPack
 apply plugin: 'com.github.dcendents.android-maven'
@@ -35,22 +36,24 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.11.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.demievil.library:refreshlayout:1.0.0@aar'
+    //使用retrofit请求string类型
+    compile 'com.squareup.retrofit2:converter-scalars:2.0.0'
 
 }
 
-/*uploadArchives {
+uploadArchives {
     repositories {
         mavenDeployer {
-            *//*snapshotRepository(url: 'http://10.70.23.21:8081/nexus/content/repositories/gapp-snapshot/') {
+            /*snapshotRepository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
                 authentication(userName: 'admin', password: 'admin123')
-            }*//*
+            }*/
 
             repository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
                 authentication(userName: 'admin', password: 'admin123')
             }
 
             pom.project {
-                version '0.0.1'
+                version '0.0.7'
                 artifactId 'gapp'
                 groupId 'gesoft.android'
                 packaging 'aar'
@@ -58,7 +61,7 @@ dependencies {
             }
         }
     }
-}*/
+}
 
 /*artifacts {
     archives file('app-release.aar')

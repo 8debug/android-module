@@ -19,7 +19,7 @@ import retrofit2.http.Url;
  * Created by yhr on 2016/6/22.
  *
  */
-public interface GHttpSerivce {
+public interface GHttpSerivce<T> {
 
     /*@GET("mobile.do")
     Call<JSONObject> ajaxGet(@Query("sign") String sign, @QueryMap Map<String, String> options);
@@ -33,15 +33,15 @@ public interface GHttpSerivce {
     Call<JSONObject> ajaxUpload(@Part("sign") String sign, @PartMap Map<String, RequestBody> params);*/
 
     @GET
-    Call<JSONObject> ajaxGet(@Url String url, @QueryMap Map<String, String> options);
+    Call<T> ajaxGet(@Url String url, @QueryMap Map<String, String> options);
 
     @FormUrlEncoded
     @POST
-    Call<JSONObject> ajaxPost(@Url String url, @FieldMap Map<String, String> options);
+    Call<T> ajaxPost(@Url String url, @FieldMap Map<String, String> options);
 
     @Multipart
     @POST
-    Call<JSONObject> ajaxUpload(@Url String url, @PartMap Map<String, RequestBody> params);
+    Call<T> ajaxUpload(@Url String url, @PartMap Map<String, RequestBody> params);
 
 
 

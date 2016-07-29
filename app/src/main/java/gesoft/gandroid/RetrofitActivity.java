@@ -15,14 +15,16 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import gesoft.gandroid.http.GHttp;
 import gesoft.gapp.common.GAct;
+import gesoft.gapp.common.GData;
 import gesoft.gapp.common.L;
+import gesoft.gapp.http.GHttp;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetrofitActivity extends AppCompatActivity {
 
     ListView lv;
-    GHttp gHttp = new GHttp();
+    GHttp<String> gHttp = new GHttp<>(ScalarsConverterFactory.create());
     File mFile;
     Context context;
 
@@ -45,9 +47,10 @@ public class RetrofitActivity extends AppCompatActivity {
     public void ajaxJSON(View v){
         Map<String, String> mapAjax = new HashMap<>();
         mapAjax.put("pageStart", "1");
-        gHttp.ajaxPost(GHttp.URL_3, mapAjax, new GHttp.IAjax() {
+        gHttp.ajaxPost(GHttp.URL_3, mapAjax, new GHttp.IAjax<String>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String str) {
+                JSONObject response = GData.parseJSON(str);
                 JSONArray array = response.optJSONArray("data");
                 String[] strings = new String[ array.length() ];
                 for(int i=0; i<array.length(); i++){
@@ -74,9 +77,9 @@ public class RetrofitActivity extends AppCompatActivity {
             Map<String, Object> mapAjax = new HashMap<>();
             mapAjax.put("loginName", "yhr");
             mapAjax.put("zipFile", mFile);
-            gHttp.ajaxUpload(GHttp.URL_4, mapAjax, new GHttp.IAjax() {
+            gHttp.ajaxUpload(GHttp.URL_4, mapAjax, new GHttp.IAjax<String>() {
                 @Override
-                public void onResponse(JSONObject response) {
+                public void onResponse(String str) {
 
                 }
             });

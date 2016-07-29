@@ -1,5 +1,8 @@
 package gesoft.gapp.http;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import org.json.JSONObject;
 
 import java.io.File;
@@ -13,10 +16,11 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class GHttp {
+public class GHttp<T> {
 
     public final static String BASE_URL = "http://10.70.23.32:8080/jdgis/zc/";
 
@@ -26,15 +30,17 @@ public class GHttp {
     //上传文件
     public static String URL_4 = URL + "?sign=4";
 
-    GHttpSerivce mHttpService;
+    static GHttpSerivce mHttpService;
 
-    public GHttp(){
+    public GHttp(Converter.Factory factory){
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl( GHttp.BASE_URL )
-                .addConverterFactory(JsonConverterFactory.create())
+                .addConverterFactory(factory)
                 .build();
         mHttpService = retrofit.create(GHttpSerivce.class);
     }
+
 
     /*private Retrofit getRetrofitJson(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -44,8 +50,8 @@ public class GHttp {
         return retrofit;
     }*/
 
-    public interface IAjax{
-        void onResponse(JSONObject response);
+    public interface IAjax<T>{
+        void onResponse(T t);
     }
 
     private ISetSuccess mSetSuccess;
@@ -59,24 +65,24 @@ public class GHttp {
         return this;
     }
 
-    private void request( Call<JSONObject> request , final IAjax iAjax){
-        request.enqueue(new Callback<JSONObject>() {
+    private void request( Call<T> request , final IAjax iAjax){
+        request.enqueue(new Callback<T>() {
             @Override
-            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
-                JSONObject json = response.body();
+            public void onResponse(Call<T> call, Response<T> response) {
+                T t = response.body();
                 if( mSetSuccess==null ){
                     try {
                         throw new Exception(" 未实现ISetSuccess接口 ");
                     } catch (Exception e) {
                         L.e(e);
                     }
-                }else if( mSetSuccess.isSuccess(json) && iAjax!=null ){
-                    iAjax.onResponse(json);
+                }else if( mSetSuccess.isSuccess(t) && iAjax!=null ){
+                    iAjax.onResponse(t);
                 }
             }
 
             @Override
-            public void onFailure(Call<JSONObject> call, Throwable e) {
+            public void onFailure(Call<T> call, Throwable e) {
                 call.cancel();
                 L.e(e);
             }
@@ -88,11 +94,13 @@ public class GHttp {
      * @param url
      * @param mapAjax
      */
-    public void ajaxPost(String url, Map<String, String> mapAjax, final IAjax iAjax){
+    public Call<T> ajaxPost(String url, Map<String, String> mapAjax, @Nullable final IAjax<T> iAjax){
 
-        Call<JSONObject> call = mHttpService.ajaxPost(url, mapAjax);
+        Call<T> request = mHttpService.ajaxPost(url, mapAjax);
 
-        request(call, iAjax);
+        request(request, iAjax);
+
+        return request;
 
     }
 
@@ -101,23 +109,16 @@ public class GHttp {
      * @param url
      * @param mapAjax
      */
-    public void ajaxUpload(String url, Map<String, Object> mapAjax, final IAjax iAjax){
+    public Call<T> ajaxUpload(String url, Map<String, Object> mapAjax, @Nullable final IAjax<T> iAjax){
 
         Map<String, RequestBody> params = parseMap( mapAjax );
 
-        Call<JSONObject> call = mHttpService.ajaxUpload(url, params);
+        Call<T> request = mHttpService.ajaxUpload(url, params);
 
-        request(call, iAjax);
+        request(request, iAjax);
+
+        return request;
     }
-
-    /*boolean isSuccess( JSONObject jsonResponse ){
-        if( jsonResponse.optInt("sign")==1 ){
-            return true;
-        }else{
-            T.show(jsonResponse.optString("msg"));
-            return false;
-        }
-    }*/
 
     /**
      * 将Map<String, Object>转换为Map<String, RequestBody>
