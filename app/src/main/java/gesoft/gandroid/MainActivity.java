@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
         //GFIR.checkUpd();
     }
 
+    public void recyclerView(View view){
+        startActivity(new Intent(this, RecyclerViewActivity.class));
+    }
+
     //推送
     void gpush(){
 

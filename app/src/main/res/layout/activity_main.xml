@@ -15,24 +15,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_download"
+        android:textAllCaps="false"
         android:onClick="download"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_asyncTask"
+        android:textAllCaps="false"
         android:onClick="asyncTask"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_retrofit"
+        android:textAllCaps="false"
         android:onClick="retrofit"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/activity_label_fresco"
+        android:textAllCaps="false"
         android:onClick="fresco"/>
 
     <Button
@@ -58,5 +62,12 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_hotfix"
         android:onClick="hotfix"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_RecyclerView"
+        android:textAllCaps="false"
+        android:onClick="recyclerView"/>
 
 </LinearLayout>

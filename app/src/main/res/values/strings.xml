@@ -8,6 +8,7 @@
     <string name="btn_bd_location">百度定位</string>
     <string name="btn_checkupd">检测更新</string>
     <string name="btn_hotfix">热修复</string>
+    <string name="btn_RecyclerView" formatted="false">RecyclerView</string>
     <string name="activity_label_fresco">fresco使用</string>
 
     <string name="btn_bd_bdlocation">定位</string>
@@ -15,6 +16,8 @@
     <string name="btn_bd_stop">结束定位</string>
     <string name="title_activity_login">Sign in</string>
     <string name="action_settings">重复</string>
+
+    <string name="act_RecyclerViewActivity">RecyclerView</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

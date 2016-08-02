@@ -37,7 +37,8 @@
         <activity
             android:name=".FrescoActivity"
             android:label="@string/activity_label_fresco" />
-        <activity android:name=".HotFixActivity"/>
+        <activity android:name=".HotFixActivity" />
+        <activity android:name=".RecyclerViewActivity" android:label="@string/act_RecyclerViewActivity"/>
     </application>
 
 </manifest>
