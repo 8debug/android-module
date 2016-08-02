@@ -14,7 +14,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 已废弃，使用GRAdapter代替
+ * @deprecated
+ */
 public class GRecyclerViewAdapter extends RecyclerView.Adapter<GRecyclerViewAdapter.ViewHolder> {
 
     private final List<JSONObject> mList ;
