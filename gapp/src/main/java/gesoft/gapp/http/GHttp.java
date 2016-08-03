@@ -46,14 +46,14 @@ public class GHttp<T> {
         return retrofit;
     }*/
 
-    public interface IAjax<A>{
-        void onResponse(A a);
+    public interface IAjax<T>{
+        void onResponse(T a);
     }
 
     private ISetSuccess mSetSuccess;
 
-    public interface ISetSuccess<A>{
-        boolean isSuccess(A t);
+    public interface ISetSuccess<T>{
+        boolean isSuccess(T t);
     }
 
     public GHttp setIsSuccess( ISetSuccess setSuccess ){
@@ -61,7 +61,7 @@ public class GHttp<T> {
         return this;
     }
 
-    private void request( Call<T> request , final IAjax iAjax){
+    private void request( Call<T> request , final IAjax<T> iAjax){
         request.enqueue(new Callback<T>() {
             @Override
             public void onResponse(Call<T> call, Response<T> response) {
@@ -90,9 +90,9 @@ public class GHttp<T> {
      * @param url
      * @param mapAjax
      */
-    public void ajaxPost(String url, Map<String, String> mapAjax, @Nullable final IAjax iAjax){
+    public void ajaxPost(String url, Map<String, String> mapAjax, @Nullable final IAjax<T> iAjax){
 
-        Call request = mHttpService.ajaxPost(url, mapAjax);
+        Call<T> request = mHttpService.ajaxPost(url, mapAjax);
 
         request(request, iAjax);
     }
@@ -102,11 +102,11 @@ public class GHttp<T> {
      * @param url
      * @param mapAjax
      */
-    public void ajaxUpload(String url, Map<String, Object> mapAjax, @Nullable final IAjax iAjax){
+    public void ajaxUpload(String url, Map<String, Object> mapAjax, @Nullable final IAjax<T> iAjax){
 
         Map<String, RequestBody> params = parseMap( mapAjax );
 
-        Call request = mHttpService.ajaxUpload(url, params);
+        Call<T> request = mHttpService.ajaxUpload(url, params);
 
         request(request, iAjax);
 
