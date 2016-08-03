@@ -42,6 +42,11 @@ public abstract class GLAdapter<T> extends BaseAdapter {
         return this;
     }
 
+    public void setListData(List<T> list ){
+        clear();
+        addAll(list);
+    }
+
     public void add( T t ){
         mList.add(t);
     }
