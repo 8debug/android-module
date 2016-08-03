@@ -1,9 +1,6 @@
 package gesoft.gapp.http;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import org.json.JSONObject;
 
 import java.io.File;
 import java.util.HashMap;
@@ -11,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 import gesoft.gapp.common.L;
-import gesoft.gapp.http.retrofit.converter.JsonConverterFactory;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -50,14 +46,14 @@ public class GHttp<T> {
         return retrofit;
     }*/
 
-    public interface IAjax<T>{
-        void onResponse(T t);
+    public interface IAjax<A>{
+        void onResponse(A a);
     }
 
     private ISetSuccess mSetSuccess;
 
-    public interface ISetSuccess<T>{
-        boolean isSuccess(T t);
+    public interface ISetSuccess<A>{
+        boolean isSuccess(A t);
     }
 
     public GHttp setIsSuccess( ISetSuccess setSuccess ){
@@ -94,14 +90,11 @@ public class GHttp<T> {
      * @param url
      * @param mapAjax
      */
-    public Call<T> ajaxPost(String url, Map<String, String> mapAjax, @Nullable final IAjax<T> iAjax){
+    public void ajaxPost(String url, Map<String, String> mapAjax, @Nullable final IAjax iAjax){
 
-        Call<T> request = mHttpService.ajaxPost(url, mapAjax);
+        Call request = mHttpService.ajaxPost(url, mapAjax);
 
         request(request, iAjax);
-
-        return request;
-
     }
 
     /**
@@ -109,15 +102,14 @@ public class GHttp<T> {
      * @param url
      * @param mapAjax
      */
-    public Call<T> ajaxUpload(String url, Map<String, Object> mapAjax, @Nullable final IAjax<T> iAjax){
+    public void ajaxUpload(String url, Map<String, Object> mapAjax, @Nullable final IAjax iAjax){
 
         Map<String, RequestBody> params = parseMap( mapAjax );
 
-        Call<T> request = mHttpService.ajaxUpload(url, params);
+        Call request = mHttpService.ajaxUpload(url, params);
 
         request(request, iAjax);
 
-        return request;
     }
 
     /**
