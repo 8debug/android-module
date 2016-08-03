@@ -25,23 +25,14 @@ GPhotoView.startImagePagerActivity(Context context, List<String> imgUrls, int po
 
 ### gbmap 百度地图
 #### 定位功能
-1、`activity`继承`GBLocationActivity`   
-2、设置开始定位和定位结束的回调函数   
+1、在主`module`中添加
 ```
-mGBLocation.setIGBLocation(new GBLocation.IGBLocation() {
-                @Override
-                public void onStart() {
-                    ...
-                }
-                @Override
-                public void onFinish(boolean isSuccess, GBLocation.GLBean bean) {
-                    mGBLocation.stop();
-                    ...
-                }
-            });
+<meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="..." />
 ```
+2、`activity`继承`GBLocationActivity`   或者 `fragment` 继承 `GBLocationFragment` 实现`GBLocation.IGBLocation` 接口
+
 3、开始定位/结束定位
 ```
-mGBLocation.start();
-mGBLocation.stop();
+startLocation();	//开始定位
+stopLocation();		//结束定位
 ```
