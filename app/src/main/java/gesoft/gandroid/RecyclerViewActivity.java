@@ -11,9 +11,10 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import gesoft.gapp.common.GRAdapter;
+import gesoft.gapp.common.GRAdapterListener;
 import gesoft.gapp.common.GVHolder;
 
-public class RecyclerViewActivity extends AppCompatActivity {
+public class RecyclerViewActivity extends AppCompatActivity implements GRAdapterListener.OnConvert<String> {
 
     @Bind(R.id.recycler_grid)
     RecyclerView recyclerGrid;
@@ -28,15 +29,16 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         List<String> listStr = new ArrayList<>(Arrays.asList("杨皓然", "岳增光", "杨刚", "张永茂", "袁宇飞", "张楠"));
 
-        GRAdapter<String> adapter = new GRAdapter<String>(R.layout.adapter_item, listStr) {
-            @Override
-            public void convert(GVHolder holder, String s) {
-                holder.setText(R.id.tv, s);
-            }
-        };
+        GRAdapter<String> adapter = new GRAdapter<>(R.layout.adapter_item);
+        adapter.addAll(listStr);
 
         recyclerGrid.setAdapter(adapter);
         recyclerLinear.setAdapter(adapter);
 
+    }
+
+    @Override
+    public void onConvert(GVHolder holder, String s) {
+        holder.setText(R.id.tv, s);
     }
 }
