@@ -25,11 +25,17 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
     provided fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    //此处不写则使用JUnit无法测试JSONObject，所有的JSONObject都为null
+    testCompile 'org.json:json:20140107'
     //design包含appcompat-v7和support-v4
     compile 'com.android.support:design:23.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -53,7 +59,7 @@ uploadArchives {
             }
 
             pom.project {
-                version '0.0.7'
+                version '0.0.16'
                 artifactId 'gapp'
                 groupId 'gesoft.android'
                 packaging 'aar'

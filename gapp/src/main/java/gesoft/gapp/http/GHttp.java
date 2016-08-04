@@ -16,7 +16,7 @@ import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class GHttp<T> {
+public class GHttp {
 
     public final static String BASE_URL = "http://10.70.23.32:8080/jdgis/zc/";
 
@@ -61,24 +61,23 @@ public class GHttp<T> {
         return this;
     }
 
-    private void request( Call<T> request , final IAjax<T> iAjax){
-        request.enqueue(new Callback<T>() {
+    private void request( Call request , final IAjax iAjax){
+        request.enqueue(new Callback() {
             @Override
-            public void onResponse(Call<T> call, Response<T> response) {
-                T t = response.body();
+            public void onResponse(Call call, Response response) {
                 if( mSetSuccess==null ){
                     try {
                         throw new Exception(" 未实现ISetSuccess接口 ");
                     } catch (Exception e) {
                         L.e(e);
                     }
-                }else if( mSetSuccess.isSuccess(t) && iAjax!=null ){
-                    iAjax.onResponse(t);
+                }else if( mSetSuccess.isSuccess(response.body()) && iAjax!=null ){
+                    iAjax.onResponse(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<T> call, Throwable e) {
+            public void onFailure(Call call, Throwable e) {
                 call.cancel();
                 L.e(e);
             }
@@ -90,9 +89,9 @@ public class GHttp<T> {
      * @param url
      * @param mapAjax
      */
-    public void ajaxPost(String url, Map<String, String> mapAjax, @Nullable final IAjax<T> iAjax){
+    public void ajaxPost(String url, Map<String, String> mapAjax, @Nullable final IAjax iAjax){
 
-        Call<T> request = mHttpService.ajaxPost(url, mapAjax);
+        Call request = mHttpService.ajaxPost(url, mapAjax);
 
         request(request, iAjax);
     }
@@ -102,11 +101,11 @@ public class GHttp<T> {
      * @param url
      * @param mapAjax
      */
-    public void ajaxUpload(String url, Map<String, Object> mapAjax, @Nullable final IAjax<T> iAjax){
+    public void ajaxUpload(String url, Map<String, Object> mapAjax, @Nullable final IAjax iAjax){
 
         Map<String, RequestBody> params = parseMap( mapAjax );
 
-        Call<T> request = mHttpService.ajaxUpload(url, params);
+        Call request = mHttpService.ajaxUpload(url, params);
 
         request(request, iAjax);
 

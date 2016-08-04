@@ -9,25 +9,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
+public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
 
     private final List<T> mList ;
     private final int mLayout;
+    private GRAdapterListener.OnConvert<T> mOnConvertListener;
+
+    public void setOnConvertListener( GRAdapterListener.OnConvert onConvert ){
+        mOnConvertListener = onConvert;
+    }
+
+    /*private GRAdapterListener.OnItemClick mOnItemClickListener;
+    private GRAdapterListener.OnItemLongClick mOnItemLongClickListener;
+
+    public void setOnItemClickListener( GRAdapterListener.OnItemClick onItemClick ){
+        mOnItemClickListener = onItemClick;
+    }
+
+    public void setOnItemLongClickListener( GRAdapterListener.OnItemLongClick onItemLongClick ){
+        mOnItemLongClickListener = onItemLongClick;
+    }*/
 
     public GRAdapter(int layoutId, List<T> list) {
         mLayout = layoutId;
         mList = list==null?new ArrayList<T>():list;
     }
 
-    /*public GRAdapter(int layoutId) {
+    public GRAdapter(int layoutId){
         mLayout = layoutId;
         mList = new ArrayList<>();
-    }*/
+    }
 
-    /*public GRAdapter(List<T> list, int layoutId) {
-        mList = list==null?new ArrayList<T>():list;
-        mLayout = layoutId;
-    }*/
+
 
     public GRAdapter addAll(List<T> list ){
         mList.addAll(list);
@@ -75,10 +88,14 @@ public abstract class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
 
     @Override
     public void onBindViewHolder(final GVHolder holder, int position) {
-        convert(holder, mList.get(position));
+
+        if( mOnConvertListener!=null ){
+            mOnConvertListener.onConvert(holder, mList.get(position));
+        }
+
     }
 
-    public abstract void convert(GVHolder holder, T t);
+    //public abstract void convert(GVHolder holder, T t);
 
     @Override
     public int getItemCount() {
