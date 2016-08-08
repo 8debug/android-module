@@ -10,11 +10,11 @@ GPushXG.setApplication(mContext);
 2、注册设备
 ```
 GPushXG.registerPush(getApplicationContext(), new GPushXG.Reg() {
-                        @Override
-                        public void onSuccess(Object token) {
-                            ...
-                        }
-                    });
+    @Override
+    public void onSuccess(Object token) {
+        ...
+    }
+});
 ```
 3、在`MessageReceiver`中写自己的逻辑代码
 
@@ -27,7 +27,7 @@ GPhotoView.startImagePagerActivity(Context context, List<String> imgUrls, int po
 #### 定位功能
 1、在主`module`中添加
 ```
-<meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="..." />
+<meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="..." tools:replace="android:value"/>
 ```
 2、`activity`继承`GBLocationActivity`   或者 `fragment` 继承 `GBLocationFragment` 实现`GBLocation.IGBLocation` 接口
 
