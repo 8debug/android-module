@@ -24,7 +24,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RetrofitActivity extends AppCompatActivity {
 
     ListView lv;
-    GHttp<String> gHttp = new GHttp<>(ScalarsConverterFactory.create());
+    GHttp gHttp = new GHttp(ScalarsConverterFactory.create());
     File mFile;
     Context context;
 

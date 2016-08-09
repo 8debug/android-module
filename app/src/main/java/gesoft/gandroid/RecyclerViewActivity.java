@@ -10,6 +10,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import gesoft.gapp.common.GDecoration;
 import gesoft.gapp.common.GRAdapter;
 import gesoft.gapp.common.GRAdapterListener;
 import gesoft.gapp.common.GVHolder;
@@ -34,6 +35,7 @@ public class RecyclerViewActivity extends AppCompatActivity implements GRAdapter
 
         recyclerGrid.setAdapter(adapter);
         recyclerLinear.setAdapter(adapter);
+        recyclerLinear.addItemDecoration(new GDecoration(this, GDecoration.VERTICAL_LIST));
 
     }
 

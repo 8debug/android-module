@@ -1,10 +1,8 @@
 package gesoft.gandroid;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.transition.Transition;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,16 +17,6 @@ public class BLocationActivity extends GBLocationActivity {
 
     @Bind(R.id.btn_location)
     Button btn;
-
-    @Override
-    protected void onStartG() {
-
-    }
-
-    @Override
-    protected void onStopG() {
-
-    }
 
     @Override
     protected void onCreateG(Bundle savedInstanceState) {
