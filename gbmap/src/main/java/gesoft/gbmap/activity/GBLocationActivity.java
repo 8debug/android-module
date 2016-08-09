@@ -23,18 +23,6 @@ public abstract class GBLocationActivity extends Activity implements GBLocation.
     private String permissionInfo;
     private final int SDK_PERMISSION_REQUEST = 127;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        try {
-            onStartG();
-        } catch (Exception e) {
-            L.e(e);
-        }
-    }
-
-    protected abstract void onStartG();
-    protected abstract void onStopG();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,16 +70,6 @@ public abstract class GBLocationActivity extends Activity implements GBLocation.
     protected void onDestroy() {
         mGBLocation.destoryLocation();
         super.onDestroy();
-    }
-
-    @Override
-    protected void onStop() {
-        try {
-            onStopG();
-        } catch (Exception e) {
-            L.e(e);
-        }
-        super.onStop();
     }
 
     protected abstract void onCreateG(Bundle savedInstanceState);
