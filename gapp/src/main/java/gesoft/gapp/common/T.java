@@ -13,6 +13,12 @@ import gesoft.gapp.base.GApplication;
  * @date 2015年11月5日
  */
 public class T {
+
+	private static Context mContext;
+
+	public static void setContext( Context ctx ){
+		mContext = ctx;
+	}
 	
 	/**
 	 * 
@@ -26,7 +32,7 @@ public class T {
 	}
 	
 	public static void show(Object msg){
-		T.show(GApplication.instance, String.valueOf(msg));
+		T.show( mContext, String.valueOf(msg));
 	}
 	
 	/**
