@@ -70,4 +70,18 @@
         android:textAllCaps="false"
         android:onClick="recyclerView"/>
 
+    <Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/btn_phonenumber"
+    android:textAllCaps="false"
+    android:onClick="phoneNumber"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_phonescreen"
+        android:textAllCaps="false"
+        android:onClick="phoneScreen"/>
+
 </LinearLayout>

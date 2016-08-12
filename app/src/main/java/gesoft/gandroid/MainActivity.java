@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gesoft.gandroid.download.service.DownloadService;
+import gesoft.gapp.common.GApp;
+import gesoft.gapp.common.GPhone;
 import gesoft.gapp.common.L;
 import gesoft.gapp.common.T;
 import gesoft.gphotoview.GPhotoView;
@@ -83,6 +86,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void recyclerView(View view){
         startActivity(new Intent(this, RecyclerViewActivity.class));
+    }
+
+    public void phoneNumber(View view){
+        T.show( this, GPhone.getPhoneNumber(this) );
+    }
+
+    public void phoneScreen( View view ){
+        DisplayMetrics display = GPhone.getMetric(this);
+        T.show("width="+display.widthPixels+", height="+display.heightPixels);
     }
 
     //推送

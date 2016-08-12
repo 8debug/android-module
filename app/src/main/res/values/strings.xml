@@ -9,6 +9,8 @@
     <string name="btn_checkupd">检测更新</string>
     <string name="btn_hotfix">热修复</string>
     <string name="btn_RecyclerView" formatted="false">RecyclerView</string>
+    <string name="btn_phonenumber" formatted="false">获取手机号码</string>
+    <string name="btn_phonescreen" formatted="false">获取手机屏幕</string>
     <string name="activity_label_fresco">fresco使用</string>
 
     <string name="btn_bd_bdlocation">定位</string>

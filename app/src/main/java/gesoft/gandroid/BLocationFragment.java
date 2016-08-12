@@ -28,15 +28,6 @@ public class BLocationFragment extends GBLocationFragment {
     @Bind(R.id.tv)
     TextView tv;
 
-    @Override
-    protected void onStartG() {
-
-    }
-
-    @Override
-    protected void onStopG() {
-
-    }
 
     @Override
     protected View onCreateViewG(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

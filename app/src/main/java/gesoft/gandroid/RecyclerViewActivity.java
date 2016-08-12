@@ -30,7 +30,7 @@ public class RecyclerViewActivity extends AppCompatActivity implements GRAdapter
 
         List<String> listStr = new ArrayList<>(Arrays.asList("杨皓然", "岳增光", "杨刚", "张永茂", "袁宇飞", "张楠"));
 
-        GRAdapter<String> adapter = new GRAdapter<>(R.layout.adapter_item);
+        GRAdapter<String> adapter = new GRAdapter<>(R.layout.adapter_item, this);
         adapter.addAll(listStr);
 
         recyclerGrid.setAdapter(adapter);
