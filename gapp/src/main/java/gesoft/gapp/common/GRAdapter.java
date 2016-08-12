@@ -15,9 +15,9 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
     private final int mLayout;
     private GRAdapterListener.OnConvert<T> mOnConvertListener;
 
-    public void setOnConvertListener( GRAdapterListener.OnConvert onConvert ){
+    /*public void setOnConvertListener( GRAdapterListener.OnConvert onConvert ){
         mOnConvertListener = onConvert;
-    }
+    }*/
 
     /*private GRAdapterListener.OnItemClick mOnItemClickListener;
     private GRAdapterListener.OnItemLongClick mOnItemLongClickListener;
@@ -30,14 +30,16 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         mOnItemLongClickListener = onItemLongClick;
     }*/
 
-    public GRAdapter(int layoutId, List<T> list) {
+    public GRAdapter(int layoutId, List<T> list, GRAdapterListener.OnConvert<T> onConvertListener) {
         mLayout = layoutId;
         mList = list==null?new ArrayList<T>():list;
+        mOnConvertListener = onConvertListener;
     }
 
-    public GRAdapter(int layoutId){
+    public GRAdapter(int layoutId, GRAdapterListener.OnConvert<T> onConvertListener){
         mLayout = layoutId;
         mList = new ArrayList<>();
+        mOnConvertListener = onConvertListener;
     }
 
 

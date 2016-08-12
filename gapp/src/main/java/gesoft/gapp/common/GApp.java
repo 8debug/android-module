@@ -91,30 +91,8 @@ public class GApp
         return txt+"";
     }*/
 
-    /**
-     * 获取手机IMEI码
-     * @param context
-     * @return
-     */
-    public static String getIMEI(Context context){
-        TelephonyManager mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return mTm.getDeviceId();
-    }
 
-    /**
-     * 获取手机型号
-     * @return
-     */
-    public static String getPhoneName(){
-        return Build.MODEL;
-    }
 
-    /**
-     * 获取手机的android版本
-     * @return
-     */
-    public static String getAndroidVersion(){
-        return Build.VERSION.RELEASE;
-    }
+
 
 }
