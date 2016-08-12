@@ -11,77 +11,86 @@
     tools:context="gesoft.gandroid.MainActivity">
 
 
-    <Button
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_download"
-        android:textAllCaps="false"
-        android:onClick="download"/>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_download"
+                android:textAllCaps="false"
+                android:onClick="download"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_asyncTask"
-        android:textAllCaps="false"
-        android:onClick="asyncTask"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_asyncTask"
+                android:textAllCaps="false"
+                android:onClick="asyncTask"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_retrofit"
-        android:textAllCaps="false"
-        android:onClick="retrofit"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_retrofit"
+                android:textAllCaps="false"
+                android:onClick="retrofit"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_label_fresco"
-        android:textAllCaps="false"
-        android:onClick="fresco"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_label_fresco"
+                android:textAllCaps="false"
+                android:onClick="fresco"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_photoview"
-        android:onClick="photoview"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_photoview"
+                android:onClick="photoview"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_bd_location"
-        android:onClick="bdlocation"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_bd_location"
+                android:onClick="bdlocation"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_checkupd"
-        android:onClick="checkupd"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_checkupd"
+                android:onClick="checkupd"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_hotfix"
-        android:onClick="hotfix"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_hotfix"
+                android:onClick="hotfix"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_RecyclerView"
-        android:textAllCaps="false"
-        android:onClick="recyclerView"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_RecyclerView"
+                android:textAllCaps="false"
+                android:onClick="recyclerView"/>
 
-    <Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/btn_phonenumber"
-    android:textAllCaps="false"
-    android:onClick="phoneNumber"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_phonenumber"
+                android:textAllCaps="false"
+                android:onClick="phoneNumber"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_phonescreen"
-        android:textAllCaps="false"
-        android:onClick="phoneScreen"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_phonescreen"
+                android:textAllCaps="false"
+                android:onClick="phoneScreen"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
