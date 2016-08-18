@@ -12,11 +12,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
- * Created by Administrator on 2016/6/5.
+ * Created by yhr on 2016/6/5.
+ * Activity调用的通用方法
  */
-public class GAct {        
+public class GAct {
+
+    private static boolean ACT_EXIT = false;
 
     /**
      * 添加或显示fragment
@@ -98,6 +103,29 @@ public class GAct {
     public static void startActivityCall(Context context, String phoneNumber){
         Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+phoneNumber));
         context.startActivity(intent);
+    }
+
+    /**
+     * 首页面双击返回按钮退出应用
+     * 此方法写在Activity.onBackPressed()中
+     * @param act
+     */
+    public static void exit( Activity act ){
+        if (!ACT_EXIT) {
+            ACT_EXIT = true;
+            T.show(act,"再按一次退出程序");
+            Timer tExit = new Timer();
+            tExit.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    ACT_EXIT = false;
+                }
+            }, 2000);
+
+        } else {
+            act.finish();
+            System.exit(0);
+        }
     }
 
 }

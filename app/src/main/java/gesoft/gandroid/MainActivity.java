@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gesoft.gandroid.download.service.DownloadService;
+import gesoft.gapp.common.GAct;
 import gesoft.gapp.common.GApp;
 import gesoft.gapp.common.GPhone;
 import gesoft.gapp.common.L;
@@ -31,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog mPro;
 
     MsgReceiver updateListViewReceiver;
+
+    @Override
+    public void onBackPressed() {
+        GAct.exit(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
