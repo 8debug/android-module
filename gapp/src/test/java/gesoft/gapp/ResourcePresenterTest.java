@@ -27,7 +27,7 @@ public class ResourcePresenterTest {
     @Before
     public void setUp(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.baidu.com")
+                .baseUrl("https://api.github.com")
                 .addConverterFactory(JsonConverterFactory.create())
                 .build();
         mHttpService = retrofit.create(GHttpSerivce.class);
@@ -35,10 +35,10 @@ public class ResourcePresenterTest {
 
     @Test
     public void getCables() throws Exception {
-        String URL = "http://www.gytaobao.cn:9218/glcsgisbdw/gis/mobile.do?sign=20";
+        //此处需要返回String类型
+        String URL = "https://api.github.com/repos/square/retrofit/contributors";
         Map<String, String> mapAjax = new HashMap<>();
-        mapAjax.put("phoneNo", "2654729");
-        Response<JSONObject> response = mHttpService.ajaxPost(URL, mapAjax).execute();
+        Response<JSONObject> response = mHttpService.ajaxGet(URL, mapAjax).execute();
         System.out.println( response.body() );
 
     }

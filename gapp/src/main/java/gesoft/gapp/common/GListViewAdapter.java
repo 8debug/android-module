@@ -15,6 +15,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 已废弃，使用GLAdapter代替
+ * @deprecated
+ */
 public abstract class GListViewAdapter extends BaseAdapter {
 
     //private Context mContext;
