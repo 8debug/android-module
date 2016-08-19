@@ -55,14 +55,14 @@ public abstract class GBLocationActivity extends Activity implements GBLocation.
     /**
      * 开始定位
      */
-    protected void startLocation(){
+    public void startLocation(){
         mGBLocation.start();
     }
 
     /**
      * 结束定位
      */
-    protected void stopLocation(){
+    public void stopLocation(){
         mGBLocation.stop();
     }
 

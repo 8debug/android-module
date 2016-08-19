@@ -30,18 +30,7 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
     private String permissionInfo;
     private final int SDK_PERMISSION_REQUEST = 127;
 
-    @Override
-    public void onStart() {
-        try {
-            super.onStart();
-            onStartG();
-        } catch (Exception e) {
-            L.e(e);
-        }
-    }
 
-    protected abstract void onStartG();
-    protected abstract void onStopG();
     protected abstract View onCreateViewG(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     /**
@@ -58,14 +47,14 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
     /**
      * 开始定位
      */
-    protected void startLocation(){
+    public void startLocation(){
         mGBLocation.start();
     }
 
     /**
      * 结束定位
      */
-    protected void stopLocation(){
+    public void stopLocation(){
         mGBLocation.stop();
     }
 
@@ -73,16 +62,6 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
     public void onDestroyView() {
         mGBLocation.destoryLocation();
         super.onDestroyView();
-    }
-
-    @Override
-    public void onStop() {
-        try {
-            onStopG();
-        } catch (Exception e) {
-            L.e(e);
-        }
-        super.onStop();
     }
 
     public GBLocationFragment() {
