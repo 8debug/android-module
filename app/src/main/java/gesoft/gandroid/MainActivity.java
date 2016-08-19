@@ -104,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
         T.show("width="+display.widthPixels+", height="+display.heightPixels);
     }
 
+    public void countTimer( View view ){
+        startActivity(new Intent(this, CountTimerActivity.class));
+    }
+
     //推送
     void gpush(){
 

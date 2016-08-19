@@ -33,12 +33,17 @@
 
         <activity android:name=".AsyncTaskActivity" />
         <activity android:name=".RetrofitActivity" />
-        <activity android:name=".BLocationActivity" />
+        <activity
+            android:name=".BLocationActivity"
+            android:theme="@style/ThemeOverlay.AppCompat" />
         <activity
             android:name=".FrescoActivity"
             android:label="@string/activity_label_fresco" />
         <activity android:name=".HotFixActivity" />
-        <activity android:name=".RecyclerViewActivity" android:label="@string/act_RecyclerViewActivity"/>
+        <activity
+            android:name=".RecyclerViewActivity"
+            android:label="@string/act_RecyclerViewActivity" />
+        <activity android:name=".CountTimerActivity"></activity>
     </application>
 
 </manifest>

@@ -19,6 +19,11 @@ public class BLocationActivity extends GBLocationActivity {
     Button btn;
 
     @Override
+    protected int getThemeId() {
+        return R.style.AppTheme;
+    }
+
+    @Override
     protected void onCreateG(Bundle savedInstanceState) {
         setContentView(R.layout.activity_blocation);
     }

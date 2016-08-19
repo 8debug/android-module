@@ -90,6 +90,13 @@
                 android:text="@string/btn_phonescreen"
                 android:textAllCaps="false"
                 android:onClick="phoneScreen"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_count"
+                android:textAllCaps="false"
+                android:onClick="countTimer"/>
         </LinearLayout>
     </ScrollView>
 
