@@ -50,30 +50,11 @@ public class GHttp {
         void onResponse(T a);
     }
 
-    private ISetSuccess mSetSuccess;
-
-    public interface ISetSuccess<T>{
-        boolean isSuccess(T t);
-    }
-
-    public GHttp setIsSuccess( ISetSuccess setSuccess ){
-        mSetSuccess = setSuccess;
-        return this;
-    }
-
     private void request( Call request , final IAjax iAjax){
         request.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                if( mSetSuccess==null ){
-                    try {
-                        throw new Exception(" 未实现ISetSuccess接口 ");
-                    } catch (Exception e) {
-                        L.e(e);
-                    }
-                }else if( mSetSuccess.isSuccess(response.body()) && iAjax!=null ){
-                    iAjax.onResponse(response.body());
-                }
+                iAjax.onResponse(response.body());
             }
 
             @Override
