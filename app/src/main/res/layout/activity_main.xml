@@ -97,6 +97,13 @@
                 android:text="@string/btn_count"
                 android:textAllCaps="false"
                 android:onClick="countTimer"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_webview"
+                android:textAllCaps="false"
+                android:onClick="webview"/>
         </LinearLayout>
     </ScrollView>
 

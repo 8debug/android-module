@@ -12,6 +12,7 @@
     <string name="btn_phonenumber" formatted="false">获取手机号码</string>
     <string name="btn_phonescreen" formatted="false">获取手机屏幕</string>
     <string name="btn_count" formatted="false">倒计时</string>
+    <string name="btn_webview" formatted="false">Webview</string>
     <string name="activity_label_fresco">fresco使用</string>
 
     <string name="btn_bd_bdlocation">定位</string>

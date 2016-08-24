@@ -35,13 +35,13 @@ public class RetrofitActivity extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.lv);
         context = this;
 
-        gHttp.setIsSuccess(new GHttp.ISetSuccess<JSONObject>() {
+        /*gHttp.setIsSuccess(new GHttp.ISetSuccess<JSONObject>() {
             @Override
             public boolean isSuccess(JSONObject response) {
                 L.d(response);
                 return response.optInt("sign")==1;
             }
-        });
+        });*/
     }
 
     public void ajaxJSON(View v){

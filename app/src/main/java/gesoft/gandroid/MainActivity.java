@@ -108,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, CountTimerActivity.class));
     }
 
+    public void webview( View view ){
+        startActivity(new Intent(this, WebviewActivity.class));
+    }
+
     //推送
     void gpush(){
 
