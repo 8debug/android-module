@@ -19,17 +19,24 @@ android {
     }
 }
 
+configurations.all {
+    //被更改的Module缓存时限默认为24小时，这里设置为永不缓存
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    //动态版本缓存时限默认为24小时
+    //resolutionStrategy.cacheDynamicVersionsFor 10, 'minutes'
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    //compile 'com.android.support:design:23.4.0'
-    //compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile project(':gapp')
     compile project(':gphotoview')
     compile project(':gbmap')
     compile project(':gpush')
-    //compile project(':gupd')
-    //compile 'com.facebook.stetho:stetho:1.3.1'
+
+    //设置依赖changing属性为true，配合cacheChangingModulesFor的配置，使依赖同步时始终下载不缓存。以下两种写法等价
+    //compile ('gesoft.android:gapp:0.0.5'){ changing=true }
+    //compile group: "gesoft.android", name: "gapp", version: "0.0.22", changing: true
+
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
-    //compile project(':ghotfix')
     testCompile 'junit:junit:4.12'
 }
