@@ -28,6 +28,8 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
     protected Activity mActivity;
     private GBLocation mGBLocation;
     private String permissionInfo;
+    //GPS定位
+    private boolean mIsGPS = false;
     private final int SDK_PERMISSION_REQUEST = 127;
 
 
@@ -48,6 +50,14 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
      * 开始定位
      */
     public void startLocation(){
+        mGBLocation.start();
+    }
+
+    /**
+     * 仅GPS定位
+     */
+    public void startLocationGPS(){
+        mGBLocation.initLocation( true );
         mGBLocation.start();
     }
 
@@ -75,10 +85,16 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
         mContext = mActivity;
         getPersimmions();
         GBLocation.setApplication(mContext);
-        mGBLocation = new GBLocation();
-        mGBLocation.initLocation();
+        View view = onCreateViewG( inflater, container, savedInstanceState);
+        mGBLocation = new GBLocation( getActivity().getApplicationContext() );
+        mGBLocation.initLocation( false );
         setGBLocation(this);
-        return onCreateViewG( inflater, container, savedInstanceState);
+
+        return view;
+    }
+
+    protected void setLocationDevice( boolean isGPS ){
+        mIsGPS = isGPS;
     }
 
     @TargetApi(23)

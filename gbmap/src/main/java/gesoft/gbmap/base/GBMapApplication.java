@@ -17,14 +17,14 @@ import gesoft.gbmap.service.LocationService;
 
 public class GBMapApplication extends Application {
 
-    public static LocationService locationService;
+    //public static LocationService locationService;
     public static Vibrator mVibrator;
     public static Context instance;
 
     public static void setApplicationContext(Context applicationContext){
         try {
             instance = applicationContext;
-            locationService = new LocationService(applicationContext);
+            //locationService = new LocationService(applicationContext);
             mVibrator =(Vibrator)applicationContext.getSystemService(Service.VIBRATOR_SERVICE);
             SDKInitializer.initialize(applicationContext);
         } catch (Exception e) {

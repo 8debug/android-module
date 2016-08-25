@@ -6,6 +6,8 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
 import android.content.Context;
 
+import gesoft.gbmap.L;
+
 /**
  * 
  * @author baidu
@@ -94,9 +96,12 @@ public class LocationService {
 	
 	public void start(){
 		synchronized (objLock) {
-			if(client != null && !client.isStarted()){
+			if(client!=null){
 				client.start();
 			}
+			/*if(client != null && !client.isStarted()){
+				client.start();
+			}*/
 		}
 	}
 	public void stop(){

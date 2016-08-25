@@ -5,6 +5,8 @@ import android.content.res.Resources;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClientOption;
+import com.baidu.location.LocationClientOption.LocationMode;
 import com.baidu.location.Poi;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.List;
 
 import gesoft.gbmap.base.GBMapApplication;
 import gesoft.gbmap.service.LocationService;
+import gesoft.gbmap.service.Utils;
 
 /**
  * Created by yhr on 2016/6/30.
@@ -23,6 +26,8 @@ public class GBLocation {
     private LocationService locationService;
 
     IGBLocation mIGBLocation;
+
+    private boolean mIsGPS = false;
 
     public void setIGBLocation(IGBLocation igbLocation){
         mIGBLocation = igbLocation;
@@ -59,9 +64,9 @@ public class GBLocation {
         return !isNumber(str);
     }
 
-    public GBLocation(){
-        locationService = GBMapApplication.locationService;
-        initLocation();
+    public GBLocation( Context applicationContext){
+        locationService = new LocationService( applicationContext );
+        //initLocation();
     }
 
     public static void setApplication(Context context){
@@ -71,9 +76,24 @@ public class GBLocation {
     /**
      * 初始化定位，注册监听+设置定位参数
      */
-    public void initLocation(){
-        locationService.registerListener(mListener);
-        locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+    public void initLocation( boolean isGPS ){
+        mIsGPS = isGPS;
+        LocationClientOption option = locationService.getDefaultLocationClientOption();
+        option.setLocationMode( mIsGPS ? LocationMode.Device_Sensors : option.getLocationMode() );
+        /*if( mIsGPS ){
+            option = new LocationClientOption();
+            option.setLocationMode(LocationMode.Device_Sensors);
+            option.setCoorType(Utils.CoorType_BD09LL);
+            option.setIsNeedAddress(true);
+            option.setIsNeedLocationPoiList(true);
+            option.setIsNeedLocationDescribe(true);
+            option.setNeedDeviceDirect(true);
+        }*/
+        //opt.setLocationMode( mIsGPS ? LocationMode.Device_Sensors: LocationMode.Hight_Accuracy );
+        locationService.unregisterListener( mListener );
+        locationService.registerListener( mListener );
+        locationService.setLocationOption( option );
+        locationService.stop();
     }
 
     /**
@@ -90,8 +110,9 @@ public class GBLocation {
      * 启动定位
      */
     public void start(){
-        if( mIGBLocation!=null )mIGBLocation.onLocationStart();
         stop();
+        if( mIGBLocation!=null )mIGBLocation.onLocationStart();
+
         locationService.start();
     }
 
@@ -138,23 +159,17 @@ public class GBLocation {
                 Boolean isSuccess = true;
                 String msg = "";
 
-                /*mStrRadius = str(location.getRadius());
-                mCountry = location.getCountry();
-                mCity = location.getCity();
-                mDistrict = location.getDistrict();
-                mStreet = location.getStreet();
-                mAddress = location.getAddrStr();
-                mDiscribe = location.getLocationDescribe();
-                mListPoi = location.getPoiList();*/
-
-
                 Resources res = GBMapApplication.instance.getResources();
 
-                if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
+                boolean isResultGPS = false;
+                boolean isResultNetwork = false;
+                boolean isResultOffline = false;
+
+                if ( isResultGPS = location.getLocType() == BDLocation.TypeGpsLocation ){// GPS定位结果
                     msg = res.getString(R.string.bd_location_success_gps);
-                } else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {// 网络定位结果
+                } else if ( isResultNetwork = location.getLocType() == BDLocation.TypeNetWorkLocation ){// 网络定位结果
                     msg = res.getString(R.string.bd_location_success_network);
-                } else if (location.getLocType() == BDLocation.TypeOffLineLocation) {// 离线定位结果
+                } else if ( isResultOffline = location.getLocType() == BDLocation.TypeOffLineLocation ){// 离线定位结果
                     msg = res.getString(R.string.bd_location_success_offline);
                 } else if (location.getLocType() == BDLocation.TypeServerError) {
                     msg = res.getString(R.string.bd_location_error_server);
@@ -168,12 +183,12 @@ public class GBLocation {
                 }
 
                 if( mIGBLocation!=null ){
-                    bean.setMsg(msg);
-                    isSuccess = ( isSuccess && isNumber(mStrLng) && isNumber(mStrLat) );
-                    mIGBLocation.onLocationFinish(isSuccess, bean);
+                    if( !mIsGPS || ( mIsGPS && isResultGPS ) ){
+                        bean.setMsg(msg);
+                        isSuccess = ( isSuccess && isNumber(mStrLng) && isNumber(mStrLat) );
+                        mIGBLocation.onLocationFinish(isSuccess, bean);
+                    }
                 }
-
-
             }
         }
     };

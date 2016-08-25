@@ -16,26 +16,29 @@ import gesoft.gbmap.L;
 public abstract class GBLocationActivity extends Activity implements GBLocation.IGBLocation {
 
     protected Context mContext;
-    protected Activity mActivity;
-
     private GBLocation mGBLocation;
-
     private String permissionInfo;
     private final int SDK_PERMISSION_REQUEST = 127;
+    //GPS定位
+    private boolean mIsGPS = false;
 
+    protected void setLocationDevice( boolean isGPS ){
+        mIsGPS = isGPS;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
             getPersimmions();
-            mActivity = this;
-            mContext = mActivity;
+            mContext = this;
             GBLocation.setApplication(getApplicationContext());
-            mGBLocation = new GBLocation();
-            mGBLocation.initLocation();
             onCreateG(savedInstanceState);
+
+            mGBLocation = new GBLocation( getApplicationContext() );
+            mGBLocation.initLocation( false );
             setGBLocation(this);
+
         } catch (Exception e) {
             L.e(e);
         }
@@ -45,7 +48,7 @@ public abstract class GBLocationActivity extends Activity implements GBLocation.
      * 实现IGBLocation接口
      * @param igbLocation
      */
-    void setGBLocation(GBLocation.IGBLocation igbLocation){
+    void setGBLocation(GBLocation.IGBLocation igbLocation) throws Exception{
         if( igbLocation!=null )mGBLocation.setIGBLocation(igbLocation);
         else{
             throw new IllegalArgumentException(" GBLocation.IGBLocation is not null ");
@@ -56,6 +59,14 @@ public abstract class GBLocationActivity extends Activity implements GBLocation.
      * 开始定位
      */
     public void startLocation(){
+        mGBLocation.start();
+    }
+
+    /**
+     * 仅GPS定位
+     */
+    public void startLocationGPS(){
+        mGBLocation.initLocation( true );
         mGBLocation.start();
     }
 
@@ -72,7 +83,7 @@ public abstract class GBLocationActivity extends Activity implements GBLocation.
         super.onDestroy();
     }
 
-    protected abstract void onCreateG(Bundle savedInstanceState);
+    protected abstract void onCreateG(Bundle savedInstanceState) throws Exception;
 
     @TargetApi(23)
     @Override
