@@ -33,7 +33,7 @@ public class BLocationFragment extends GBLocationFragment {
     protected View onCreateViewG(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_blocation, container, false);
         ButterKnife.bind(this, view);
-
+        setLocationDevice(true);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,13 +51,13 @@ public class BLocationFragment extends GBLocationFragment {
 
     @Override
     public void onLocationStart() {
-        btn.setText("正在定位...");
+        btn.setText("正在综合定位...");
     }
 
     @Override
     public void onLocationFinish(boolean isSuccess, GBLocation.GLBean bean) {
         stopLocation();
-        tv.setText(bean.getLat()+", "+bean.getLng()+" address="+bean.getDiscribe());
+        tv.setText(bean.getLat()+", "+bean.getLng()+" address="+bean.getDiscribe()+"  "+bean.getMsg());
         btn.setText("开始定位");
     }
 

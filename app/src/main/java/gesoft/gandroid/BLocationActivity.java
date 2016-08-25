@@ -15,44 +15,48 @@ import gesoft.gbmap.activity.GBLocationActivity;
 
 public class BLocationActivity extends GBLocationActivity {
 
+
     @Bind(R.id.btn_location)
-    Button btn;
+    Button btnLocation;
 
     @Override
     protected void onCreateG(Bundle savedInstanceState) {
         setContentView(R.layout.activity_blocation);
+        setLocationDevice(true);
+        ButterKnife.bind(this);
+
     }
 
     public void location(final View view) {
-        startLocation();
+        T.show("开始GPS定位");
+        startLocationGPS();
     }
 
-    public void openFragment( View view ){
+    public void openFragment(View view) {
         FragmentManager mgr = getFragmentManager();
         FragmentTransaction tr = mgr.beginTransaction();
-        tr.add(R.id.fragment, new BLocationFragment(), BLocationFragment.TAG).commit();
+        tr.add(R.id.layout_content, new BLocationFragment(), BLocationFragment.TAG).commit();
     }
 
     @Override
     public void onLocationStart() {
-        btn.setText(getResources().getString(R.string.btn_bd_start));
+        btnLocation.setText(getResources().getString(R.string.btn_bd_start));
     }
 
     @Override
     public void onLocationFinish(boolean isSuccess, GBLocation.GLBean bean) {
         stopLocation();
-        btn.setText(getResources().getString(R.string.btn_bd_stop));
+        btnLocation.setText(getResources().getString(R.string.btn_bd_start));
         if (isSuccess) {
             TextView tv = (TextView) findViewById(R.id.tv_result);
-            tv.setText(bean.getDiscribe());
+            tv.setText(bean.getDiscribe()+"\n"+bean.getMsg());
         }
-        T.show(mContext, bean.getMsg() + " " + bean.getTime());
     }
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-    }
+    }*/
+
 }

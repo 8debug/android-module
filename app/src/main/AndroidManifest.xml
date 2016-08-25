@@ -35,7 +35,7 @@
         <activity android:name=".RetrofitActivity" />
         <activity
             android:name=".BLocationActivity"
-            android:theme="@style/ThemeOverlay.AppCompat" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".FrescoActivity"
             android:label="@string/activity_label_fresco" />
@@ -44,7 +44,7 @@
             android:name=".RecyclerViewActivity"
             android:label="@string/act_RecyclerViewActivity" />
         <activity android:name=".CountTimerActivity" />
-        <activity android:name=".WebviewActivity"></activity>
+        <activity android:name=".WebviewActivity"/>
     </application>
 
 </manifest>
