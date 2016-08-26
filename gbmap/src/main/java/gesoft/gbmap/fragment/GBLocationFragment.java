@@ -87,9 +87,8 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
         GBLocation.setApplication(mContext.getApplicationContext());
         mGBLocation = new GBLocation( getActivity().getApplicationContext() );
         mGBLocation.initLocation( false );
-        View view = onCreateViewG( inflater, container, savedInstanceState);
         setGBLocation(this);
-
+        View view = onCreateViewG( inflater, container, savedInstanceState);
         return view;
     }
 

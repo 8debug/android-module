@@ -35,9 +35,8 @@ public abstract class GBLocationActivity extends Activity implements GBLocation.
             GBLocation.setApplication(getApplicationContext());
             mGBLocation = new GBLocation( getApplicationContext() );
             mGBLocation.initLocation( false );
-            onCreateG(savedInstanceState);
             setGBLocation(this);
-
+            onCreateG(savedInstanceState);
         } catch (Exception e) {
             L.e(e);
         }
