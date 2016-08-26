@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import gesoft.gapp.common.L;
+import gesoft.gapp.http.retrofit.converter.JsonConverterFactory;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -35,6 +36,14 @@ public class GHttp {
                 .addConverterFactory(factory)
                 .build();
         mHttpService = retrofit.create(GHttpSerivce.class);
+    }
+
+    /**
+     * json工厂
+     * @return
+     */
+    public static JsonConverterFactory getJsonConverterFactory(){
+        return JsonConverterFactory.create();
     }
 
 
