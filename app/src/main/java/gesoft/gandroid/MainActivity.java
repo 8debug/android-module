@@ -54,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         startService(intent );
     }
 
+    public void photopicker(View view){
+        startActivity(new Intent(this, PhotoActivity.class) );
+    }
+
     public void asyncTask(View view){
         startActivity(new Intent(this, AsyncTaskActivity.class));
     }

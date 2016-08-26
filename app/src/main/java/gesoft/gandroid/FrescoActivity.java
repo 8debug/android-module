@@ -13,12 +13,14 @@ import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
+import java.io.File;
 import java.net.URI;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import gesoft.gapp.common.GImage;
 import gesoft.gapp.common.L;
+import gesoft.gapp.common.T;
 
 public class FrescoActivity extends AppCompatActivity {
 
@@ -37,8 +39,15 @@ public class FrescoActivity extends AppCompatActivity {
     }
 
     public void loadImg(View view){
-        Uri uri = Uri.parse("/storage/sdcard0/dcim/map.jpg");
-        GImage.loadImg(this, uri.getPath(), fresco);
+        String strUri = "/storage/sdcard0/dcim/map.jpg";
+        File file = new File(strUri);
+        if( file.exists() ){
+            Uri uri = Uri.parse("/storage/sdcard0/dcim/map.jpg");
+            GImage.loadImg(this, uri.getPath(), fresco);
+        }else{
+            T.show(this, strUri+"  不存在");
+        }
+
     }
 
 
