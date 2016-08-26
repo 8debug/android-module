@@ -28,6 +28,13 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/btn_photopicker"
+                android:textAllCaps="false"
+                android:onClick="photopicker"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/btn_asyncTask"
                 android:textAllCaps="false"
                 android:onClick="asyncTask"/>

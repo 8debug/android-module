@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">GAndroid</string>
     <string name="btn_download">service下载</string>
+    <string name="btn_photopicker">相册</string>
     <string name="btn_asyncTask">async_task</string>
     <string name="btn_retrofit">Retrofit</string>
     <string name="btn_photoview">图片浏览</string>
