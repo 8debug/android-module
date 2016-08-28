@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'maven'
+apply plugin: 'maven'
 
 // JitPack
 apply plugin: 'com.github.dcendents.android-maven'
@@ -34,7 +34,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-/*
 uploadArchives {
     repositories {
         mavenDeployer {
@@ -43,7 +42,7 @@ uploadArchives {
             }
 
             pom.project {
-                version '0.0.1'
+                version '0.0.9'
                 artifactId 'gbmap'
                 groupId 'gesoft.android'
                 packaging 'aar'
@@ -51,4 +50,4 @@ uploadArchives {
             }
         }
     }
-}*/
+}
