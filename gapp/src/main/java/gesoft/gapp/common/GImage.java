@@ -48,7 +48,7 @@ public class GImage {
             }
             return bitmap;
         } catch (Exception e) {
-            e.printStackTrace();
+            L.e(e);
         }
         return null;
     }

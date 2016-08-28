@@ -26,8 +26,8 @@
     <style name="g_tv_border_red">
         <item name="android:background">@drawable/g_border_radius_red</item>
         <item name="android:textColor">@color/g_bg_red</item>
-        <item name="android:paddingEnd">3dp</item>
-        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:paddingLeft">3dp</item>
         <item name="android:paddingTop">2dp</item>
         <item name="android:paddingBottom">2dp</item>
     </style>
@@ -36,8 +36,8 @@
     <style name="g_tv_border_blue">
         <item name="android:background">@drawable/g_border_radius_blue</item>
         <item name="android:textColor">@color/g_bg_blue</item>
-        <item name="android:paddingEnd">3dp</item>
-        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:paddingLeft">3dp</item>
         <item name="android:paddingTop">2dp</item>
         <item name="android:paddingBottom">2dp</item>
     </style>
@@ -46,11 +46,31 @@
     <style name="g_tv_border_gray">
         <item name="android:background">@drawable/g_border_radius_gray</item>
         <item name="android:textColor">@color/g_gray_normal</item>
-        <item name="android:paddingEnd">3dp</item>
-        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:paddingLeft">3dp</item>
         <item name="android:paddingTop">2dp</item>
         <item name="android:paddingBottom">2dp</item>
     </style>
 
+
+    <style name="g_radio_blue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/g_radio_blue</item>
+        <item name="android:textColor">@color/xml_radio_blue</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="g_radio_red">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/g_radio_red</item>
+        <item name="android:textColor">@color/xml_radio_red</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:padding">5dp</item>
+    </style>
 
 </resources>
