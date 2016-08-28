@@ -1,0 +1,37 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    xmlns:style="http://schemas.android.com/apk/res-auto"
+    android:background="@color/g_bg_gray">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="horizontal">
+                <RadioButton
+                    style="@style/g_radio_blue"
+                    android:text="单选一"
+                    android:layout_marginEnd="10dp"/>
+                <RadioButton
+                    style="@style/g_radio_red"
+                    android:text="单选二"/>
+
+            </RadioGroup>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

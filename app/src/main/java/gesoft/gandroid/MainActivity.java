@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         gpush();
     }
 
+    public void baseui(View view){
+        startActivity(new Intent(this, BaseUIActivity.class) );
+    }
+
     public void download(View view){
         Intent intent = new Intent(this, DownloadService.class);
         intent.putExtra(DownloadService.PARAM_URL, "http://218.61.254.30:8082/glcsgis_APPDownload/apk/UnicomZc.apk");

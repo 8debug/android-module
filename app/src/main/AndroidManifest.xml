@@ -45,7 +45,8 @@
             android:label="@string/act_RecyclerViewActivity" />
         <activity android:name=".CountTimerActivity" />
         <activity android:name=".WebviewActivity" />
-        <activity android:name=".PhotoActivity"></activity>
+        <activity android:name=".PhotoActivity" />
+        <activity android:name=".BaseUIActivity"></activity>
     </application>
 
 </manifest>
