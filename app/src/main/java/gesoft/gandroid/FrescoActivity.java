@@ -56,7 +56,7 @@ public class FrescoActivity extends AppCompatActivity {
             Uri uri = Uri.parse("http://10.70.23.32/demo/map.jpg");
             //uri = Uri.parse("res://gesoft.gandroid/" + R.mipmap.map);
 
-            ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
+            /*ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
                     .setResizeOptions(new ResizeOptions(fresco.getMeasuredWidth()+100, fresco.getMeasuredHeight()+100))
                     .setImageType(ImageRequest.ImageType.SMALL)
                     .setAutoRotateEnabled(true)
@@ -64,7 +64,7 @@ public class FrescoActivity extends AppCompatActivity {
             PipelineDraweeController controller = (PipelineDraweeController)Fresco.newDraweeControllerBuilder()
                     .setOldController(fresco.getController())
                     .setImageRequest(request)
-                    .build();
+                    .build();*/
 
 
 
@@ -75,7 +75,7 @@ public class FrescoActivity extends AppCompatActivity {
                     .setOldController(fresco.getController())
                     .setControllerListener(listener)
                     .build();*/
-            fresco.setController(controller);
+           // fresco.setController(controller);
         } catch (Exception e) {
             L.e(e);
         }

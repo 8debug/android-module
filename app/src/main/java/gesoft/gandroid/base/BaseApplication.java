@@ -12,6 +12,7 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener;
 import java.util.HashSet;
 import java.util.Set;
 
+import gesoft.gapp.base.GApplication;
 import gesoft.push.GPushXG;
 
 /**
@@ -26,7 +27,7 @@ public class BaseApplication extends Application {
         //Stetho.initializeWithDefaults(this);
         mContext = getApplicationContext();
 
-        //配置fresco打印崩溃信息
+        /*//配置fresco打印崩溃信息
         Set<RequestListener> requestListeners = new HashSet<>();
         requestListeners.add(new RequestLoggingListener());
 
@@ -36,9 +37,10 @@ public class BaseApplication extends Application {
             //开启向下采样，向下采样在大部分情况下比 resize 更快
                 .setDownsampleEnabled(true).build();
 
-        Fresco.initialize(this, config);
+        Fresco.initialize(this, config);*/
+        GApplication.setContext(this);
         //配置fresco打印崩溃信息
-        FLog.setMinimumLoggingLevel(FLog.ERROR);
+        //FLog.setMinimumLoggingLevel(FLog.ERROR);
 
         //信鸽推送
         GPushXG.setApplication(mContext);

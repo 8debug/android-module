@@ -52,11 +52,14 @@ public class PhotoActivity extends Activity {
 
         try {
             if (RESULT_OK == resultCode && requestCode == PICK_PHOTO) {
-                ArrayList<String> array = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
-                String strUri = array.get(0);
-                File file = new File(strUri);
-                T.show(this, "file="+file.exists()+",  strUri="+strUri);
-                fresco.setImageURI( strUri );
+                try {
+                    ArrayList<String> array = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
+                    File file = new File( array.get(0) );
+                    String path = "file://"+file.getPath();
+                    fresco.setImageURI( path );
+                } catch (Exception e) {
+                    L.e(e);
+                }
             }
         } catch (Exception e) {
             L.e(e);
