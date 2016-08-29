@@ -1,12 +1,17 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+// JitPack
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.297179121'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 24
     buildToolsVersion '23.0.3'
 
     defaultConfig {
         minSdkVersion 12
-        targetSdkVersion 21
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -20,4 +25,22 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
+                authentication(userName: 'admin', password: 'admin123')
+            }
+
+            pom.project {
+                version '0.0.1'
+                artifactId 'gphotopicker'
+                groupId 'gesoft.android'
+                packaging 'aar'
+                description 'photo select'
+            }
+        }
+    }
 }
