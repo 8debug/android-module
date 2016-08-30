@@ -71,8 +71,11 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
     @Override
     public void onDestroyView() {
         mGBLocation.destoryLocation();
+        onDestroyViewG();
         super.onDestroyView();
     }
+
+    protected void onDestroyViewG(){}
 
     public GBLocationFragment() {
         // Required empty public constructor
