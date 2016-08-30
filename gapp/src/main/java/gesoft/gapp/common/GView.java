@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.RadioGroup;
 
 import java.util.Calendar;
 
@@ -44,6 +45,17 @@ public class GView {
 
     public interface DatePickerInterface{
         void onSetDate(CharSequence date);
+    }
+
+    /**
+     * 启用/禁用RadioGroup
+     * @param group
+     * @param isEnabled
+     */
+    public static void setEnabledRadioGroup( RadioGroup group, boolean isEnabled ){
+        for (int i = 0, n = group.getChildCount(); i <n ; i++) {
+            group.getChildAt(i).setEnabled(isEnabled);
+        }
     }
 
 

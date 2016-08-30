@@ -52,25 +52,22 @@
         <item name="android:paddingBottom">2dp</item>
     </style>
 
-
-    <style name="g_radio_blue">
+    <style name="g_radio_label_base">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/g_radio_blue</item>
-        <item name="android:textColor">@color/xml_radio_blue</item>
         <item name="android:gravity">center</item>
         <item name="android:button">@null</item>
         <item name="android:padding">5dp</item>
     </style>
 
-    <style name="g_radio_red">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="g_radio_blue" parent="g_radio_label_base">
+        <item name="android:background">@drawable/g_radio_blue</item>
+        <item name="android:textColor">@color/xml_radio_blue</item>
+    </style>
+
+    <style name="g_radio_red" parent="g_radio_label_base">
         <item name="android:background">@drawable/g_radio_red</item>
         <item name="android:textColor">@color/xml_radio_red</item>
-        <item name="android:gravity">center</item>
-        <item name="android:button">@null</item>
-        <item name="android:padding">5dp</item>
     </style>
 
 </resources>

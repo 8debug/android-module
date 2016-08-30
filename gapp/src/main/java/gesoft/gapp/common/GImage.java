@@ -21,10 +21,15 @@ import java.util.Date;
 
 /**
  * Created by yhr on 2016/2/15.
+ *
  */
 public class GImage {
 
-
+    /**
+     * 压缩图片
+     * @param path
+     * @return
+     */
     public static Bitmap revitionImageSize(String path){
         try {
             BufferedInputStream in = new BufferedInputStream( new FileInputStream(path));
