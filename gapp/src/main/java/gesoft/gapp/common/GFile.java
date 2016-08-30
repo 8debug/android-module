@@ -19,6 +19,47 @@ public class GFile {
 	}
 
 	/**
+	 * 删除文件
+	 * @param path	文件路径
+     */
+	public static void deleteFile( String path ){
+		File file = new File(path);
+		if( file.exists() ){
+			file.delete();
+		}
+	}
+
+	/**
+	 * 删除文件
+	 * @param file	文件
+     */
+	public static void deleteFile( File file ){
+		if( file.exists() ){
+			file.delete();
+		}
+	}
+
+	/**
+	 * 删除多个文件
+	 * @param arrayPath	多个文件路径
+     */
+	public static void deleteFiles( String ... arrayPath ){
+		for (String path : arrayPath) {
+			deleteFile( path );
+		}
+	}
+
+	/**
+	 * 删除文件
+	 * @param arrayFile	多个文件
+     */
+	public static void deleteFiles( File ... arrayFile ){
+		for ( File file : arrayFile) {
+			deleteFile( file );
+		}
+	}
+
+	/**
 	 * 取得压缩包中的 文件列表(文件夹,文件自选)
 	 * @param zipFileString		压缩包名字
 	 * @param bContainFolder	是否包括 文件夹
