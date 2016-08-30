@@ -15,20 +15,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <RadioGroup
+                android:id="@+id/rg_demo1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:orientation="horizontal">
                 <RadioButton
+                    android:id="@+id/rbtn_1"
                     style="@style/g_radio_blue"
+                    android:text="单选一"
+                    android:layout_marginEnd="10dp"/>
+                <RadioButton
+                    style="@style/g_radio_blue"
+                    android:text="单选二"/>
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/rg_demo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:orientation="horizontal">
+                <RadioButton
+                    style="@style/g_radio_red"
                     android:text="单选一"
                     android:layout_marginEnd="10dp"/>
                 <RadioButton
                     style="@style/g_radio_red"
                     android:text="单选二"/>
-
             </RadioGroup>
         </LinearLayout>
 
