@@ -42,7 +42,7 @@ public class FrescoActivity extends AppCompatActivity {
         String strUri = "/storage/sdcard0/dcim/map.jpg";
         File file = new File(strUri);
         if( file.exists() ){
-            Uri uri = Uri.parse("/storage/sdcard0/dcim/map.jpg");
+            Uri uri = Uri.fromFile(file);
             GImage.loadImg(this, uri.getPath(), fresco);
         }else{
             T.show(this, strUri+"  不存在");

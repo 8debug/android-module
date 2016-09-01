@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="gesoft.gandroid.PhotoActivity">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/fresco_demo"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        fresco:placeholderImage="@drawable/ic_camera"
-        android:layout_centerInParent="true"/>
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        fresco:placeholderImage="@drawable/ic_camera"/>
 
-</RelativeLayout>
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:scrollbars="none"/>
+
+
+
+</LinearLayout>
