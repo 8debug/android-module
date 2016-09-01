@@ -68,7 +68,8 @@ public class PhotoAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mDatas.size();
+        int size = mDatas.size();
+        return mIsShowCamera? size+1:size;
     }
 
     @Override
@@ -157,8 +158,7 @@ public class PhotoAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if(getItemViewType(position) == TYPE_CAMERA) {
-            convertView = LayoutInflater.from(mContext).inflate(
-                    R.layout.item_camera_layout, null);
+            convertView = LayoutInflater.from(mContext).inflate( R.layout.item_camera_layout, null);
             convertView.setTag(null);
             //设置高度等于宽度
             GridView.LayoutParams lp = new GridView.LayoutParams(mWidth, mWidth);
@@ -167,8 +167,7 @@ public class PhotoAdapter extends BaseAdapter {
             ViewHolder holder = null;
             if (convertView == null) {
                 holder = new ViewHolder();
-                convertView = LayoutInflater.from(mContext).inflate(
-                        R.layout.item_photo_layout, null);
+                convertView = LayoutInflater.from(mContext).inflate( R.layout.item_photo_layout, null);
                 holder.photoImageView = (ImageView) convertView.findViewById(R.id.imageview_photo);
                 holder.selectView = (ImageView) convertView.findViewById(R.id.checkmark);
                 holder.maskView = convertView.findViewById(R.id.mask);
@@ -194,8 +193,7 @@ public class PhotoAdapter extends BaseAdapter {
             } else {
                 holder.selectView.setVisibility(View.GONE);
             }
-            ImageLoader.getInstance().display(photo.getPath(), holder.photoImageView,
-                    mWidth, mWidth);
+            ImageLoader.getInstance().display(photo.getPath(), holder.photoImageView, mWidth, mWidth);
         }
         return convertView;
     }

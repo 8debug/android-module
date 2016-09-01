@@ -102,10 +102,18 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
             Toast.makeText(this, "No SD card!", Toast.LENGTH_SHORT).show();
             return;
         }
-        getPhotosTask.execute();
+    }
+
+    @Override
+    protected void onResume() {
+        getAsyncTask().execute();
+        super.onResume();
     }
 
     private void initView() {
+        mProgressDialog = ProgressDialog.show(PhotoPickerActivity.this, null, "loading...");
+        mProgressDialog.hide();
+
         mGridView = (GridView) findViewById(R.id.photo_gridview);
         mPhotoNumTV = (TextView) findViewById(R.id.photo_num);
         mPhotoNameTV = (TextView) findViewById(R.id.floder_name);
@@ -146,13 +154,12 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
     }
 
     private void getPhotosSuccess() {
-        mProgressDialog.dismiss();
+        mProgressDialog.hide();
         mPhotoLists.addAll(mFloderMap.get(ALL_PHOTO).getPhotoList());
 
-        mPhotoNumTV.setText(OtherUtils.formatResourceString(getApplicationContext(),
-                R.string.photos_num, mPhotoLists.size()));
+        mPhotoNumTV.setText(OtherUtils.formatResourceString(getApplicationContext(), R.string.photos_num, mPhotoLists.size()));
 
-        List<Photo> empty = new ArrayList();
+        List<Photo> empty = new ArrayList<>();
         empty.add(new Photo(""));
         mPhotoAdapter = new PhotoAdapter(this.getApplicationContext(), mPhotoLists.size()==0?empty:mPhotoLists);
         mPhotoAdapter.setIsShowCamera(mIsShowCamera);
@@ -346,10 +353,10 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
     /**
      * 获取照片的异步任务
      */
-    private AsyncTask getPhotosTask = new AsyncTask() {
+    /*private AsyncTask getPhotosTask = new AsyncTask() {
         @Override
         protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(PhotoPickerActivity.this, null, "loading...");
+            mProgressDialog.show();
         }
 
         @Override
@@ -362,7 +369,27 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
         protected void onPostExecute(Object o) {
             getPhotosSuccess();
         }
-    };
+    };*/
+
+    private AsyncTask getAsyncTask(){
+        return new AsyncTask() {
+            @Override
+            protected void onPreExecute() {
+                mProgressDialog.show();
+            }
+
+            @Override
+            protected Object doInBackground(Object[] params) {
+                mFloderMap = PhotoUtils.getPhotos( PhotoPickerActivity.this.getApplicationContext() );
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                getPhotosSuccess();
+            }
+        };
+    }
 
     /**
      * 选择相机
@@ -377,8 +404,7 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mTmpFile));
             startActivityForResult(cameraIntent, REQUEST_CAMERA);
         }else{
-            Toast.makeText(getApplicationContext(),
-                    R.string.msg_no_camera, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.msg_no_camera, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -390,6 +416,7 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
             if(resultCode == Activity.RESULT_OK) {
                 if (mTmpFile != null) {
                     mSelectList.add(mTmpFile.getAbsolutePath());
+                    PhotoUtils.addPhoto(this, mTmpFile);
                     returnData();
                 }
             }else{
@@ -398,5 +425,12 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
                 }
             }
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        mProgressDialog.dismiss();
+        super.onDestroy();
     }
 }
