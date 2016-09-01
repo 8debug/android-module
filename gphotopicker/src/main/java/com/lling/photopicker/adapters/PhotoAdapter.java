@@ -17,6 +17,7 @@ import com.lling.photopicker.utils.ImageLoader;
 import com.lling.photopicker.utils.OtherUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,7 +70,10 @@ public class PhotoAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         int size = mDatas.size();
-        return mIsShowCamera? size+1:size;
+        if( mIsShowCamera ){
+            size += 1;
+        }
+        return size;
     }
 
     @Override
@@ -86,6 +90,9 @@ public class PhotoAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
+        if( mIsShowCamera && position==0 ){
+            return new Date().getTime();
+        }
         return mDatas.get(position).getId();
     }
 

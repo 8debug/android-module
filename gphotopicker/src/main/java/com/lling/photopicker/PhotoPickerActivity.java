@@ -159,9 +159,9 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
 
         mPhotoNumTV.setText(OtherUtils.formatResourceString(getApplicationContext(), R.string.photos_num, mPhotoLists.size()));
 
-        List<Photo> empty = new ArrayList<>();
-        empty.add(new Photo(""));
-        mPhotoAdapter = new PhotoAdapter(this.getApplicationContext(), mPhotoLists.size()==0?empty:mPhotoLists);
+        /*List<Photo> empty = new ArrayList<>();
+        empty.add(new Photo(""));*/
+        mPhotoAdapter = new PhotoAdapter(this.getApplicationContext(), mPhotoLists);
         mPhotoAdapter.setIsShowCamera(mIsShowCamera);
         mPhotoAdapter.setSelectMode(mSelectMode);
         mPhotoAdapter.setMaxNum(mMaxNum);
