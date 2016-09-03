@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
+import java.io.File;
+
 /**
  * Created by yhg on 2016/6/20.
  * 常用的系统intent
@@ -17,10 +19,12 @@ public class GIntent {
      * @param ctx
      * @return
      */
-    public static Intent getIntentCamera(Context ctx){
+    public static Intent getIntentCamera(Context ctx, File fileOut){
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(cameraIntent.resolveActivity(ctx.getPackageManager()) == null){
             Toast.makeText(ctx, "没找到摄像头", Toast.LENGTH_SHORT).show();
+        }else{
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileOut));
         }
         return cameraIntent;
     }
