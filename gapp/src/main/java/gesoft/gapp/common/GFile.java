@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 
 /**
@@ -189,25 +190,29 @@ public class GFile {
 	 * @param arrayFilePath
 	 * @throws Exception
      */
-	public static File getZipFiles(String zipPath, String... arrayFilePath) throws Exception {
+	public static File getZipFiles(String zipPath, String... arrayFilePath){
 
 		File zipFile = new File(zipPath);
-		if( zipFile.exists() ){
-			zipFile.delete();
-		}
-		zipFile.createNewFile();
+		try {
+			if( zipFile.exists() ){
+                zipFile.delete();
+            }
+			zipFile.createNewFile();
 
-		//创建Zip包
-		java.util.zip.ZipOutputStream outZip = new java.util.zip.ZipOutputStream(new java.io.FileOutputStream(zipFile.getPath()));
-		for (String filePath : arrayFilePath) {
-			//打开要输出的文件
-			File file = new File(filePath);
-			//压缩
-			zipFiles(file.getParent()+ File.separator, file.getName(), outZip);
+			//创建Zip包
+			java.util.zip.ZipOutputStream outZip = new java.util.zip.ZipOutputStream(new FileOutputStream(zipFile.getPath()));
+			for (String filePath : arrayFilePath) {
+                //打开要输出的文件
+                File file = new File(filePath);
+                //压缩
+                zipFiles(file.getParent()+ File.separator, file.getName(), outZip);
+            }
+			//完成,关闭
+			outZip.finish();
+			outZip.close();
+		} catch (Exception e) {
+			L.e(e);
 		}
-		//完成,关闭
-		outZip.finish();
-		outZip.close();
 		return new File(zipPath);
 	}
 
@@ -264,20 +269,29 @@ public class GFile {
 	}//end of func
 
 	/**
-	 * 在SD卡根目录中创建文件，文件名为时间戳
+	 * 在SD卡根目录中创建Image文件，文件名为时间戳
 	 * @param context
 	 * @return
      */
-	public static File createFile(Context context){
+	public static File createFileImage(Context context){
+		return createFile(context, new Date().getTime()+".jpg");
+	}
+
+	/**
+	 * 创建文件
+	 * @param context
+	 * @param fileName	完整文件名 例如 xxx.jpg
+     * @return file		创建后的文件
+     */
+	public static File createFile(Context context, String fileName){
 		File file;
 		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-			String timeStamp = String.valueOf(new Date().getTime());
-			file = new File(Environment.getExternalStorageDirectory() +
-					File.separator + timeStamp+".jpg");
+			//String timeStamp = String.valueOf(new Date().getTime());
+			file = new File( Environment.getExternalStorageDirectory() + File.separator + fileName );
 		}else{
 			File cacheDir = context.getCacheDir();
-			String timeStamp = String.valueOf(new Date().getTime());
-			file = new File(cacheDir, timeStamp+".jpg");
+			//String timeStamp = String.valueOf(new Date().getTime());
+			file = new File(cacheDir, fileName);
 		}
 		return file;
 	}

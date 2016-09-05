@@ -68,7 +68,7 @@ public class GAct {
         if(cameraIntent.resolveActivity(act.getPackageManager()) != null){
             // 设置系统相机拍照后的输出路径
             // 创建临时文件
-            mTmpFile = GFile.createFile(act.getApplicationContext());
+            mTmpFile = GFile.createFileImage(act.getApplicationContext());
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mTmpFile));
             act.startActivityForResult(cameraIntent, requestCode);
         }else{
