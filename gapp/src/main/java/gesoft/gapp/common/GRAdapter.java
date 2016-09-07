@@ -11,7 +11,7 @@ import java.util.List;
 
 public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
 
-    private final List<T> mList ;
+    private List<T> mList ;
     private final int mLayout;
     private GRAdapterListener.OnConvert<T> mOnConvertListener;
 
@@ -42,7 +42,10 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         mOnConvertListener = onConvertListener;
     }
 
-
+    public GRAdapter setData( List<T> list ){
+        mList = list;
+        return this;
+    }
 
     public GRAdapter addAll(List<T> list ){
         mList.addAll(list);
@@ -54,7 +57,7 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         return this;
     }
 
-    public GRAdapter add(T t, int idx ){
+    public GRAdapter add( int idx , T t ){
         mList.add(idx, t);
         return this;
     }
