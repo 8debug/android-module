@@ -3,16 +3,11 @@ package gesoft.gandroid.base;
 import android.app.Application;
 import android.content.Context;
 
-import com.facebook.common.logging.FLog;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.imagepipeline.listener.RequestListener;
-import com.facebook.imagepipeline.listener.RequestLoggingListener;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import gesoft.gapp.base.GApplication;
+import gesoft.gapp.common.GApp;
+import gesoft.gapp.common.GPhone;
+import gesoft.gcrashemail.crash.GCrashHandler;
+import gesoft.ghotfix.GHotFix;
 import gesoft.push.GPushXG;
 
 /**
@@ -46,7 +41,14 @@ public class BaseApplication extends Application {
         GPushXG.setApplication(mContext);
 
         //热修复
-        //GHotFix.setApplication(mContext);
+        GHotFix.setApplication(mContext);
+
+
+
+
+        /*GCrash gCrash = GCrash.getInstance();
+        gCrash.setEmailMessage(GApp.getAppName(mContext)+"_"+GApp.getVersionName(mContext)+", "+ GPhone.getPhoneName()+", "+GPhone.getPhoneNumber(mContext));
+        gCrash.init(mContext);*/
 
         /*GFIR.init(this);
         GFIR.checkUpd(new GFIR.ICheckUpdCallback() {

@@ -21,6 +21,7 @@ import gesoft.gapp.common.GApp;
 import gesoft.gapp.common.GPhone;
 import gesoft.gapp.common.L;
 import gesoft.gapp.common.T;
+import gesoft.gcrashemail.crash.GCrashHandler;
 import gesoft.gphotoview.GPhotoView;
 import gesoft.push.GPushConstant;
 import gesoft.push.GPushXG;
@@ -118,6 +119,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void webview( View view ){
         startActivity(new Intent(this, WebviewActivity.class));
+    }
+
+    public void sendEmail( View view ){
+
+        //搜集崩溃信息
+        GCrashHandler crashHandler = GCrashHandler.getInstance();
+        crashHandler.setNick( GApp.getAppName(mContext)+"_"+GApp.getVersionName(mContext) );
+        crashHandler.setEmailMessage( GPhone.getPhoneName()+", "+GPhone.getPhoneNumber(mContext) );
+        crashHandler.init(mContext);
+
+        Intent intent = null;
+        intent.putExtra("asd",  true);
     }
 
     //推送
