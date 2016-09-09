@@ -1,29 +1,31 @@
 package gesoft.gcrashemail.crash;
-  
-import java.io.File;  
-import java.io.FileOutputStream;  
-import java.io.PrintWriter;  
-import java.io.StringWriter;  
-import java.io.Writer;  
-import java.lang.Thread.UncaughtExceptionHandler;  
-import java.lang.reflect.Field;  
-import java.text.DateFormat;  
-import java.text.SimpleDateFormat;  
-import java.util.Date;  
-import java.util.HashMap;  
-import java.util.Map;  
-  
-import android.content.Context;  
-import android.content.pm.PackageInfo;  
-import android.content.pm.PackageManager;  
-import android.content.pm.PackageManager.NameNotFoundException;  
-import android.os.Build;  
-import android.os.Environment;  
-import android.os.Looper;  
-import android.util.Log;  
+
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
+import android.os.Environment;
+import android.os.Looper;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.mail.internet.MimeUtility;
 
 import gesoft.gcrashemail.email.MultiMailsender;
 
@@ -36,6 +38,11 @@ import gesoft.gcrashemail.email.MultiMailsender;
 public class GCrashHandler implements UncaughtExceptionHandler {
 
     private String mSubject;
+    private String mNick;
+
+    public void setNick( String nick ){
+        mNick = nick;
+    }
       
     public static final String TAG = "GCrashHandler";
       
@@ -130,35 +137,50 @@ public class GCrashHandler implements UncaughtExceptionHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //这个类主要是设置邮件
-                MultiMailsender.MultiMailSenderInfo mailInfo = new MultiMailsender.MultiMailSenderInfo();
-                mailInfo.setMailServerHost("smtp.163.com");
-                mailInfo.setMailServerPort("25");
-                mailInfo.setValidate(true);
-                mailInfo.setUserName("y.h.r@163.com");
-                mailInfo.setPassword("13050920586");//您的邮箱密码
-                mailInfo.setFromAddress("y.h.r@163.com");
-                mailInfo.setToAddress("y.h.r@163.com");
-                mailInfo.setSubject( mSubject );
-                mailInfo.setContent( ExceptionUtils.getStackTrace(ex) );
-                //抄送
+
+                try {
+                    //这个类主要是设置邮件
+                    MultiMailsender.MultiMailSenderInfo mailInfo = new MultiMailsender.MultiMailSenderInfo();
+                    mailInfo.setMailServerHost("smtp.163.com");
+                    mailInfo.setMailServerPort("25");
+                    mailInfo.setValidate(true);
+                    mailInfo.setUserName("y.h.r@163.com");
+                    mailInfo.setPassword("13050920586");//您的邮箱密码
+
+                    String nick = TextUtils.isEmpty(mNick)?"": MimeUtility.encodeText( mNick );
+                    mailInfo.setFromAddress(nick+"<y.h.r@163.com>");
+
+                    mailInfo.setToAddress("y.h.r@163.com");
+                    mailInfo.setSubject( mSubject );
+                    mailInfo.setContent( getStackTrace(ex) );
+                    //抄送
                 /*String[] receivers = new String[]{"y.h.r@163.com"};
                 String[] ccs = receivers; mailInfo.setReceivers( receivers );
                 mailInfo.setCcs(ccs);
                 MultiMailsender.sendMailtoMultiCC(mailInfo);//发送抄送
                 */
 
-                //这个类主要来发送邮件
-                //MultiMailsender sms = new MultiMailsender();
+                    //这个类主要来发送邮件
+                    //MultiMailsender sms = new MultiMailsender();
 
-                //发送文体格式
-                MultiMailsender.sendTextMail(mailInfo);
+                    //发送文体格式
+                    MultiMailsender.sendTextMail(mailInfo);
 
-                //发送html格式
-                //MultiMailsender.sendMailtoMultiReceiver(mailInfo);
+                    //发送html格式
+                    //MultiMailsender.sendMailtoMultiReceiver(mailInfo);
+                } catch (UnsupportedEncodingException e) {
+                    Log.e("error", "error", e);
+                }
 
             }
         }).start();
+    }
+
+    public String getStackTrace( Throwable throwable) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw, true);
+        throwable.printStackTrace(pw);
+        return sw.getBuffer().toString();
     }
       
     /** 
