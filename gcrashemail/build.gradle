@@ -26,5 +26,27 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'org.apache.commons:commons-lang3:3.4'
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            /*snapshotRepository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
+                authentication(userName: 'admin', password: 'admin123')
+            }*/
+
+            repository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
+                authentication(userName: 'admin', password: 'admin123')
+            }
+
+            pom.project {
+                version '0.0.1'
+                artifactId 'gcrashemail'
+                groupId 'gesoft.android'
+                packaging 'aar'
+                description 'gesoft gcrash'
+            }
+        }
+    }
 }
