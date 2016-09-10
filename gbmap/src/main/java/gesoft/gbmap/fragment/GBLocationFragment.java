@@ -80,15 +80,22 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
         // Required empty public constructor
     }
 
+    //SDK API<23时，onAttach(Context)不执行，需要使用onAttach(Activity)。Fragment自身的Bug，v4的没有此问题
+    @Override
+    public void onAttach(Activity act) {
+        super.onAttach(act);
+        mActivity = act;
+        mContext = act;
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        mContext = context;
         if (context instanceof Activity){
             mActivity =(Activity) context;
         }
-
-        mContext = context;
 
     }
 
@@ -96,7 +103,7 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getPersimmions();
         GBLocation.setApplication(mContext.getApplicationContext());
-        mGBLocation = new GBLocation( getActivity().getApplicationContext() );
+        mGBLocation = new GBLocation(mContext.getApplicationContext());
         mGBLocation.initLocation( false );
         setGBLocation(this);
         View view = onCreateViewG( inflater, container, savedInstanceState);
