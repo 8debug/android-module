@@ -28,15 +28,18 @@ public class PhotoUtils {
     public static String addPhoto( Context context, File file ){
 
         String path = file.getAbsolutePath();
-        String strResult = "";
+        String strResult;
         ContentValues values = new ContentValues();
         values.put( MediaStore.Images.Media.DATA, path);
         //values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
         //values.put(MediaStore.Images.Media.DESCRIPTION, file.getName());
         //values.put( MediaStore.Images.ImageColumns.DATA, path );
         //保存在SD卡中
-        Uri uri = context.getContentResolver().insert( MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values );
-        strResult = uri.toString();
+        Uri uri = MediaStore.Audio.Media.getContentUriForPath( path );
+        context.getContentResolver().delete( uri, MediaStore.MediaColumns.DATA + "=\"" + path + "\"", null);
+        //context.getContentResolver().delete( uri, null, null);
+        uri = context.getContentResolver().insert( MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values );
+        strResult = uri!=null?uri.toString():null;
 
         //保存图片到系统媒体库
         //strResult = MediaStore.Images.Media.insertImage(context.getContentResolver(), path, file.getName(), file.getName());
