@@ -14,7 +14,6 @@ import java.util.List;
 
 import gesoft.gbmap.base.GBMapApplication;
 import gesoft.gbmap.service.LocationService;
-import gesoft.gbmap.service.Utils;
 
 /**
  * Created by yhr on 2016/6/30.
