@@ -4,11 +4,9 @@ import android.app.Application;
 import android.app.Service;
 import android.content.Context;
 import android.os.Vibrator;
+import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
-
-import gesoft.gbmap.L;
-import gesoft.gbmap.service.LocationService;
 
 /**
  * Created by yhr on 2016/6/30.
@@ -28,7 +26,7 @@ public class GBMapApplication extends Application {
             mVibrator =(Vibrator)applicationContext.getSystemService(Service.VIBRATOR_SERVICE);
             SDKInitializer.initialize(applicationContext);
         } catch (Exception e) {
-            L.e(e);
+            Log.e("error_debug", "error_debug", e);
         }
     }
 

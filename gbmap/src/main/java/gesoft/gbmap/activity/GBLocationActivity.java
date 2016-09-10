@@ -7,11 +7,11 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 import gesoft.gbmap.GBLocation;
-import gesoft.gbmap.L;
 
 public abstract class GBLocationActivity extends Activity implements GBLocation.IGBLocation {
 
@@ -38,7 +38,7 @@ public abstract class GBLocationActivity extends Activity implements GBLocation.
             setGBLocation(this);
             onCreateG(savedInstanceState);
         } catch (Exception e) {
-            L.e(e);
+            Log.e("error_debug", "error_debug", e);
         }
     }
 

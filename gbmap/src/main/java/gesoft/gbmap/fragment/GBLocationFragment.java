@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import gesoft.gbmap.GBLocation;
-import gesoft.gbmap.L;
 
 /**
  * by yhr 在fragment中封装百度定位
