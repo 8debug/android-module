@@ -81,11 +81,20 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof Activity){
+            mActivity =(Activity) context;
+        }
+
+        mContext = context;
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mActivity = getActivity();
-        mContext = mActivity;
         getPersimmions();
         GBLocation.setApplication(mContext.getApplicationContext());
         mGBLocation = new GBLocation( getActivity().getApplicationContext() );

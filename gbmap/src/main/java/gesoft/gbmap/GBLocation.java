@@ -147,13 +147,17 @@ public class GBLocation {
 
                 List<Poi> listPoi = location.getPoiList();
                 List<GPoi> listGpoi = new ArrayList<>();
-                for (Poi poi : listPoi) {
-                    GPoi gpoi = new GPoi();
-                    gpoi.setId(poi.getId());
-                    gpoi.setName(poi.getName());
-                    gpoi.setRank(poi.getRank());
-                    listGpoi.add(gpoi);
+
+                if( listPoi!=null ){
+                    for (Poi poi : listPoi) {
+                        GPoi gpoi = new GPoi();
+                        gpoi.setId(poi.getId());
+                        gpoi.setName(poi.getName());
+                        gpoi.setRank(poi.getRank());
+                        listGpoi.add(gpoi);
+                    }
                 }
+
                 bean.setListPoi(listGpoi);
 
                 Boolean isSuccess = true;
