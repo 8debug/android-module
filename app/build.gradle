@@ -32,10 +32,12 @@ dependencies {
     compile project(':gphotoview')
     compile project(':gbmap')
     compile project(':gpush')
+    compile project(':ghotfix')
     //设置依赖changing属性为true，配合cacheChangingModulesFor的配置，使依赖同步时始终下载不缓存。以下两种写法等价
     //compile ('gesoft.android:gapp:0.0.5'){ changing=true }
     //compile group: "gesoft.android", name: "gapp", version: "0.0.22", changing: true
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
     testCompile 'junit:junit:4.12'
     compile project(':gphotopicker')
+    compile project(':gcrashemail')
 }
