@@ -12,10 +12,12 @@ public interface GRAdapterListener {
         void onConvert( GVHolder holder, T t );
     }
 
-    interface OnItemClick extends View.OnClickListener{
+    interface OnItemClick<T>{
+        void onItemClick( GVHolder holder, T t );
     }
 
-    interface OnItemLongClick extends View.OnLongClickListener{
+    interface OnItemLongClick<T>{
+        void onItemLongClick( GVHolder holder, T t );
     }
 
 }
