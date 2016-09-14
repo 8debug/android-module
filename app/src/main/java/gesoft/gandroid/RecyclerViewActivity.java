@@ -3,24 +3,29 @@ package gesoft.gandroid;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import gesoft.gapp.common.EndlessRecyclerOnScrollListener;
 import gesoft.gapp.common.GDecoration;
 import gesoft.gapp.common.GRAdapter;
 import gesoft.gapp.common.GRAdapterListener;
 import gesoft.gapp.common.GVHolder;
 
-public class RecyclerViewActivity extends AppCompatActivity implements GRAdapterListener.OnConvert<String> {
+public class RecyclerViewActivity extends AppCompatActivity
+        implements GRAdapterListener.OnConvert<String>  {
 
     @Bind(R.id.recycler_grid)
     RecyclerView recyclerGrid;
-    @Bind(R.id.recycler_linear)
-    RecyclerView recyclerLinear;
+    @Bind(R.id.recycler_horizontal)
+    RecyclerView recyclerHorizontal;
+    @Bind(R.id.recycler_vertical)
+    RecyclerView recyclerVertical;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +33,53 @@ public class RecyclerViewActivity extends AppCompatActivity implements GRAdapter
         setContentView(R.layout.activity_recycler_view);
         ButterKnife.bind(this);
 
-        List<String> listStr = new ArrayList<>(Arrays.asList("杨皓然", "岳增光", "杨刚", "张永茂", "袁宇飞", "张楠"));
-
-        GRAdapter<String> adapter = new GRAdapter<>(R.layout.adapter_item, this);
-        adapter.addAll(listStr);
-
+        List<String> listStr = new ArrayList<>();
+        for (int i = 1; i <=5 ; i++) {
+            listStr.add("第" + i + "个");
+        }
+        GRAdapter<String> adapter = new GRAdapter<>( this, R.layout.adapter_item, listStr, this);
+        adapter.addFooterView( R.layout.g_listview_footer );
         recyclerGrid.setAdapter(adapter);
-        recyclerLinear.setAdapter(adapter);
-        recyclerLinear.addItemDecoration(new GDecoration(this, GDecoration.VERTICAL_LIST));
 
+        recyclerHorizontal.setAdapter(adapter);
+        recyclerHorizontal.addItemDecoration(new GDecoration(this, GDecoration.VERTICAL_LIST));
+
+        listStr = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            listStr.add("第1页，第"+i+"项");
+        }
+        final GRAdapter<String> adapter2 = new GRAdapter<>( this, R.layout.adapter_item, listStr, this);
+        adapter2.addFooterView( R.layout.g_listview_footer );
+        recyclerVertical.setAdapter(adapter2);
+        recyclerVertical.addOnScrollListener(new EndlessRecyclerOnScrollListener( recyclerVertical.getLayoutManager() ) {
+            @Override
+            public void onLoadMore( final int current_page) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(3000);
+                            for (int i = 1; i <=2 ; i++) {
+                                adapter2.add("第"+current_page+"页，第"+i+"项");
+                            }
+                            recyclerVertical.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    recyclerVertical.getAdapter().notifyDataSetChanged();
+                                }
+                            });
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        });
     }
 
     @Override
     public void onConvert(GVHolder holder, String s) {
         holder.setText(R.id.tv, s);
     }
+
 }
