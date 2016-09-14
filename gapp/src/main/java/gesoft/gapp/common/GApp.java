@@ -74,8 +74,7 @@ public class GApp
         {
 
             PackageManager packageManager = context.getPackageManager();
-            PackageInfo packageInfo = packageManager.getPackageInfo(
-                    context.getPackageName(), 0);
+            PackageInfo packageInfo = packageManager.getPackageInfo( context.getPackageName(), 0);
             return packageInfo.versionName;
 
         } catch (NameNotFoundException e)
