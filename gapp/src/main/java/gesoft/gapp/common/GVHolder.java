@@ -10,16 +10,16 @@ import android.widget.TextView;
 public class GVHolder extends RecyclerView.ViewHolder {
 
     private final SparseArray<View> mViews;
-    private final View mConvertView;
+    //private final View mConvertView;
 
     public GVHolder(View itemView) {
         super(itemView);
         mViews = new SparseArray<>();
-        mConvertView = itemView;
+        //mConvertView = itemView;
     }
 
     public View getConvertView(){
-        return mConvertView;
+        return itemView;
     }
 
     /**
@@ -30,7 +30,8 @@ public class GVHolder extends RecyclerView.ViewHolder {
     public <T extends View> T getView(int viewId){
         View view = mViews.get(viewId);
         if (view == null){
-            view = mConvertView.findViewById(viewId);
+            //view = mConvertView.findViewById(viewId);
+            view = itemView.findViewById(viewId);
             mViews.put(viewId, view);
         }
         return (T) view;
