@@ -8,39 +8,60 @@
     android:orientation="vertical"
     tools:context="gesoft.gandroid.RecyclerViewActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
-        android:textSize="15sp"
-        android:text="九宫格"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_grid"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layoutManager="GridLayoutManager"
-        app:spanCount="3"
-        app:reverseLayout="true"
-        tools:listitem="@layout/adapter_item"/>
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="九宫格"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="GridLayoutManager"
+            app:spanCount="3"
+            app:reverseLayout="false"
+            tools:listitem="@layout/adapter_item"/>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
-        android:textSize="15sp"
-        android:text="横向"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_linear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="LinearLayoutManager"
-        app:spanCount="3"
-        app:reverseLayout="true"
-        tools:listitem="@layout/adapter_item"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="横向"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="LinearLayoutManager"
+            app:spanCount="3"
+            app:reverseLayout="true"
+            tools:listitem="@layout/adapter_item"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="竖向"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/adapter_item"/>
+    </LinearLayout>
 
 </LinearLayout>

@@ -3,15 +3,13 @@ package gesoft.gandroid;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import gesoft.gapp.common.EndlessRecyclerOnScrollListener;
+import gesoft.gapp.common.GROnScrollListener;
 import gesoft.gapp.common.GDecoration;
 import gesoft.gapp.common.GRAdapter;
 import gesoft.gapp.common.GRAdapterListener;
@@ -51,7 +49,7 @@ public class RecyclerViewActivity extends AppCompatActivity
         final GRAdapter<String> adapter2 = new GRAdapter<>( this, R.layout.adapter_item, listStr, this);
         adapter2.addFooterView( R.layout.g_listview_footer );
         recyclerVertical.setAdapter(adapter2);
-        recyclerVertical.addOnScrollListener(new EndlessRecyclerOnScrollListener( recyclerVertical.getLayoutManager() ) {
+        recyclerVertical.addOnScrollListener(new GROnScrollListener( recyclerVertical.getLayoutManager() ) {
             @Override
             public void onLoadMore( final int current_page) {
                 new Thread(new Runnable() {

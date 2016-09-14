@@ -1,12 +1,11 @@
 package gesoft.gapp.common;
 
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener {
-    public static String TAG = EndlessRecyclerOnScrollListener.class.getSimpleName();
+public abstract class GROnScrollListener extends RecyclerView.OnScrollListener {
+    public static String TAG = GROnScrollListener.class.getSimpleName();
 
     private int previousTotal = 0; // The total number of items in the dataset after the last load
     private boolean loading = true; // True if we are still waiting for the last set of data to load.
@@ -20,7 +19,7 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
 
     private RecyclerView.LayoutManager mLayoutManager;
 
-    public EndlessRecyclerOnScrollListener(RecyclerView.LayoutManager layoutManager) {
+    public GROnScrollListener(RecyclerView.LayoutManager layoutManager) {
         this.mLayoutManager = layoutManager;
     }
 
