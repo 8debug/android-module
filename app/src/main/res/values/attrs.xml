@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="gTitleText" format="string" />
+    <attr name="gTitleTextColor" format="color" />
+    <attr name="gTitleTextSize" format="dimension" />
+    <attr name="gTitleBackGroudColor" format="color" />
+
+    <declare-styleable name="GValidCode">
+        <attr name="gTitleText" />
+        <attr name="gTitleTextColor" />
+        <attr name="gTitleTextSize" />
+        <attr name="gTitleBackGroudColor" />
+    </declare-styleable>
+    
+</resources>

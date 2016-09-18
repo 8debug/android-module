@@ -46,7 +46,8 @@
         <activity android:name=".CountTimerActivity" />
         <activity android:name=".WebviewActivity" />
         <activity android:name=".PhotoActivity" />
-        <activity android:name=".BaseUIActivity"></activity>
+        <activity android:name=".BaseUIActivity" />
+        <activity android:name=".CustomViewActivity"></activity>
     </application>
 
 </manifest>

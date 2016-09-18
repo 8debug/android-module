@@ -9,10 +9,10 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import gesoft.gapp.common.GROnScrollListener;
 import gesoft.gapp.common.GDecoration;
 import gesoft.gapp.common.GRAdapter;
 import gesoft.gapp.common.GRAdapterListener;
+import gesoft.gapp.common.GROnScrollListener;
 import gesoft.gapp.common.GVHolder;
 
 public class RecyclerViewActivity extends AppCompatActivity
@@ -36,17 +36,17 @@ public class RecyclerViewActivity extends AppCompatActivity
             listStr.add("第" + i + "个");
         }
         GRAdapter<String> adapter = new GRAdapter<>( this, R.layout.adapter_item, listStr, this);
-        adapter.addFooterView( R.layout.g_listview_footer );
+        //adapter.addFooterView( R.layout.g_listview_footer );
         recyclerGrid.setAdapter(adapter);
 
         recyclerHorizontal.setAdapter(adapter);
         recyclerHorizontal.addItemDecoration(new GDecoration(this, GDecoration.VERTICAL_LIST));
 
-        listStr = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
-            listStr.add("第1页，第"+i+"项");
+        List<String> listStrVertical = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            listStrVertical.add("第1页，第"+i+"项");
         }
-        final GRAdapter<String> adapter2 = new GRAdapter<>( this, R.layout.adapter_item, listStr, this);
+        final GRAdapter<String> adapter2 = new GRAdapter<>( this, R.layout.adapter_item, listStrVertical, this);
         adapter2.addFooterView( R.layout.g_listview_footer );
         recyclerVertical.setAdapter(adapter2);
         recyclerVertical.addOnScrollListener(new GROnScrollListener( recyclerVertical.getLayoutManager() ) {

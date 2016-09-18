@@ -126,6 +126,14 @@
                 android:text="@string/btn_email"
                 android:textAllCaps="false"
                 android:onClick="sendEmail"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_customview"
+                android:textAllCaps="false"
+                android:onClick="customview"/>
+
         </LinearLayout>
     </ScrollView>
 

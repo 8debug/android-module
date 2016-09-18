@@ -133,6 +133,10 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("asd",  true);
     }
 
+    public void customview( View view ){
+        startActivity(new Intent(this, CustomViewActivity.class));
+    }
+
     //推送
     void gpush(){
 

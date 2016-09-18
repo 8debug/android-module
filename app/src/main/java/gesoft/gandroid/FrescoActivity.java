@@ -48,12 +48,15 @@ public class FrescoActivity extends AppCompatActivity {
             T.show(this, strUri+"  不存在");
         }
 
+        Uri uri = Uri.parse("http://10.70.23.32/demo/test.jpeg");
+        fresco.setImageURI(uri);
+
     }
 
 
     public void localLargeImg(View view){
         try {
-            Uri uri = Uri.parse("http://10.70.23.32/demo/map.jpg");
+            Uri uri = Uri.parse("http://10.70.23.32/demo/test.jpeg");
             //uri = Uri.parse("res://gesoft.gandroid/" + R.mipmap.map);
 
             /*ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
