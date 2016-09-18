@@ -19,8 +19,10 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
     private GRAdapterListener.OnConvert<T> mOnConvertListener;
     private GRAdapterListener.OnItemClick mOnItemClickListener;
     private GRAdapterListener.OnItemLongClick mOnItemLongClickListener;
-    private View mViewFooter;
-    private View mViewHeader;
+    /*private View mViewFooter;
+    private View mViewHeader;*/
+    private List<View> mListFooter = new ArrayList<>();
+    private List<View> mListHeader = new ArrayList<>();
     private Context mContext;
 
     public void setOnItemClickListener( GRAdapterListener.OnItemClick onItemClickListener ){
@@ -41,8 +43,20 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         mOnConvertListener = onConvertListener;
     }
 
+    public GRAdapter( int layoutId, List<T> list, GRAdapterListener.OnConvert<T> onConvertListener) {
+        mLayout = layoutId;
+        mList = list==null?new ArrayList<T>():list;
+        mOnConvertListener = onConvertListener;
+    }
+
     public GRAdapter(Context context, int layoutId, GRAdapterListener.OnConvert<T> onConvertListener){
         mContext = context;
+        mLayout = layoutId;
+        mList = new ArrayList<>();
+        mOnConvertListener = onConvertListener;
+    }
+
+    public GRAdapter( int layoutId, GRAdapterListener.OnConvert<T> onConvertListener){
         mLayout = layoutId;
         mList = new ArrayList<>();
         mOnConvertListener = onConvertListener;
@@ -96,30 +110,32 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         View view;
 
         if( viewType==ITEM_TYPE_HEADER ){
-            view = mViewHeader;
+            view = mListHeader.get(0);
         }else if( viewType==ITEM_TYPE_FOOTER ){
-            view = mViewFooter;
+            view = mListFooter.get(0);
         }else{
-            view = LayoutInflater.from( mContext ).inflate(mLayout, parent, false);
+            view = LayoutInflater.from( parent.getContext() ).inflate(mLayout, parent, false);
         }
 
         return new GVHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final GVHolder holder, final int position) {
+    public void onBindViewHolder(final GVHolder holder, int position) {
 
-        if( getData().size()>position ){
+        if( !isHeader(position) && !isFooter(position) ){
+
+            final int index = position - mListHeader.size();
 
             if( mOnConvertListener!=null ){
-                mOnConvertListener.onConvert(holder, mList.get(position));
+                mOnConvertListener.onConvert(holder, mList.get(index));
             }
 
             if( mOnItemClickListener!=null ){
                 holder.getConvertView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnItemClickListener.onItemClick(holder, mList.get(position));
+                        mOnItemClickListener.onItemClick(holder, mList.get(index));
                     }
                 });
             }
@@ -128,27 +144,23 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
                 holder.getConvertView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnItemLongClickListener.onItemLongClick(holder, mList.get(position));
+                        mOnItemLongClickListener.onItemLongClick(holder, mList.get(index));
                     }
                 });
             }
 
         }
 
-
-
-
-
     }
 
     @Override
     public int getItemCount() {
         int count = mList.size();
-        if( mViewHeader !=null ){
-            count++;
+        if( mListHeader.size() >0 ){
+            count += mList.size();
         }
-        if( mViewFooter !=null ){
-            count++;
+        if( mListFooter.size() >0 ){
+            count += mListFooter.size();
         }
         return count;
     }
@@ -167,7 +179,7 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
     @Override
     public void onViewAttachedToWindow(GVHolder holder) {
         super.onViewAttachedToWindow(holder);
-        if ( mViewFooter!=null && isFooter(holder.getLayoutPosition())) {
+        if ( isFooter(holder.getLayoutPosition()) ) {
             ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
             if (lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams) {
                 StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
@@ -189,7 +201,7 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
             gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    if ( isScrollFooter(position)) {
+                    if ( isFooter(position) ) {
                         return gridManager.getSpanCount();
                     }
                     return 1;
@@ -198,21 +210,31 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         }
     }
 
-    private boolean isScrollFooter( int position ){
+    /*private boolean isScrollFooter( int position ){
         return position >= getItemCount()-1;
-    }
+    }*/
 
     public void addFooterView( int resId ){
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
-        mViewFooter = LayoutInflater.from(mContext).inflate(resId, null);
-        mViewFooter.setLayoutParams( params );
+        View viewFooter = LayoutInflater.from(mContext).inflate(resId, null);
+        viewFooter.setLayoutParams( params );
+        mListFooter.clear();
+        mListFooter.add(viewFooter);
+    }
+
+    public void addHeaderView( int resId ){
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
+        View viewHeader = LayoutInflater.from(mContext).inflate(resId, null);
+        viewHeader.setLayoutParams( params );
+        mListHeader.clear();
+        mListHeader.add(viewHeader);
     }
 
     private boolean isFooter( int position ){
-        return mViewFooter !=null && position >= getItemCount()-1 ;
+        return position >= mListHeader.size() + mList.size();
     }
 
     private boolean isHeader( int position ){
-        return mViewHeader !=null && position ==0 ;
+        return position < mListHeader.size() ;
     }
 }
