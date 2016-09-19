@@ -72,13 +72,13 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         return this;
     }
 
-    public GRAdapter add(T t ){
-        mList.add(t);
+    public GRAdapter add(T item ){
+        mList.add(item);
         return this;
     }
 
-    public GRAdapter add(int idx , T t ){
-        mList.add(idx, t);
+    public GRAdapter add(int idx , T item ){
+        mList.add(idx, item);
         return this;
     }
 
@@ -96,8 +96,8 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         return mList.get(index);
     }
 
-    public GRAdapter remove(T t ){
-        mList.remove(t);
+    public GRAdapter remove(T item ){
+        mList.remove(item);
         return this;
     }
 

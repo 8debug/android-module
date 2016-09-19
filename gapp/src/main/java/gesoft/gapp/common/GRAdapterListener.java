@@ -9,15 +9,15 @@ import android.view.View;
 public interface GRAdapterListener {
 
     interface OnConvert<T>{
-        void onConvert( GVHolder holder, T t );
+        void onConvert( GVHolder holder, T item );
     }
 
     interface OnItemClick<T>{
-        void onItemClick( GVHolder holder, T t );
+        void onItemClick( GVHolder holder, T item );
     }
 
     interface OnItemLongClick<T>{
-        void onItemLongClick( GVHolder holder, T t );
+        void onItemLongClick( GVHolder holder, T item );
     }
 
 }
