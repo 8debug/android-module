@@ -142,23 +142,24 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
                 mOnConvertListener.onConvert(holder, mList.get(index));
             }
 
-            if( mOnItemClickListener!=null ){
-                holder.getConvertView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+            holder.getConvertView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if( mOnItemClickListener!=null ){
                         mOnItemClickListener.onItemClick(holder, mList.get(index));
                     }
-                });
-            }
+                }
+            });
 
-            if( mOnItemLongClickListener!=null ){
-                holder.getConvertView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+            holder.getConvertView().setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if( mOnItemLongClickListener!=null ){
                         mOnItemLongClickListener.onItemLongClick(holder, mList.get(index));
                     }
-                });
-            }
+                    return true;
+                }
+            });
 
         }
 
