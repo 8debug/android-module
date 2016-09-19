@@ -25,6 +25,10 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
     private List<View> mListHeader = new ArrayList<>();
     private Context mContext;
 
+    public void setOnConverListener( GRAdapterListener.OnConvert onConverListener ){
+        mOnConvertListener = onConverListener;
+    }
+
     public void setOnItemClickListener( GRAdapterListener.OnItemClick onItemClickListener ){
         mOnItemClickListener = onItemClickListener;
     }
@@ -36,6 +40,12 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
     private final static int ITEM_TYPE_FOOTER = 1000;
     private final static int ITEM_TYPE_HEADER = 1001;
 
+    public GRAdapter(Context context, int layoutId, List<T> list) {
+        mContext = context;
+        mLayout = layoutId;
+        mList = list==null?new ArrayList<T>():list;
+    }
+
     public GRAdapter(Context context, int layoutId, List<T> list, GRAdapterListener.OnConvert<T> onConvertListener) {
         mContext = context;
         mLayout = layoutId;
@@ -43,24 +53,24 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         mOnConvertListener = onConvertListener;
     }
 
-    public GRAdapter( int layoutId, List<T> list, GRAdapterListener.OnConvert<T> onConvertListener) {
+    /*public GRAdapter( int layoutId, List<T> list, GRAdapterListener.OnConvert<T> onConvertListener) {
         mLayout = layoutId;
         mList = list==null?new ArrayList<T>():list;
         mOnConvertListener = onConvertListener;
-    }
+    }*/
 
-    public GRAdapter(Context context, int layoutId, GRAdapterListener.OnConvert<T> onConvertListener){
+    /*public GRAdapter(Context context, int layoutId, GRAdapterListener.OnConvert<T> onConvertListener){
         mContext = context;
         mLayout = layoutId;
         mList = new ArrayList<>();
         mOnConvertListener = onConvertListener;
-    }
+    }*/
 
-    public GRAdapter( int layoutId, GRAdapterListener.OnConvert<T> onConvertListener){
+    /*public GRAdapter( int layoutId, GRAdapterListener.OnConvert<T> onConvertListener){
         mLayout = layoutId;
         mList = new ArrayList<>();
         mOnConvertListener = onConvertListener;
-    }
+    }*/
 
     public GRAdapter setData(List<T> list ){
         mList = list;
@@ -114,7 +124,8 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         }else if( viewType==ITEM_TYPE_FOOTER ){
             view = mListFooter.get(0);
         }else{
-            view = LayoutInflater.from( parent.getContext() ).inflate(mLayout, parent, false);
+            //view = LayoutInflater.from( parent.getContext() ).inflate(mLayout, parent, false);
+            view = LayoutInflater.from( mContext ).inflate(mLayout, parent, false);
         }
 
         return new GVHolder(view);
