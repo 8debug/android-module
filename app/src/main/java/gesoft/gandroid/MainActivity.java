@@ -137,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, CustomViewActivity.class));
     }
 
+    public void sql( View view ){
+        startActivity(new Intent(this, SQLiteActivity.class));
+    }
+
     //推送
     void gpush(){
 
