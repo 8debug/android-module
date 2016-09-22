@@ -47,7 +47,8 @@
         <activity android:name=".WebviewActivity" />
         <activity android:name=".PhotoActivity" />
         <activity android:name=".BaseUIActivity" />
-        <activity android:name=".CustomViewActivity"></activity>
+        <activity android:name=".CustomViewActivity" />
+        <activity android:name=".SQLiteActivity"></activity>
     </application>
 
 </manifest>
