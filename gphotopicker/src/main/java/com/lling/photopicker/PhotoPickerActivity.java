@@ -95,6 +95,7 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GPhotoApplication.setContext(this);
         setContentView(R.layout.activity_photo_picker);
         initIntentParams();
         initView();
