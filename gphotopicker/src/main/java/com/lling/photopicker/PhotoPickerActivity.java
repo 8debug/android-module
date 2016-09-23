@@ -51,6 +51,11 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
 
     public final static String KEY_RESULT = "picker_result";
     public final static int REQUEST_CAMERA = 1;
+    public final static String KEY_ACTION = "key_action";
+    //照片是拍照获得的
+    public final static int ACTION_CAMERA = 121212;
+    //照片是相册选择的
+    public final static int ACTION_PHOTO = 212121;
 
     /** 是否显示相机 */
     public final static String EXTRA_SHOW_CAMERA = "is_show_camera";
@@ -148,7 +153,7 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
                 @Override
                 public void onClick(View v) {
                     mSelectList.addAll(mPhotoAdapter.getmSelectedPhotos());
-                    returnData();
+                    returnData( ACTION_PHOTO );
                 }
             });
         }
@@ -211,7 +216,7 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
         String path = photo.getPath();
         if(mSelectMode == MODE_SINGLE) {
             mSelectList.add(path);
-            returnData();
+            returnData( ACTION_PHOTO );
         }
     }
 
@@ -232,10 +237,11 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
     /**
      * 返回选择图片的路径
      */
-    private void returnData() {
+    private void returnData( int action ) {
         // 返回已选择的图片数据
         Intent data = new Intent();
         data.putStringArrayListExtra(KEY_RESULT, mSelectList);
+        data.putExtra(KEY_ACTION, action);
         setResult(RESULT_OK, data);
         finish();
     }
@@ -418,7 +424,7 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
                 if (mTmpFile != null) {
                     mSelectList.add(mTmpFile.getAbsolutePath());
                     PhotoUtils.addPhoto(this, mTmpFile);
-                    returnData();
+                    returnData( ACTION_CAMERA );
                 }
             }else{
                 if(mTmpFile != null && mTmpFile.exists()){
