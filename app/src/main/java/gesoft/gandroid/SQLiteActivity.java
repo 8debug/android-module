@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
-import gesoft.gandroid.database.GCameraSQLHelper;
+import gesoft.gapp.databases.camera.GCameraSQLHelper;
+
 
 public class SQLiteActivity extends Activity {
 

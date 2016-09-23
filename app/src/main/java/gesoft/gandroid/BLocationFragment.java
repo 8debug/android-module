@@ -3,9 +3,7 @@ package gesoft.gandroid;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +11,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.lling.photopicker.GPhotoApplication;
 import com.lling.photopicker.PhotoPickerActivity;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import gesoft.gandroid.database.CameraPhoto;
-import gesoft.gandroid.database.GCameraSQLHelper;
+
 import gesoft.gapp.common.L;
+import gesoft.gapp.databases.camera.GCameraPhoto;
+import gesoft.gapp.databases.camera.GCameraSQLHelper;
 import gesoft.gbmap.GBLocation;
 import gesoft.gbmap.fragment.GBLocationFragment;
 
@@ -75,7 +72,7 @@ public class BLocationFragment extends GBLocationFragment {
             public void onClick(View v) {
                 StringBuffer buffer = new StringBuffer();
                 for (String path : mArray) {
-                    CameraPhoto photo = mSqlHelper.queryLocation(path);
+                    GCameraPhoto photo = mSqlHelper.queryLocation(path);
                     String time = DateUtils.formatDateTime(getActivity(), photo.getTime(),DateUtils.FORMAT_SHOW_DATE);
                     String str = photo.getLng() + ", " + photo.getLat() + ", " + photo.getPath() + ", " + time;
                     buffer.append(str);
