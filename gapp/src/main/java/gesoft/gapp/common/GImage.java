@@ -3,8 +3,15 @@ package gesoft.gapp.common;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Handler;
+import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -328,5 +335,48 @@ public class GImage {
                 }
             }
         }).start();
+    }
+
+    public static Bitmap getBitmap( ImageView imageView ){
+        imageView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = imageView.getDrawingCache();
+        imageView.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
+    /**
+     * 添加文字水印
+     * @param bitmap
+     * @param text
+     */
+    public static  Bitmap addWaterMarker(Bitmap bitmap, String text, int textSize, float x, float y, int width, int height){
+
+        Bitmap icon = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(icon);
+
+        Paint photoPaint = new Paint(); //建立画笔
+        photoPaint.setDither(true); //获取跟清晰的图像采样
+        photoPaint.setFilterBitmap(true);//过滤一些
+
+        Rect src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());//创建一个指定的新矩形的坐标
+        Rect dst = new Rect(0, 0, width, height);//创建一个指定的新矩形的坐标
+        canvas.drawBitmap(bitmap, src, dst, photoPaint);//将photo 缩放或则扩大到 dst使用的填充区photoPaint
+
+        Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DEV_KERN_TEXT_FLAG);//设置画笔
+        textPaint.setTextSize(textSize);//字体大小
+        //textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setTypeface(Typeface.DEFAULT);//采用默认的宽度
+        textPaint.setAntiAlias(true);  //抗锯齿
+        textPaint.setStrokeWidth(0);
+        textPaint.setAlpha(0);
+        textPaint.setStyle(Paint.Style.FILL);
+        textPaint.setColor(Color.GRAY);//采用的颜色
+        textPaint.setShadowLayer(0f, 0f, 0f, Color.LTGRAY);
+
+        canvas.drawText(text, x, y, textPaint);//绘制上去字，开始未知x,y采用那只笔绘制
+        canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.restore();
+        bitmap.recycle();
+        return icon;
     }
 }

@@ -1,10 +1,10 @@
-package gesoft.gandroid.database;
+package gesoft.gapp.databases.camera;
 
 /**
  * Created by yhr on 2016/9/20.
  * 照相机图片
  */
-public class CameraPhoto {
+public class GCameraPhoto {
 
     public double getLng() {
         return lng;

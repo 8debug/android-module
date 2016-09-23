@@ -1,4 +1,4 @@
-package gesoft.gandroid.database;
+package gesoft.gapp.databases.camera;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -64,20 +64,20 @@ public class GCameraSQLHelper extends SQLiteOpenHelper {
         }
     }
 
-    public CameraPhoto queryLocation( String path ){
+    public GCameraPhoto queryLocation(String path ){
         SQLiteDatabase db = getWritableDatabase();
         String[] columns = new String[]{ GCamerField.COLUMN_LAT, GCamerField.COLUMN_LNG, GCamerField.COLUMN_PATH, GCamerField.COLUMN_INPUT_DATE };
         Cursor cursor = db.query( GCamerField.TABLE_NAME, columns, GCamerField.COLUMN_PATH + " = ?" , new String[]{ path }, null, null, null );
-        CameraPhoto cameraPhoto = null;
+        GCameraPhoto GCameraPhoto = null;
         if( cursor!=null && cursor.moveToFirst() ){
-            cameraPhoto = new CameraPhoto();
-            cameraPhoto.setLat( cursor.getDouble( cursor.getColumnIndex( GCamerField.COLUMN_LAT ) ) );
-            cameraPhoto.setLng( cursor.getDouble( cursor.getColumnIndex( GCamerField.COLUMN_LNG ) ) );
-            cameraPhoto.setPath( cursor.getString( cursor.getColumnIndex( GCamerField.COLUMN_PATH ) ) );
-            cameraPhoto.setTime( cursor.getLong( cursor.getColumnIndex( GCamerField.COLUMN_INPUT_DATE ) ) );
+            GCameraPhoto = new GCameraPhoto();
+            GCameraPhoto.setLat( cursor.getDouble( cursor.getColumnIndex( GCamerField.COLUMN_LAT ) ) );
+            GCameraPhoto.setLng( cursor.getDouble( cursor.getColumnIndex( GCamerField.COLUMN_LNG ) ) );
+            GCameraPhoto.setPath( cursor.getString( cursor.getColumnIndex( GCamerField.COLUMN_PATH ) ) );
+            GCameraPhoto.setTime( cursor.getLong( cursor.getColumnIndex( GCamerField.COLUMN_INPUT_DATE ) ) );
             cursor.close();
         }
-        return cameraPhoto;
+        return GCameraPhoto;
     }
 
 }

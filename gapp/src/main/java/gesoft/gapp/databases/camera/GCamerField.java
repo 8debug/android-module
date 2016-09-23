@@ -1,4 +1,4 @@
-package gesoft.gandroid.database;
+package gesoft.gapp.databases.camera;
 
 /**
  * Created by yhr on 2016/9/20.
