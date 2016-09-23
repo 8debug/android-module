@@ -20,6 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import gesoft.gapp.common.L;
+import gesoft.gapp.common.T;
 import gesoft.gapp.databases.camera.GCameraPhoto;
 import gesoft.gapp.databases.camera.GCameraSQLHelper;
 import gesoft.gbmap.GBLocation;
@@ -73,9 +74,13 @@ public class BLocationFragment extends GBLocationFragment {
                 StringBuffer buffer = new StringBuffer();
                 for (String path : mArray) {
                     GCameraPhoto photo = mSqlHelper.queryLocation(path);
-                    String time = DateUtils.formatDateTime(getActivity(), photo.getTime(),DateUtils.FORMAT_SHOW_DATE);
-                    String str = photo.getLng() + ", " + photo.getLat() + ", " + photo.getPath() + ", " + time;
-                    buffer.append(str);
+                    if( photo!=null ){
+                        String time = DateUtils.formatDateTime(getActivity(), photo.getTime(),DateUtils.FORMAT_SHOW_DATE);
+                        String str = photo.getLng() + ", " + photo.getLat() + ", " + photo.getPath() + ", " + time;
+                        buffer.append(str);
+                    }else{
+                        T.show("图片中未找到位置信息");
+                    }
                 }
                 tv.setText(buffer.toString());
             }
@@ -95,10 +100,13 @@ public class BLocationFragment extends GBLocationFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         try {
-            if (getActivity().RESULT_OK == resultCode && requestCode == PICK_PHOTO) {
+            if (PhotoPickerActivity.RESULT_OK == resultCode && requestCode == PICK_PHOTO) {
                 mArray = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
-                for (String path : mArray) {
-                    mSqlHelper.insertLocation(mLocationBean.getLng(), mLocationBean.getLat(), path, new Date().getTime());
+                int action = data.getIntExtra(PhotoPickerActivity.KEY_ACTION, 0);
+                if( action==PhotoPickerActivity.ACTION_CAMERA ){
+                    for (String path : mArray) {
+                        mSqlHelper.insertLocation(mLocationBean.getLng(), mLocationBean.getLat(), path, new Date().getTime());
+                    }
                 }
             }
         } catch (Exception e) {
