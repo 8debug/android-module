@@ -3,6 +3,7 @@ package gesoft.gandroid;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import gesoft.gapp.common.GDate;
 import gesoft.gapp.common.L;
 import gesoft.gapp.common.T;
 import gesoft.gapp.databases.camera.GCameraPhoto;
@@ -105,7 +107,15 @@ public class BLocationFragment extends GBLocationFragment {
                 int action = data.getIntExtra(PhotoPickerActivity.KEY_ACTION, 0);
                 if( action==PhotoPickerActivity.ACTION_CAMERA ){
                     for (String path : mArray) {
-                        mSqlHelper.insertLocation(mLocationBean.getLng(), mLocationBean.getLat(), path, new Date().getTime());
+                        ExifInterface exifInterface = new ExifInterface(path);
+                        /*exifInterface.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.valueOf(mLocationBean.getLat()) );
+                        exifInterface.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.valueOf(mLocationBean.getLng()) );*/
+                        exifInterface.setAttribute( ExifInterface.TAG_DATETIME , GDate.getDate("yyyy-MM-dd HH:mm",new Date()) );
+                        exifInterface.setAttribute( ExifInterface.TAG_GPS_ALTITUDE,"1/1000");
+                        /*exifInterface.setAttribute(ExifInterface.TAG_ORIENTATION,"6");
+                        exifInterface.setAttribute(ExifInterface.TAG_IMAGE_WIDTH,"2000");*/
+                        exifInterface.saveAttributes();
+                        //mSqlHelper.insertLocation(mLocationBean.getLng(), mLocationBean.getLat(), path, new Date().getTime());
                     }
                 }
             }
