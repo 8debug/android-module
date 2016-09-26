@@ -13,15 +13,17 @@ import java.util.Locale;
  */
 public class GDate {
 
-    public static CharSequence getDate(String format, Date date){
-        return DateFormat.format(format, date);
+    public static String getDate(String format, Date date){
+        CharSequence str = DateFormat.format(format, date);
+        return String.valueOf(str);
     }
 
-    public static CharSequence getDate(String format, Calendar calendar){
-        return DateFormat.format(format, calendar);
+    public static String getDate(String format, Calendar calendar){
+        CharSequence str = DateFormat.format(format, calendar);
+        return String.valueOf(str);
     }
 
-    public static CharSequence getNowDate(String format){
+    public static String getNowDate(String format){
         return getDate(format, new Date());
     }
 
