@@ -64,6 +64,7 @@ public class GBLocation {
     }
 
     public GBLocation( Context applicationContext){
+        setApplication(applicationContext);
         locationService = new LocationService( applicationContext );
         //initLocation();
     }
