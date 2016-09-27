@@ -13,11 +13,11 @@ public interface GRAdapterListener {
     }
 
     interface OnItemClick<T>{
-        void onItemClick( GVHolder holder, T item );
+        void onItemClick( View view, GVHolder holder, T item );
     }
 
     interface OnItemLongClick<T>{
-        void onItemLongClick( GVHolder holder, T item );
+        void onItemLongClick(  View view, GVHolder holder, T item );
     }
 
 }

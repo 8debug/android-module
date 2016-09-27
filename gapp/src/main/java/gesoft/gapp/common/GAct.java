@@ -31,6 +31,7 @@ public class GAct {
      * @param tag   要添加（显示）的fragment的tag
      * @param arrayTag  其他不显示的fragments的tags
      */
+    @Deprecated
     public static void addFragmentToActivity (@NonNull FragmentManager mgr,
                                               @NonNull Fragment fragment,
                                               int frameId,
@@ -62,6 +63,7 @@ public class GAct {
      * @param requestCode
      * @return
      */
+    @Deprecated
     public static File startActivityCamera(Activity act, int requestCode){
         File mTmpFile = null;
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -110,6 +112,7 @@ public class GAct {
      * 此方法写在Activity.onBackPressed()中
      * @param act
      */
+    @Deprecated
     public static void exit( Activity act ){
         if (!ACT_EXIT) {
             ACT_EXIT = true;

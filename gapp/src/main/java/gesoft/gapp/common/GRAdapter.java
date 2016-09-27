@@ -17,8 +17,8 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
     private List<T> mList ;
     private final int mLayout;
     private GRAdapterListener.OnConvert<T> mOnConvertListener;
-    private GRAdapterListener.OnItemClick mOnItemClickListener;
-    private GRAdapterListener.OnItemLongClick mOnItemLongClickListener;
+    //private GRAdapterListener.OnItemClick mOnItemClickListener;
+    //private GRAdapterListener.OnItemLongClick mOnItemLongClickListener;
     /*private View mViewFooter;
     private View mViewHeader;*/
     private List<View> mListFooter = new ArrayList<>();
@@ -29,13 +29,13 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
         mOnConvertListener = onConverListener;
     }
 
-    public void setOnItemClickListener( GRAdapterListener.OnItemClick onItemClickListener ){
+    /*public void setOnItemClickListener( GRAdapterListener.OnItemClick onItemClickListener ){
         mOnItemClickListener = onItemClickListener;
     }
 
     public void setOnItemLongClickListener( GRAdapterListener.OnItemLongClick onItemLongClickListener ){
         mOnItemLongClickListener = onItemLongClickListener;
-    }
+    }*/
 
     private final static int ITEM_TYPE_FOOTER = 1000;
     private final static int ITEM_TYPE_HEADER = 1001;
@@ -142,11 +142,11 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
                 mOnConvertListener.onConvert(holder, mList.get(index));
             }
 
-            holder.getConvertView().setOnClickListener(new View.OnClickListener() {
+            /*holder.getConvertView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if( mOnItemClickListener!=null ){
-                        mOnItemClickListener.onItemClick(holder, mList.get(index));
+                        mOnItemClickListener.onItemClick( v, holder, mList.get(index));
                     }
                 }
             });
@@ -155,11 +155,11 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
                 @Override
                 public boolean onLongClick(View v) {
                     if( mOnItemLongClickListener!=null ){
-                        mOnItemLongClickListener.onItemLongClick(holder, mList.get(index));
+                        mOnItemLongClickListener.onItemLongClick( v, holder, mList.get(index));
                     }
                     return true;
                 }
-            });
+            });*/
 
         }
 
@@ -225,6 +225,29 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
     /*private boolean isScrollFooter( int position ){
         return position >= getItemCount()-1;
     }*/
+
+    /**
+     * 获取尾部
+     * @return
+     */
+    public View getFooterView(){
+        if( mListFooter.size()>0 ){
+            return mListFooter.get(0);
+        }
+        return null;
+    }
+
+    public void showFooterView(){
+        if( mListFooter.size()>0 ){
+            mListFooter.get(0).setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void hideFooterView(){
+        if( mListFooter.size()>0 ){
+            mListFooter.get(0).setVisibility(View.GONE);
+        }
+    }
 
     public void addFooterView( int resId ){
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
