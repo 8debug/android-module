@@ -165,6 +165,6 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		int action = data.getIntExtra(PhotoPickerActivity.KEY_ACTION, 0);
         //通过照相获取的图片
         if( action==PhotoPickerActivity.ACTION_CAMERA ){}
-        }
+    }
 }
 ```
