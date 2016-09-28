@@ -27,6 +27,7 @@ import java.util.Map;
 
 import javax.mail.internet.MimeUtility;
 
+import gesoft.gcrashemail.bean.GEmail;
 import gesoft.gcrashemail.email.MultiMailsender;
 
 /** 
@@ -37,11 +38,16 @@ import gesoft.gcrashemail.email.MultiMailsender;
  */  
 public class GCrashHandler implements UncaughtExceptionHandler {
 
-    private String mSubject;
-    private String mNick;
+    /*private String mSubject;
+    private String mNick;*/
+    private GEmail mGEmail;
 
-    public void setNick( String nick ){
+    /*public void setNick( String nick ){
         mNick = nick;
+    }*/
+
+    public void setGEMail( GEmail mail ){
+        mGEmail = mail;
     }
       
     public static final String TAG = "GCrashHandler";
@@ -84,7 +90,7 @@ public class GCrashHandler implements UncaughtExceptionHandler {
      * 当UncaughtException发生时会转入该函数来处理 
      */  
     @Override  
-    public void uncaughtException(Thread thread, Throwable ex) {  
+    public void uncaughtException(Thread thread, Throwable ex) {
         if (!handleException(ex) && mDefaultHandler != null) {  
             //如果用户没有处理则让系统默认的异常处理器来处理  
             mDefaultHandler.uncaughtException(thread, ex);  
@@ -129,9 +135,9 @@ public class GCrashHandler implements UncaughtExceptionHandler {
         return true;  
     }
 
-    public void setEmailMessage( String subject ){
+    /*public void setEmailMessage( String subject ){
         mSubject = subject;
-    }
+    }*/
 
     void sendEmail( final Throwable ex ){
         new Thread(new Runnable() {
@@ -139,19 +145,22 @@ public class GCrashHandler implements UncaughtExceptionHandler {
             public void run() {
 
                 try {
+
                     //这个类主要是设置邮件
                     MultiMailsender.MultiMailSenderInfo mailInfo = new MultiMailsender.MultiMailSenderInfo();
                     mailInfo.setMailServerHost("smtp.163.com");
                     mailInfo.setMailServerPort("25");
                     mailInfo.setValidate(true);
-                    mailInfo.setUserName("y.h.r@163.com");
-                    mailInfo.setPassword("13050920586");//您的邮箱密码
+                    mailInfo.setUserName( mGEmail.getUserName() );
+                    mailInfo.setPassword( mGEmail.getUserPwd() );//您的邮箱密码
+                    //mailInfo.setUserName("y.h.r@163.com");
+                    //mailInfo.setPassword("13050920586");//您的邮箱密码
 
-                    String nick = TextUtils.isEmpty(mNick)?"": MimeUtility.encodeText( mNick );
-                    mailInfo.setFromAddress(nick+"<y.h.r@163.com>");
+                    String nick = TextUtils.isEmpty( mGEmail.getNick() )?"": MimeUtility.encodeText( mGEmail.getNick() );
+                    mailInfo.setFromAddress( nick+"<"+mGEmail.getUserName()+">" );
 
-                    mailInfo.setToAddress("y.h.r@163.com");
-                    mailInfo.setSubject( mSubject );
+                    mailInfo.setToAddress( mGEmail.getUserName() );
+                    mailInfo.setSubject( mGEmail.getSubject() );
                     mailInfo.setContent( getStackTrace(ex) );
                     //抄送
                 /*String[] receivers = new String[]{"y.h.r@163.com"};
@@ -168,7 +177,7 @@ public class GCrashHandler implements UncaughtExceptionHandler {
 
                     //发送html格式
                     //MultiMailsender.sendMailtoMultiReceiver(mailInfo);
-                } catch (UnsupportedEncodingException e) {
+                } catch (Exception e) {
                     Log.e("error", "error", e);
                 }
 
