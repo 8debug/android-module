@@ -131,11 +131,8 @@ public class MainActivity extends AppCompatActivity {
         email.setToAddress("y.h.r@163.com");
         email.setNick( GApp.getAppName(mContext)+"_"+GApp.getVersionName(mContext) );
         email.setSubject( GPhone.getPhoneName()+", "+GPhone.getPhoneNumber(mContext) );
-
         GCrashHandler crashHandler = GCrashHandler.getInstance();
         crashHandler.setGEMail(email);
-        //crashHandler.setNick( GApp.getAppName(mContext)+"_"+GApp.getVersionName(mContext) );
-        //crashHandler.setEmailMessage( GPhone.getPhoneName()+", "+GPhone.getPhoneNumber(mContext) );
         crashHandler.init(mContext);
 
         Intent intent = null;
