@@ -21,6 +21,7 @@ import gesoft.gapp.common.GApp;
 import gesoft.gapp.common.GPhone;
 import gesoft.gapp.common.L;
 import gesoft.gapp.common.T;
+import gesoft.gcrashemail.bean.GEmail;
 import gesoft.gcrashemail.crash.GCrashHandler;
 import gesoft.gphotoview.GPhotoView;
 import gesoft.push.GPushConstant;
@@ -124,9 +125,17 @@ public class MainActivity extends AppCompatActivity {
     public void sendEmail( View view ){
 
         //搜集崩溃信息
+        GEmail email = new GEmail();
+        email.setUserName("y.h.r@163.com");
+        email.setUserPwd("13050920586");
+        email.setToAddress("y.h.r@163.com");
+        email.setNick( GApp.getAppName(mContext)+"_"+GApp.getVersionName(mContext) );
+        email.setSubject( GPhone.getPhoneName()+", "+GPhone.getPhoneNumber(mContext) );
+
         GCrashHandler crashHandler = GCrashHandler.getInstance();
-        crashHandler.setNick( GApp.getAppName(mContext)+"_"+GApp.getVersionName(mContext) );
-        crashHandler.setEmailMessage( GPhone.getPhoneName()+", "+GPhone.getPhoneNumber(mContext) );
+        crashHandler.setGEMail(email);
+        //crashHandler.setNick( GApp.getAppName(mContext)+"_"+GApp.getVersionName(mContext) );
+        //crashHandler.setEmailMessage( GPhone.getPhoneName()+", "+GPhone.getPhoneNumber(mContext) );
         crashHandler.init(mContext);
 
         Intent intent = null;
