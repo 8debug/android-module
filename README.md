@@ -97,7 +97,7 @@ GPushXG.registerPush(getApplicationContext(), new GPushXG.Reg() {
 ```
 //第一种方式
 GPhotoView.startImagePagerActivity(Context context, List<String> imgUrls, int position, int width, int height);
-//第二种方式
+//dierz
 GPhotoView.startImagePagerActivity( View view, List<String> imgUrls, int position );
 ```
 
@@ -134,9 +134,14 @@ stopLocation();		//结束综合定位
 /*	例子
 **	若要收集全局crash信息将代码写到自定义的Application中
 */
+GEmail email = new GEmail();
+email.setUserName("xxx@163.com");
+email.setUserPwd("xxxxx");
+email.setToAddress("xxx@163.com");
+email.setNick(GApp.getAppName(mContext)+"_"+GApp.getVersionName(mContext));
+email.setSubject(GPhone.getPhoneName()+", "+GPhone.getPhoneNumber(mContext));
 GCrashHandler crashHandler = GCrashHandler.getInstance();
-crashHandler.setNick("昵称");
-crashHandler.setEmailMessage("邮件主题");
+crashHandler.setGEMail(email);
 crashHandler.init(mContext);
 ```
 
@@ -165,6 +170,6 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		int action = data.getIntExtra(PhotoPickerActivity.KEY_ACTION, 0);
         //通过照相获取的图片
         if( action==PhotoPickerActivity.ACTION_CAMERA ){}
-    }
+        }
 }
 ```
