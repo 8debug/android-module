@@ -49,8 +49,7 @@ public class GValidCode extends View {
                     mTitleTextColor = a.getInt(attr, Color.BLACK);
                     break;
                 case R.styleable.GValidCode_gTitleTextSize:
-                    mTitleTextSize = a.getDimensionPixelSize(attr,
-                                        (int)TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics() ));
+                    mTitleTextSize = a.getDimensionPixelSize(attr, (int)TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics() ));
                     break;
                 case R.styleable.GValidCode_gTitleBackGroudColor:
                     mTitleBackColor = a.getColor(attr,Color.YELLOW);

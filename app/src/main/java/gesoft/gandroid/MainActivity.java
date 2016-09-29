@@ -5,6 +5,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,18 +14,22 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import gesoft.gandroid.download.service.DownloadService;
 import gesoft.gapp.common.GAct;
 import gesoft.gapp.common.GApp;
+import gesoft.gapp.common.GFile;
+import gesoft.gapp.common.GImage;
 import gesoft.gapp.common.GPhone;
 import gesoft.gapp.common.L;
 import gesoft.gapp.common.T;
 import gesoft.gcrashemail.bean.GEmail;
 import gesoft.gcrashemail.crash.GCrashHandler;
 import gesoft.gphotoview.GPhotoView;
+import gesoft.gshare.GShareSDK;
 import gesoft.push.GPushConstant;
 import gesoft.push.GPushXG;
 
@@ -141,6 +147,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void customview( View view ){
         startActivity(new Intent(this, CustomViewActivity.class));
+    }
+
+    public void share( View view ){
+        File file = GFile.createFile(this, GApp.getAppName(this)+".jpg");
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        GImage.storeImage(bitmap, file.getAbsolutePath());
+        GShareSDK.share(this,
+                "格微软件",
+                "http://www.ge-soft.com/",
+                "这是一条内容",
+                file.getAbsolutePath(),
+                "https://wx.qq.com/",
+                "这是一条评论",
+                "分享此内容的网站名称",
+                "http://www.163.com");
     }
 
     public void sql( View view ){

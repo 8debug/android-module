@@ -17,6 +17,7 @@
     <string name="btn_webview" formatted="false">Webview</string>
     <string name="btn_email" formatted="false">send Email</string>
     <string name="btn_customview" formatted="false">自定义控件</string>
+    <string name="btn_share" formatted="false">分享</string>
     <string name="btn_sqlite" formatted="false">SQLite数据库</string>
 
 
