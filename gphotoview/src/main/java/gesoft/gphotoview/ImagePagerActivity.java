@@ -185,6 +185,16 @@ public class ImagePagerActivity extends Activity {
 
                 final String imgurl = datas.get(position);
 
+                /*ImagePipeline imagePipeline = Fresco.getImagePipeline();
+
+                ImageRequest imageRequest = ImageRequestBuilder
+                        .newBuilderWithSource(Uri.parse(imgurl))
+                        .setRequestPriority(Priority.HIGH)
+                        .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
+                        .build();
+
+                DataSource<CloseableReference<CloseableImage>> dataSource = imagePipeline.fetchDecodedImage(imageRequest, context);*/
+
                 Glide.with(context)
                         .load(imgurl)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存多个尺寸

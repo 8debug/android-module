@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
 // JitPack
 apply plugin: 'com.github.dcendents.android-maven'
@@ -9,7 +10,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion 17
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -27,4 +28,28 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.facebook.fresco:fresco:0.13.0'
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            /*snapshotRepository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
+                authentication(userName: 'admin', password: 'admin123')
+            }*/
+
+            repository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
+                authentication(userName: 'admin', password: 'admin123')
+            }
+
+            pom.project {
+                version '0.0.1'
+                artifactId 'gphotoview'
+                groupId 'gesoft.android'
+                packaging 'aar'
+                description 'gphotoview'
+            }
+        }
+    }
 }
