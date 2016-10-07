@@ -26,7 +26,7 @@
             </intent-filter>
         </service>
 
-        <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="nhpg9WfZGFETBRlBMc89Z65NhewdSGUl" />
+        <!--<meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="nhpg9WfZGFETBRlBMc89Z65NhewdSGUl" />-->
 
     </application>
 
