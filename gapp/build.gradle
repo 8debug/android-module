@@ -3,14 +3,14 @@ apply plugin: 'maven'
 
 // JitPack
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.297179121'
+group ='com.github.297179121'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion 17
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -39,8 +39,9 @@ dependencies {
     //design包含appcompat-v7和support-v4
     compile 'com.android.support:design:23.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.facebook.fresco:fresco:0.11.0'
+    compile 'com.facebook.fresco:fresco:0.13.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.demievil.library:refreshlayout:1.0.0@aar'
     //使用retrofit请求string类型
     compile 'com.squareup.retrofit2:converter-scalars:2.0.0'
@@ -59,7 +60,7 @@ uploadArchives {
             }
 
             pom.project {
-                version '0.0.16'
+                version '0.0.25'
                 artifactId 'gapp'
                 groupId 'gesoft.android'
                 packaging 'aar'

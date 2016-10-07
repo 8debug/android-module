@@ -23,12 +23,9 @@ public class GApplication extends Application {
 
 	public static void setContext( Context context ){
 		applicationContext = context;
-		/*ImagePipelineConfig config = ImagePipelineConfig.newBuilder(context)
+		ImagePipelineConfig config = ImagePipelineConfig.newBuilder(context)
 				.setProgressiveJpegConfig(new SimpleProgressiveJpegConfig())
 				.build();
-		Fresco.initialize(context,config);*/
-		Fresco.initialize(context);
+		Fresco.initialize(context,config);
 	}
-
-
 }

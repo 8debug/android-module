@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -49,7 +50,7 @@ public class GApp
     /**
      * 获取应用程序名称
      */
-    public static String getAppName(Context context)
+    public static String getAppName( @NonNull Context context)
     {
         try{
             PackageManager packageManager = context.getPackageManager();
