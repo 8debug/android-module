@@ -6,14 +6,15 @@ apply plugin: 'com.github.dcendents.android-maven'
 group ='com.github.297179121'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+
     }
     buildTypes {
         release {
@@ -26,18 +27,17 @@ android {
         abortOnError false
     }
 
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
 }
 
+
+
 dependencies {
-    provided fileTree(dir: 'libs', include: ['*.jar'])
+    provided fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     //此处不写则使用JUnit无法测试JSONObject，所有的JSONObject都为null
     testCompile 'org.json:json:20140107'
     //design包含appcompat-v7和support-v4
-    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:design:25.0.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.facebook.fresco:fresco:0.13.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -45,31 +45,27 @@ dependencies {
     compile 'com.demievil.library:refreshlayout:1.0.0@aar'
     //使用retrofit请求string类型
     compile 'com.squareup.retrofit2:converter-scalars:2.0.0'
-
 }
 
 uploadArchives {
     repositories {
         mavenDeployer {
-            /*snapshotRepository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
-                authentication(userName: 'admin', password: 'admin123')
-            }*/
-
-            repository(url: 'http://www.gytaobao.cn:9205/nexus/content/repositories/gapp/') {
-                authentication(userName: 'admin', password: 'admin123')
+            repository(url: "${nexusUrl}/content/repositories/mnt_releases/") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            snapshotRepository(url: "${nexusUrl}/content/repositories/mnt_snapshots/") {
+                authentication(userName: nexusUsername, password: nexusPassword)
             }
 
             pom.project {
-                version '0.0.25'
+                version '0.0.1-SNAPSHOT'
                 artifactId 'gapp'
-                groupId 'gesoft.android'
+                groupId 'android.common'
                 packaging 'aar'
-                description 'gesoft common'
+                description 'yhr'
             }
+
         }
     }
 }
 
-/*artifacts {
-    archives file('app-release.aar')
-}*/
