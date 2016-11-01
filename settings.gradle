@@ -1,4 +1,4 @@
-include ':app', ':gphotopicker', ':gvideo', ':gcrashemail', ':gapkplug'
+include ':app', ':gphotopicker', ':gvideo', ':gcrashemail', ':gapkplug', ':gdebug'
 include ':gphotoview'
 include ':gbmap'
 include ':ghotfix' /*':gupd',*/
