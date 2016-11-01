@@ -79,7 +79,7 @@ public class GHttp {
 
     public interface IAjaxCall<T>{
         void onResponse(T a);
-        void onFailure();
+        void onFailed();
     }
 
     @Deprecated
@@ -109,7 +109,7 @@ public class GHttp {
             @Override
             public void onFailure(Call call, Throwable e) {
                 L.e(e);
-                iAjax.onFailure();
+                iAjax.onFailed();
                 call.cancel();
             }
         });
