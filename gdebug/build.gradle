@@ -9,7 +9,7 @@ android {
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 9
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -24,9 +24,8 @@ android {
 
 dependencies {
 
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.facebook.stetho:stetho:1.4.1'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.4.1'
+    compile 'com.facebook.stetho:stetho:1.3.1'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
 
 }
 
@@ -44,7 +43,7 @@ uploadArchives {
             pom.project {
                 version '0.0.1-SNAPSHOT'
                 artifactId 'gdebug'
-                groupId 'android.common'
+                groupId 'mnt.common'
                 packaging 'aar'
                 description 'by yhr'
             }
