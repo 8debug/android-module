@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+
+// JitPack
+apply plugin: 'com.github.dcendents.android-maven'
+group ='com.github.297179121'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.facebook.stetho:stetho:1.4.1'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.4.1'
+
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "${nexusUrl}/content/repositories/mnt_releases/") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            snapshotRepository(url: "${nexusUrl}/content/repositories/mnt_snapshots/") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+
+            pom.project {
+                version '0.0.1-SNAPSHOT'
+                artifactId 'gdebug'
+                groupId 'android.common'
+                packaging 'aar'
+                description 'by yhr'
+            }
+
+        }
+    }
+}
