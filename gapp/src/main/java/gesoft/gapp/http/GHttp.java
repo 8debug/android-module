@@ -18,6 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class GHttp {
 
@@ -64,6 +65,10 @@ public class GHttp {
         return JsonConverterFactory.create();
     }
 
+    public static ScalarsConverterFactory getScalarsConverterFactory(){
+        return ScalarsConverterFactory.create();
+    }
+
 
     /*private Retrofit getRetrofitJson(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -73,29 +78,9 @@ public class GHttp {
         return retrofit;
     }*/
 
-    public interface IAjax<T>{
-        void onResponse(T a);
-    }
-
     public interface IAjaxCall<T>{
-        void onResponse(T a);
-        void onFailed();
-    }
-
-    @Deprecated
-    private void request( Call request , final IAjax iAjax){
-        request.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-                iAjax.onResponse(response.body());
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable e) {
-                L.e(e);
-                call.cancel();
-            }
-        });
+        void onSuccess(T a);
+        void onFailed(Throwable e);
     }
 
 
@@ -103,31 +88,24 @@ public class GHttp {
         request.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                iAjax.onResponse(response.body());
+                iAjax.onSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call call, Throwable e) {
                 L.e(e);
-                iAjax.onFailed();
+                iAjax.onFailed(e);
                 call.cancel();
             }
         });
     }
 
     /**
-     * 请求数据返回json格式
+     * post请求
      * @param url
      * @param mapAjax
+     * @param iAjax
      */
-    @Deprecated
-    public void ajaxPost(String url, Map<String, String> mapAjax, @Nullable final IAjax iAjax){
-
-        Call request = mHttpService.ajaxPost(url, mapAjax);
-
-        request(request, iAjax);
-    }
-
     public void ajaxPost(String url, Map<String, String> mapAjax, @Nullable final IAjaxCall iAjax){
 
         Call request = mHttpService.ajaxPost(url, mapAjax);
@@ -140,17 +118,6 @@ public class GHttp {
      * @param url
      * @param mapAjax
      */
-    @Deprecated
-    public void ajaxUpload(String url, Map<String, Object> mapAjax, @Nullable final IAjax iAjax){
-
-        Map<String, RequestBody> params = parseMap( mapAjax );
-
-        Call request = mHttpService.ajaxUpload(url, params);
-
-        request(request, iAjax);
-
-    }
-
     public void ajaxUpload(String url, Map<String, Object> mapAjax, @Nullable final IAjaxCall iAjax){
 
         Map<String, RequestBody> params = parseMap( mapAjax );
