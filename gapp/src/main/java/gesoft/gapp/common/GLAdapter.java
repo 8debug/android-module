@@ -10,8 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,18 +22,6 @@ public abstract class GLAdapter<T> extends BaseAdapter {
     public GLAdapter(int itemLayoutId){
         this.mItemLayoutId = itemLayoutId;
     }
-
-    /*public GListViewAdapter(Context context, int itemLayoutId){
-        this.mContext = context;
-        this.mItemLayoutId = itemLayoutId;
-    }
-  
-    public GListViewAdapter(Context context, List<JSONObject> list, int itemLayoutId){
-        this.mContext = context;
-        this.mList = list != null? list : new ArrayList<JSONObject>();
-        this.mItemLayoutId = itemLayoutId;
-
-    }*/
 
     public GLAdapter addAll(List<T> list ){
         mList.addAll(list);
@@ -88,14 +74,11 @@ public abstract class GLAdapter<T> extends BaseAdapter {
         return position;  
     }
 
-    /*public abstract void convert(GAdapterViewHolder helper, JSONObject json);*/
-
     public abstract void convert(GViewHolder helper, T t);
     
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		/*GAdapterViewHolder viewHolder = GAdapterViewHolder.get(mContext, convertView, parent, mItemLayoutId, position);
-        convert(viewHolder, getItem(position));*/
+
         GViewHolder viewHolder;
         if( convertView==null ){
             viewHolder = new GViewHolder(parent.getContext(), parent, mItemLayoutId, position);
