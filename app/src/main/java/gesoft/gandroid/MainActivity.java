@@ -14,9 +14,15 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gesoft.gandroid.download.service.DownloadService;
 import gesoft.gapp.common.GAct;
@@ -26,12 +32,14 @@ import gesoft.gapp.common.GImage;
 import gesoft.gapp.common.GPhone;
 import gesoft.gapp.common.L;
 import gesoft.gapp.common.T;
+import gesoft.gapp.http.GHttp;
 import gesoft.gcrashemail.bean.GEmail;
 import gesoft.gcrashemail.crash.GCrashHandler;
 import gesoft.gphotoview.GPhotoView;
 import gesoft.gshare.GShareSDK;
 import gesoft.push.GPushConstant;
 import gesoft.push.GPushXG;
+import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -162,6 +170,32 @@ public class MainActivity extends AppCompatActivity {
                 "这是一条评论",
                 "分享此内容的网站名称",
                 "http://www.163.com");
+    }
+
+    public void stetho( View view ){
+        String url = "http://123.56.124.168:80/doctor-service/doctor/LG_Login";
+        String username = "yanghaoran";
+        String userpwd = "123456";
+        Map<String, String> params = new HashMap<>();
+        params.put("loginCode", username);
+        params.put("loginPassword", userpwd);
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                                                .addNetworkInterceptor(new StethoInterceptor())
+                                                .build();
+
+        GHttp gHttp = new GHttp(GHttp.getJsonConverterFactory(), client);
+        gHttp.ajaxPost( url, params, new GHttp.IAjaxCall<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject jsonResponse) {
+                T.show(mContext, jsonResponse.toString());
+            }
+
+            @Override
+            public void onFailed( Throwable e ) {
+                T.show(mContext, "失败");
+            }
+        });
     }
 
     public void sql( View view ){

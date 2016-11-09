@@ -39,9 +39,9 @@ public class RetrofitActivity extends AppCompatActivity {
     public void ajaxJSON(View v){
         Map<String, String> mapAjax = new HashMap<>();
         mapAjax.put("pageStart", "1");
-        gHttp.ajaxPost(GHttp.URL_3, mapAjax, new GHttp.IAjax<String>() {
+        gHttp.ajaxPost(GHttp.URL_3, mapAjax, new GHttp.IAjaxCall<String>() {
             @Override
-            public void onResponse(String str) {
+            public void onSuccess(String str) {
                 JSONObject response = GData.parseJSON(str);
                 JSONArray array = response.optJSONArray("data");
                 String[] strings = new String[ array.length() ];
@@ -53,6 +53,11 @@ public class RetrofitActivity extends AppCompatActivity {
                 L.d(lv);
                 L.d(adapter);
                 lv.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailed(Throwable e) {
+
             }
         });
 
@@ -69,9 +74,14 @@ public class RetrofitActivity extends AppCompatActivity {
             Map<String, Object> mapAjax = new HashMap<>();
             mapAjax.put("loginName", "yhr");
             mapAjax.put("zipFile", mFile);
-            gHttp.ajaxUpload(GHttp.URL_4, mapAjax, new GHttp.IAjax<String>() {
+            gHttp.ajaxUpload(GHttp.URL_4, mapAjax, new GHttp.IAjaxCall<String>() {
                 @Override
-                public void onResponse(String str) {
+                public void onSuccess(String str) {
+
+                }
+
+                @Override
+                public void onFailed(Throwable e) {
 
                 }
             });

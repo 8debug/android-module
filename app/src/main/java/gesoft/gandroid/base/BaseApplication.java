@@ -3,10 +3,9 @@ package gesoft.gandroid.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.stetho.Stetho;
+
 import gesoft.gapp.base.GApplication;
-import gesoft.gapp.common.GApp;
-import gesoft.gapp.common.GPhone;
-import gesoft.gcrashemail.crash.GCrashHandler;
 import gesoft.ghotfix.GHotFix;
 import gesoft.push.GPushXG;
 
@@ -42,6 +41,11 @@ public class BaseApplication extends Application {
 
         //热修复
         GHotFix.setApplication(mContext);
+
+        //通过chrome调试app
+        Stetho.initializeWithDefaults(this);
+
+        //GDebug.stetho(mContext);
 
 
 

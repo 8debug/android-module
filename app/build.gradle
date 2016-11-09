@@ -45,4 +45,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':gphotopicker')
     compile project(':gcrashemail')
+    compile project(':gdebug')
 }
