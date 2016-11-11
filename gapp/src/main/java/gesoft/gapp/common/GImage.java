@@ -1,6 +1,5 @@
 package gesoft.gapp.common;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -8,12 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.os.Handler;
 import android.widget.ImageView;
-
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -24,7 +18,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 
 /**
  * Created by yhr on 2016/2/15.
@@ -316,7 +309,7 @@ public class GImage {
      * @param path
      * @param fresco
      */
-    public static void loadImg(final Context ctx, final String path, final SimpleDraweeView fresco){
+    /*public static void loadImg(final Context ctx, final String path, final SimpleDraweeView fresco){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -335,6 +328,30 @@ public class GImage {
                 }
             }
         }).start();
+    }*/
+
+    /**
+     * 加载本地图片（非高清大图）
+     * @param path
+     * @return
+     */
+    public static void setLocalImage( final String path, final ImageView imageView ){
+        try {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    final Bitmap bitmap = revitionImageSize(path);
+                    imageView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            imageView.setImageBitmap(bitmap);
+                        }
+                    });
+                }
+            }).start();
+        } catch (Exception e) {
+            L.e(e);
+        }
     }
 
     public static Bitmap getBitmap( ImageView imageView ){
