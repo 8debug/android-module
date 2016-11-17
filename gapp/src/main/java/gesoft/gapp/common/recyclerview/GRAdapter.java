@@ -1,4 +1,4 @@
-package gesoft.gapp.common;
+package gesoft.gapp.common.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
+public class GRAdapter<T> extends RecyclerView.Adapter<GRVHolder> {
 
     private List<T> mList ;
     private final int mLayout;
@@ -116,7 +116,7 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
     }
 
     @Override
-    public GVHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public GRVHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
 
         if( viewType==ITEM_TYPE_HEADER ){
@@ -128,11 +128,11 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
             view = LayoutInflater.from( mContext ).inflate(mLayout, parent, false);
         }
 
-        return new GVHolder(view);
+        return new GRVHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final GVHolder holder, int position) {
+    public void onBindViewHolder(final GRVHolder holder, int position) {
 
         if( !isHeader(position) && !isFooter(position) ){
 
@@ -189,7 +189,7 @@ public class GRAdapter<T> extends RecyclerView.Adapter<GVHolder> {
     }
 
     @Override
-    public void onViewAttachedToWindow(GVHolder holder) {
+    public void onViewAttachedToWindow(GRVHolder holder) {
         super.onViewAttachedToWindow(holder);
         if ( isFooter(holder.getLayoutPosition()) ) {
             ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();

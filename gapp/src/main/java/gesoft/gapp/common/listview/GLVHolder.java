@@ -1,4 +1,4 @@
-package gesoft.gapp.common;
+package gesoft.gapp.common.listview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,100 +6,15 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public abstract class GLAdapter<T> extends BaseAdapter {
-
-    //private Context mContext;
-    private List<T> mList = new ArrayList<>();
-    private final int mItemLayoutId;
-
-    public GLAdapter(int itemLayoutId){
-        this.mItemLayoutId = itemLayoutId;
-    }
-
-    public GLAdapter addAll(List<T> list ){
-        mList.addAll(list);
-        return this;
-    }
-
-    public void setListData(List<T> list ){
-        clear();
-        addAll(list);
-    }
-
-    public void add( T t ){
-        mList.add(t);
-    }
-
-    public void add( T t, int idx ){
-        mList.add(idx, t);
-    }
-
-    public void clear(){
-        mList.clear();
-    }
-
-    public void remove( int index){
-        mList.remove(index);
-    }
-
-    public void remove( T j ){
-        mList.remove(j);
-    }
-
-    public List<T> getData(){
-        return mList;
-    }
-  
-    @Override  
-    public int getCount()  
-    {  
-        return mList.size();
-    }  
-  
-    @Override  
-    public T getItem(int position){
-        return mList.get(position);
-    }  
-  
-    @Override  
-    public long getItemId(int position)  
-    {  
-        return position;  
-    }
-
-    public abstract void convert(GViewHolder helper, T t);
-    
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-
-        GViewHolder viewHolder;
-        if( convertView==null ){
-            viewHolder = new GViewHolder(parent.getContext(), parent, mItemLayoutId, position);
-        }else{
-            viewHolder = (GViewHolder) convertView.getTag();
-            viewHolder.setPosition(position);
-        }
-        convert(viewHolder, getItem(position));
-        return viewHolder.getConvertView();  
-	}
-
-
-
-
-
-    public class GViewHolder {
+public class GLVHolder {
         private final SparseArray<View> mViews;
         private View mConvertView;
         private int mPosition;
 
-        private GViewHolder(Context context, ViewGroup parent, int layoutId, int position){
+        public GLVHolder(Context context, ViewGroup parent, int layoutId, int position){
             this.mPosition = position;
             mViews = new SparseArray<>();
             mConvertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
@@ -115,11 +30,11 @@ public abstract class GLAdapter<T> extends BaseAdapter {
          * @param position
          * @return
          */
-        public GViewHolder get(Context context, View convertView, ViewGroup parent, int layoutId, int position){
+        public GLVHolder get(Context context, View convertView, ViewGroup parent, int layoutId, int position){
             if (convertView == null){
-                return new GViewHolder(context, parent, layoutId, position);
+                return new GLVHolder(context, parent, layoutId, position);
             }else{
-                GViewHolder holder = (GViewHolder) convertView.getTag();
+                GLVHolder holder = (GLVHolder) convertView.getTag();
                 holder.setPosition(position);
                 return holder;
             }
@@ -152,7 +67,7 @@ public abstract class GLAdapter<T> extends BaseAdapter {
          * @param text
          * @return
          */
-        public GViewHolder setText(int viewId, String text){
+        public GLVHolder setText(int viewId, String text){
             TextView view = getView(viewId);
             view.setText(text);
             return this;
@@ -165,7 +80,7 @@ public abstract class GLAdapter<T> extends BaseAdapter {
          * @param drawableId
          * @return
          */
-        public GViewHolder setImageResource(int viewId, int drawableId){
+        public GLVHolder setImageResource(int viewId, int drawableId){
             ImageView view = getView(viewId);
             view.setImageResource(drawableId);
             return this;
@@ -178,7 +93,7 @@ public abstract class GLAdapter<T> extends BaseAdapter {
          * @param bm
          * @return
          */
-        public GViewHolder setImageBitmap(int viewId, Bitmap bm){
+        public GLVHolder setImageBitmap(int viewId, Bitmap bm){
             ImageView view = getView(viewId);
             view.setImageBitmap(bm);
             return this;
@@ -192,5 +107,3 @@ public abstract class GLAdapter<T> extends BaseAdapter {
             mPosition = position;
         }
     }
-	
-}
