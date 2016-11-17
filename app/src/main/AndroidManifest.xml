@@ -48,7 +48,8 @@
         <activity android:name=".PhotoActivity" />
         <activity android:name=".BaseUIActivity" />
         <activity android:name=".CustomViewActivity" />
-        <activity android:name=".SQLiteActivity"></activity>
+        <activity android:name=".SQLiteActivity" />
+        <activity android:name=".ListViewActivity"></activity>
     </application>
 
 </manifest>

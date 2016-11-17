@@ -172,6 +172,10 @@ public class MainActivity extends AppCompatActivity {
                 "http://www.163.com");
     }
 
+    public void listview( View view ){
+        startActivity(new Intent(this, ListViewActivity.class));
+    }
+
     public void stetho( View view ){
         String url = "http://123.56.124.168:80/doctor-service/doctor/LG_Login";
         String username = "yanghaoran";

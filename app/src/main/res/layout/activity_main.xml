@@ -22,6 +22,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/btn_listivew"
+                android:onClick="listview"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/btn_Stetho"
                 android:textAllCaps="false"
                 android:onClick="stetho"/>

@@ -43,7 +43,7 @@ public class FrescoActivity extends AppCompatActivity {
         File file = new File(strUri);
         if (file.exists()) {
             Uri uri = Uri.fromFile(file);
-            GImage.loadImg(this, uri.getPath(), fresco);
+            //GImage.loadImg(this, uri.getPath(), fresco);
         } else {
             T.show(this, strUri + "  不存在");
         }

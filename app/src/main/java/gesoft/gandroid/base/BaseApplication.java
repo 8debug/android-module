@@ -33,6 +33,9 @@ public class BaseApplication extends Application {
 
         Fresco.initialize(this, config);*/
         GApplication.setContext(this);
+
+        //初始化Fresco
+        GApplication.initFresco(this);
         //配置fresco打印崩溃信息
         //FLog.setMinimumLoggingLevel(FLog.ERROR);
 

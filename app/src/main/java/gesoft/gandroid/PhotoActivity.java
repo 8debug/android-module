@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.lling.photopicker.GPhotoApplication;
 import com.lling.photopicker.PhotoPickerActivity;
 
 import java.io.File;
@@ -19,9 +16,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import gesoft.gapp.common.GLAdapter;
 import gesoft.gapp.common.L;
-import gesoft.gapp.common.T;
 
 public class PhotoActivity extends Activity {
 

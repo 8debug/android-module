@@ -10,10 +10,10 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import gesoft.gapp.common.GDecoration;
-import gesoft.gapp.common.GRAdapter;
-import gesoft.gapp.common.GRAdapterListener;
+import gesoft.gapp.common.recyclerview.GRAdapter;
+import gesoft.gapp.common.recyclerview.GRAdapterListener;
 import gesoft.gapp.common.GROnScrollListener;
-import gesoft.gapp.common.GVHolder;
+import gesoft.gapp.common.recyclerview.GRVHolder;
 
 public class RecyclerViewActivity extends AppCompatActivity
         implements GRAdapterListener.OnConvert<String>  {
@@ -76,7 +76,7 @@ public class RecyclerViewActivity extends AppCompatActivity
     }
 
     @Override
-    public void onConvert(GVHolder holder, String s) {
+    public void onConvert(GRVHolder holder, String s) {
         holder.setText(R.id.tv, s);
     }
 
