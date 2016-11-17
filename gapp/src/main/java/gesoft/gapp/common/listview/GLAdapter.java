@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GLAdapter<T> extends BaseAdapter {
+public class GLAdapter<T> extends BaseAdapter {
 
     //private Context mContext;
     private List<T> mList = new ArrayList<>();
