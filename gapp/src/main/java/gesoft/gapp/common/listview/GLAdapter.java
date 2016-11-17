@@ -60,7 +60,7 @@ public class GLAdapter<T> extends BaseAdapter {
   
     @Override  
     public int getCount()  
-    {  
+    {
         return mList.size();
     }  
   
