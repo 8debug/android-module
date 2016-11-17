@@ -74,6 +74,17 @@ public class GLVHolder {
         }
 
         /**
+         * 为View设置Tag对象值
+         * @param viewId
+         * @param value
+         * @return
+         */
+        public GLVHolder setTag( int viewId, Object value ){
+            getView(viewId).setTag(value);
+            return this;
+        }
+
+        /**
          * 为ImageView设置图片
          *
          * @param viewId
