@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.File;
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,7 +54,7 @@ public class FrescoActivity extends AppCompatActivity {
         fresco.setImageURI(uri);
     }
 
-    public void nextImg(View view) {
+    public void watermark(View view) {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.c);
 
         int width = img.getMeasuredWidth();
@@ -128,6 +130,17 @@ public class FrescoActivity extends AppCompatActivity {
                     .build();*/
             // fresco.setController(controller);
         } catch (Exception e) {
+            L.e(e);
+        }
+    }
+
+    public void editAttr( View view){
+        try {
+            String path = "/storage/emulated/0/1474803715102.jpg";
+            ExifInterface exifInterface = new ExifInterface(path);
+            exifInterface.setAttribute(ExifInterface.TAG_MAKE ,"gesoft");
+            exifInterface.saveAttributes();
+        } catch (IOException e) {
             L.e(e);
         }
     }

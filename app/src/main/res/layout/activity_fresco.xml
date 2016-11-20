@@ -28,22 +28,30 @@
             android:layout_marginBottom="20dp"
             fresco:roundWithOverlayColor="@android:color/transparent"
             fresco:roundingBorderWidth="2dp"
-            fresco:roundingBorderColor="@color/g_bg_red"
-            fresco:placeholderImage="@mipmap/a"/>
+            fresco:roundingBorderColor="@color/g_bg_red"/>
 
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="nextImg"
-            android:text="换一张"/>
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="watermark"
+                android:text="文字水印"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="editAttr"
+                android:text="修改属性"/>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/img"
             android:layout_width="220dp"
             android:layout_height="140dp"
             android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
-            android:src="@mipmap/b"/>
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </ScrollView>

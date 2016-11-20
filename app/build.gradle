@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         applicationId "gesoft.gandroid"
@@ -16,6 +16,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            debuggable true
         }
     }
 }
@@ -34,6 +37,11 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':gapp')
     compile project(':gphotoview')
+    //排除依赖项目中的依赖
+    /*compile ( project(':gphotoview') ){
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+    }*/
     compile project(':gbmap')
     compile project(':gpush')
     compile project(':ghotfix')
@@ -45,5 +53,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':gphotopicker')
     compile project(':gcrashemail')
+    compile project(':gapkplug')
     compile project(':gdebug')
 }

@@ -21,7 +21,7 @@
     <string name="btn_sqlite" formatted="false">SQLite数据库</string>
     <string name="btn_Stetho" formatted="false">Stetho查看网络请求</string>
     <string name="btn_listivew" formatted="false">ListView</string>
-
+    <string name="btn_bluetooth" formatted="false">蓝牙</string>
 
     <string name="activity_label_fresco">fresco使用</string>
 
