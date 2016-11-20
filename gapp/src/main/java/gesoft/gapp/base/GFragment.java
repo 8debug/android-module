@@ -24,13 +24,22 @@ public class GFragment extends Fragment {
 
     }
 
-    @Override
+    /*@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
         mContext = mActivity;
         mPro = new ProgressDialog(mActivity);
         onStartG();
+    }*/
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if( context instanceof Activity ){
+            mActivity = (Activity) context;
+            mContext = context;
+        }
     }
 
     @Override
