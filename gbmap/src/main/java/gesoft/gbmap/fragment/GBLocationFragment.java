@@ -81,12 +81,12 @@ public abstract class GBLocationFragment extends Fragment implements GBLocation.
     }
 
     //SDK API<23时，onAttach(Context)不执行，需要使用onAttach(Activity)。Fragment自身的Bug，v4的没有此问题
-    @Override
+    /*@Override
     public void onAttach(Activity act) {
         super.onAttach(act);
         mActivity = act;
         mContext = act;
-    }
+    }*/
 
     @Override
     public void onAttach(Context context) {
