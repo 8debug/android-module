@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import com.example.ybase.R;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }, 2000);
 
             } else {
-                ActivityCollector.finishAll();
+                BaseActivityCollector.finishAll();
                 System.exit(0);
                 android.os.Process.killProcess(android.os.Process.myPid());
             }
@@ -53,7 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        ActivityCollector.addActivity(this);
+        BaseActivityCollector.addActivity(this);
         mContext = this;
         onCreateFragment(savedInstanceState);
 
@@ -95,6 +93,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityCollector.removeActivity(this);
+        BaseActivityCollector.removeActivity(this);
     }
 }
