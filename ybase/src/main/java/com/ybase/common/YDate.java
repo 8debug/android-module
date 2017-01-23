@@ -1,10 +1,10 @@
 package com.ybase.common;
 
-import android.content.Context;
-import android.text.format.DateUtils;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class YDate {
 
-    public final static String FORM_SIMPLE_DATE = "yyyy-MM-dd";
+    public final static String FORMAT_DATE_SIMPLE = "yyyy-MM-dd";
 
     private static SimpleDateFormat getSimpleDateFormat( String format ){
         return new SimpleDateFormat(format, Locale.CHINESE);
@@ -34,6 +34,23 @@ public class YDate {
             e.printStackTrace();
         }
         return d;
+    }
+
+
+    public static int getAge( String strDate ){
+        try {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINESE);
+            Calendar dob = Calendar.getInstance();
+            dob.setTime( sf.parse(strDate) );
+            Calendar today = Calendar.getInstance();
+            int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+            return age;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Log.e("yhr", "getAge", e);
+        }
+        return -1;
     }
 
 
