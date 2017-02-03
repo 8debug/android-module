@@ -10,7 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.ybase.R;
+import com.ybase.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

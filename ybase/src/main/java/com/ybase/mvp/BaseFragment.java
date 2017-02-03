@@ -6,10 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.widget.Toast;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 /**
