@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
 android {
     compileSdkVersion 25
@@ -29,4 +30,27 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.1.0'
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            /*repository(url: "${nexusUrl}/content/repositories/mnt_releases/") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }*/
+            snapshotRepository(url: "${nexusUrl_snapshots}") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+
+            pom.project {
+                version '0.0.1-SNAPSHOT'
+                artifactId 'ybase'
+                groupId 'hevision.android'
+                packaging 'aar'
+                description 'yhr'
+            }
+
+        }
+    }
 }
