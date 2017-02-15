@@ -12,14 +12,8 @@ import java.util.Set;
 
 public class YStore {
 
-    private static String FILE_NAME;
-
-    public static void setFileName( String fileName ){
-        FILE_NAME = fileName;
-    }
-
-    public static void save( Context context, String key, Object obj ){
-        SharedPreferences shared = context.getSharedPreferences( FILE_NAME, Context.MODE_PRIVATE);
+    public static void save( Context context, String name,  String key, Object obj ){
+        SharedPreferences shared = context.getSharedPreferences( name, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = shared.edit();
         String value = String.valueOf(obj);
         if( obj instanceof String ){
@@ -38,8 +32,8 @@ public class YStore {
         editor.apply();
     }
 
-    public static Object getValue( Context context, String key, Object obj ){
-        SharedPreferences shared = context.getSharedPreferences( FILE_NAME, Context.MODE_PRIVATE);
+    public static Object getValue( Context context, String name, String key, Object obj ){
+        SharedPreferences shared = context.getSharedPreferences( name, Context.MODE_PRIVATE);
         String value = String.valueOf(obj);
         if( obj instanceof String ){
             return shared.getString(key, value);
