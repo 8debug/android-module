@@ -90,6 +90,7 @@ public class YFile {
 
         File zipFile = new File(zipPath);
         try {
+            zipFile.getParentFile().mkdirs();
             if( zipFile.exists() ){
                 zipFile.delete();
             }
