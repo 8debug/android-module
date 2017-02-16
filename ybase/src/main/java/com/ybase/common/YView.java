@@ -2,6 +2,7 @@ package com.ybase.common;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 /**
@@ -15,15 +16,19 @@ public class YView {
 
     public static void showAlert( Context context, String title, String msg ){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(title);
+        if(!TextUtils.isEmpty(title)){
+            builder.setTitle(title);
+        }
         builder.setMessage(msg);
+        builder.setPositiveButton("确定", null);
         builder.show();
     }
 
     public static void showAlert( Context context, String msg ){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(msg);
-        builder.show();
+        builder.show();*/
+        showAlert(context, "", msg);
     }
 
     public static void showToast( Context context, String msg ){
