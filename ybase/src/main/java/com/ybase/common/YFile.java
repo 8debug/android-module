@@ -22,6 +22,21 @@ public class YFile {
 
     private final static String TAG = "YFile";
 
+    /**
+     * 新建文件，若目录不存在则创建
+     * @param pathFile
+     * @return
+     */
+    public static boolean createNewFile( String pathFile ){
+        try {
+            File file = new File(pathFile);
+            return file.getParentFile().mkdirs() && file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static void copy(InputStream input, OutputStream out){
         try {
             byte[] buffer = new byte[1024];
