@@ -1,6 +1,6 @@
 package com.ybase.common;
 
-import com.ybase.common.log.L;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,19 +22,28 @@ public class YFile {
 
     private final static String TAG = "YFile";
 
+    private final static String MSG = "com.ybase.common.YFile";
+
     /**
      * 新建文件，若目录不存在则创建
      * @param pathFile
      * @return
      */
-    public static boolean createNewFile( String pathFile ){
+    public static File createNewFile( String pathFile ){
+        File file = new File(pathFile);
         try {
-            File file = new File(pathFile);
-            return file.getParentFile().mkdirs() && file.createNewFile();
+
+            file.getParentFile().mkdirs();
+
+            if( file.createNewFile() ){
+                return file;
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e(TAG, MSG, e);
         }
-        return false;
+        return null;
     }
 
     public static void copy(InputStream input, OutputStream out){
@@ -123,7 +132,7 @@ public class YFile {
             outZip.finish();
             outZip.close();
         } catch (Exception e) {
-            L.e(TAG, TAG, e);
+            Log.e(TAG, TAG, e);
         }
         return new File(zipPath);
     }
