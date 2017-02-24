@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.6'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.json:json:20140107'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            /*repository(url: "${nexusUrl}/content/repositories/mnt_releases/") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }*/
+            snapshotRepository(url: "${nexusUrl_snapshots}") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+
+            pom.project {
+                version '0.0.1-SNAPSHOT'
+                artifactId 'yhttp'
+                groupId 'hevision.android'
+                packaging 'aar'
+                description 'yhr'
+            }
+
+        }
+    }
+}
