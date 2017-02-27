@@ -48,19 +48,26 @@ public class YFile {
 
     public static void copy(InputStream input, OutputStream out){
         try {
-            byte[] buffer = new byte[1024];
-            while ( input.read(buffer)!=-1 ){
-                out.write(buffer);
-                buffer = new byte[1024];
+            byte[] data = new byte[4096];
+            int count;
+            while ((count = input.read(data)) != -1) {
+                out.write(data, 0, count);
             }
+            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e(TAG, MSG, e);
         }finally {
             try {
-                out.close();
-                input.close();
+                if( out!=null ){
+                    out.close();
+                }
+                if( input!=null ){
+                    input.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
+                Log.e(TAG, MSG, e);
             }
         }
     }
