@@ -24,5 +24,26 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile files('libs/jg_filter_sdk_1.1.jar')
 }
+
+ uploadArchives {
+     repositories {
+         mavenDeployer {
+             /*repository(url: "${nexusUrl}/content/repositories/mnt_releases/") {
+                 authentication(userName: nexusUsername, password: nexusPassword)
+             }*/
+             snapshotRepository(url: "${nexusUrl_snapshots}") {
+                 authentication(userName: nexusUsername, password: nexusPassword)
+             }
+
+             pom.project {
+                 version '0.0.1-SNAPSHOT'
+                 artifactId 'ypush'
+                 groupId 'hevision.android'
+                 packaging 'aar'
+                 description 'yhr'
+             }
+
+         }
+     }
+ }

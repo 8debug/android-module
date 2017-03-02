@@ -2,7 +2,6 @@ package gesoft.push;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -11,7 +10,6 @@ import com.tencent.android.tpush.XGNotifaction;
 import com.tencent.android.tpush.XGPushConfig;
 import com.tencent.android.tpush.XGPushManager;
 import com.tencent.android.tpush.XGPushNotifactionCallback;
-import com.tencent.android.tpush.service.XGPushService;
 
 import java.util.List;
 
@@ -117,8 +115,8 @@ public class GPushXG {
         });
 
         // 2.36（不包括）之前的版本需要调用以下2行代码
-        Intent service = new Intent(applicationContext, XGPushService.class);
-        applicationContext.startService(service);
+        /*Intent service = new Intent(applicationContext, XGPushService.class);
+        applicationContext.startService(service);*/
 
         // 其它常用的API：
         // 绑定账号（别名）注册：registerPush(context,account)或registerPush(context,account, XGIOperateCallback)，其中account为APP账号，可以为任意字符串（qq、openid或任意第三方），业务方一定要注意终端与后台保持一致。
