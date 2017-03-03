@@ -72,6 +72,31 @@ public class YFile {
         }
     }
 
+    public static void delete( String path ){
+        File file = new File(path);
+        if( !file.exists() ){
+            return;
+        }
+
+        //文件
+        if( file.isFile() ){
+            file.delete();
+            return;
+        }
+
+        //空文件夹
+        File[] arrayFile = file.listFiles();
+        if( arrayFile==null ){
+            file.delete();
+            return;
+        }
+
+        //有内容的文件夹
+        for (File f : arrayFile) {
+            delete( f.getAbsolutePath() );
+        }
+    }
+
     /**
      * copy文件
      * @param fileSrc
