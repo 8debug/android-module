@@ -86,7 +86,7 @@ public class YFile {
 
         //空文件夹
         File[] arrayFile = file.listFiles();
-        if( arrayFile==null ){
+        if( arrayFile==null || arrayFile.length==0 ){
             file.delete();
             return;
         }
