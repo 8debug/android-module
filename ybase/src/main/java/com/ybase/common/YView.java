@@ -24,6 +24,13 @@ public class YView {
         builder.show();
     }
 
+    public static AlertDialog getAlert( Context context, String msg ){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(msg);
+        builder.setPositiveButton("确定", null);
+        return builder.create();
+    }
+
     public static void showAlert( Context context, String msg ){
         /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(msg);
