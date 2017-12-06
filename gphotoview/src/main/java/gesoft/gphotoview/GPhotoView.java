@@ -21,4 +21,9 @@ public class GPhotoView {
 
     }
 
+    public static void startImagePagerActivity( View view, List<String> imgUrls, int position, int orientation ){
+        ImagePagerActivity.startImagePagerActivity( view.getContext(), imgUrls, position, view.getMeasuredWidth(), view.getMeasuredHeight(), orientation);
+
+    }
+
 }

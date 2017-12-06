@@ -35,11 +35,13 @@ import uk.co.senab.photoview.PhotoView;
 public class ImagePagerActivity extends Activity {
     public static final String INTENT_IMGURLS = "imgurls";
     public static final String INTENT_POSITION = "position";
+    public static final String INTENT_ORIENTATION = "orientation";
     public static final String INTENT_IMAGESIZE = "imagesize";
 
     private List<View> guideViewList = new ArrayList<>();
     private LinearLayout guideGroup;
     public ImageSize imageSize;
+    public int orientation;
     private int startPos;
     private ArrayList<String> imgUrls;
 
@@ -51,12 +53,23 @@ public class ImagePagerActivity extends Activity {
         context.startActivity(intent);
     }*/
 
-    static void startImagePagerActivity(Context context, List<String> imgUrls, int position, int width, int height){
+    static void startImagePagerActivity( Context context, List<String> imgUrls, int position, int width, int height ){
 //      ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize(view.getMeasuredWidth(), view.getMeasuredHeight());
         ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize( width, height );
         Intent intent = new Intent(context, ImagePagerActivity.class);
         intent.putStringArrayListExtra(INTENT_IMGURLS, new ArrayList<>(imgUrls));
         intent.putExtra(INTENT_POSITION, position);
+        intent.putExtra(INTENT_IMAGESIZE, imageSize);
+        context.startActivity(intent);
+    }
+
+    static void startImagePagerActivity( Context context, List<String> imgUrls, int position, int width, int height, int orientation ){
+//      ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize(view.getMeasuredWidth(), view.getMeasuredHeight());
+        ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize( width, height );
+        Intent intent = new Intent(context, ImagePagerActivity.class);
+        intent.putStringArrayListExtra(INTENT_IMGURLS, new ArrayList<>(imgUrls));
+        intent.putExtra(INTENT_POSITION, position);
+        intent.putExtra(INTENT_ORIENTATION, orientation);
         intent.putExtra(INTENT_IMAGESIZE, imageSize);
         context.startActivity(intent);
     }
@@ -80,6 +93,10 @@ public class ImagePagerActivity extends Activity {
         guideGroup = (LinearLayout) findViewById(R.id.guideGroup);
 
         getIntentData();
+
+        if(getResources().getConfiguration().orientation != orientation){
+            setRequestedOrientation(orientation);
+        }
 
         ImageAdapter mAdapter = new ImageAdapter(this);
         mAdapter.setDatas(imgUrls);
@@ -113,6 +130,7 @@ public class ImagePagerActivity extends Activity {
         startPos = getIntent().getIntExtra(INTENT_POSITION, 0);
         imgUrls = getIntent().getStringArrayListExtra(INTENT_IMGURLS);
         imageSize = (ImageSize) getIntent().getSerializableExtra(INTENT_IMAGESIZE);
+        orientation = getIntent().getIntExtra(INTENT_ORIENTATION, getResources().getConfiguration().orientation);
     }
 
     private void addGuideView(LinearLayout guideGroup, int startPos, ArrayList<String> imgUrls) {
